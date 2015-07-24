@@ -1,4 +1,5 @@
 <?php 
+
 function toArray($obj,$point=array()){
 	$obj = (array)$obj;
 	$obj = $obj['results'];
@@ -17,6 +18,7 @@ function toArray($obj,$point=array()){
 	}
 	return $return;
 }
+
 function getPointer($className,$objectId){
 	$pointer = array('__type'=>'Pointer','className'=>$className,'objectId'=>$objectId);
 	return $pointer;
