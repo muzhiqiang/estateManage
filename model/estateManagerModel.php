@@ -1,5 +1,7 @@
 <?php
 require_once('../leancloud/AV.php');
+require_once('../utils/function.php');
+require_once('../utils/function.php');
 Class estateManagerModel{
     /**
     *注册管理员账号
@@ -8,16 +10,17 @@ Class estateManagerModel{
 	public function register($estateName,$estatePassword,$villageId){
         $query = new leancloud\AVQuery('estateManager');
         $query->where('estateName',$estateName);
-        $estateManager = (array)$query->find();
-        $estateManager = $estateManager['results'];
+        $estateManager = $query->find();
+        $estateManager = toArray($estateManager);
         if(empty($estateManager)){                      //注册成功
             $obj = new leancloud\AVObject('estateManager');
             $obj->estateName = $estateName;
             $obj->estatePassword = $estatePassword;
-            $obj->villageId = $villageId;
+            $obj->villageId = getPointer('villageInfo',$villageId);
             $obj->save();
+            return true;
         }else{                          //注册失败
-
+            return false;
         }
 		
 	}
@@ -26,12 +29,9 @@ Class estateManagerModel{
     **/
 	public function getAll(){
 		$query = new leancloud\AVQuery('estateManager');
-        $estateManagerList = (array)$query->find();
-        $estateManagerList = $estateManagerList['results'];
-        $estateManager = array();
-        foreach ($estateManagerList as $key => $value) {
-            $estateManager = array_merge($estateManager,array($key =>(array)$value));
-        }
+        $estateManagerList = $query->find();
+        $estateManager = toArray($estateManagerList,array('villageId'));
+
         return $estateManager;
         // $estateManagerList = (array)
 	}
@@ -41,14 +41,15 @@ Class estateManagerModel{
     public function login($username,$password){
         $query = new leancloud\AVQuery('estateManager');
         $query->where('estateName',$username);
-        $estateManager = (array)$query->find();
-        $estateManager = $estateManager['results'];
+        $estateManager = $query->find();
+        $estateManager = toArray($estateManager,array('villageId'));
         if(!empty($estateManager)){
-            session_start();
-            $_SESSION['estateManager'] = (array)$estateManager[0];
-            return true;
+            if($estateManager[0]['estatePassword']==$password){
+                return $estateManager[0];
+            }
+        
         }   
-        return false;
+        return array();
     }
 }
 

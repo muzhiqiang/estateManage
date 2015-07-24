@@ -20,7 +20,7 @@ if(isset($_GET['method'])){
 			$estateName = $_POST['username'];
 			$estatePassword = $_POST['password'];
 			$estateManagerModel->register($estateName,$estatePassword,$villageId);
-			header("Location:".__PUBLIC__."/cotrol/estateManagerControl.php?method=getAll");
+			header("Location:".__PUBLIC__.'/control/estateManagerControl.php?method=getAll');
 		}
 		
 	}else if($method=='look'){   		//查看管理员所属小区信息
@@ -31,13 +31,17 @@ if(isset($_GET['method'])){
 		header("Location:".__PUBLIC__."/view/admin/lookVillage.php");
 	}else if($method=='login'){			//管理员登录处理
 		if(isset($_POST['username'])&&isset($_POST['password'])){
-			if($estateManagerModel->login($_POST['username'],$_POST['password'])){
-				session_start();
-				$villageId = $_SESSION['estateManager']['villageId'];
+			$estateManager = $estateManagerModel->login($_POST['username'],$_POST['password']);
+			if(!empty($estateManager)){
+				$villageId = $estateManager['villageId'];				
 				$villageInfo = $villageModel->getByVillageId($villageId);
-				$_SESSION['villageInfo'] = $villageInfo;
+                $estateManager = array_merge($estateManager[0],array('villageName'=>$villageInfo[0]['villageName']));
+				session_start();
 				
+				$_SESSION['villageInfo'] = $villageInfo;
 			}
+			
+				
 		}
 		header("Location:".__PUBLIC__."/view/estateManager/index.php");
 	}	
