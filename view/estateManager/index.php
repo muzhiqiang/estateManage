@@ -1,6 +1,6 @@
 <?php
 	require_once('head.php');
-	$estateManager = $_COOKIE['estateManager'];
+	$estateManager = $_SESSION['estateManager'];
 ?>
 <!DOCTYPE html>
 <html>
