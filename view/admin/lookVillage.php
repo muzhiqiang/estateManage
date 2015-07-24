@@ -14,7 +14,6 @@ require_once('head.php');
 			<th>小区地址</th>
 		</tr>
 		<?php
-			session_start();
 			if(isset($_SESSION['villageInfo'])){
 				$villageInfo = $_SESSION['villageInfo'];
 				echo '<th>'.$villageInfo['villageName'].'</th>';

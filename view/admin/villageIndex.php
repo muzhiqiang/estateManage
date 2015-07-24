@@ -14,7 +14,6 @@ require_once('head.php');
 			<th>地址</th>
 		</tr>
 		<?php
-		session_start();
 		if(isset($_SESSION['villageInfo'])&&!empty($_SESSION['villageInfo'])){
 			$villageList = $_SESSION['villageInfo'];
 			foreach ($villageList as $key => $value) {

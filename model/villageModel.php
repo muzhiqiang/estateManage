@@ -1,16 +1,12 @@
 <?php
 require_once('../leancloud/AV.php');
+require_once('../utils/function.php');
 	Class villageModel{
 		public function getAll(){
 			$query = new leancloud\AVQuery('villageInfo');
-			$villageList = (array)$query->find();
-			$villageList = $villageList['results'];
-			$villageInfo = array();
-			foreach ($villageList as $key => $value) {
-				$valueArray = (array)$value;
-				$villageInfo = array_merge($villageInfo,array($key=>$valueArray));
-			}
-			return $villageInfo;
+			$villageList = $query->find();
+			$villageList = toArray($villageList);
+			return $villageList;
 		}
 		public function add($villageName,$address){
 			$obj = new leancloud\AVObject('villageInfo');
@@ -22,12 +18,9 @@ require_once('../leancloud/AV.php');
 		public function getByVillageId($villageId){
 			$query = new leancloud\AVQuery('villageInfo');
 			$query->where('objectId',$villageId);
-			$villageInfo = (array)$query->find();
-			$villageInfo = $villageInfo['results'];
-			if(!empty($villageInfo)){
-				$villageInfo = (array)$villageInfo[0];
-			}
-			return $villageInfo;
+			$villageInfo = $query->find();
+			$villageInfo = toArray($villageInfo);
+			return $villageInfo[0];
 		}
 	}
 
