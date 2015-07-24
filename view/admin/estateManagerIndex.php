@@ -14,7 +14,6 @@ require_once('head.php');
 			<th>密码</th>
 		</tr>
 		<?php
-		session_start();
 		if(isset($_SESSION['estateManagerList'])&&!empty($_SESSION['estateManagerList'])){
 			$estateManagerList = $_SESSION['estateManagerList'];
 			foreach ($estateManagerList as $key => $value) {

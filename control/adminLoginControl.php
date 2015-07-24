@@ -7,6 +7,11 @@
 	$username = $_POST["adminName"];
 	$password = $_POST["adminPassword"];
 	$adminUserModel = new adminUserModel();
-	$adminUserModel->login($username,$password);
+	$adminUser = $adminUserModel->login($username,$password);
+	session_start();
+	if(!empty($adminUser)){
+		$_SESSION['adminUser'] = $adminUser;
+
+	}
 	header("Location:".__PUBLIC__."/view/admin/index.php");
 ?>
