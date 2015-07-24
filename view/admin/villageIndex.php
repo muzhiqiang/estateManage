@@ -1,3 +1,6 @@
+<?php
+require_once('head.php');
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,19 +18,18 @@
 		if(isset($_SESSION['villageInfo'])&&!empty($_SESSION['villageInfo'])){
 			$villageList = $_SESSION['villageInfo'];
 			foreach ($villageList as $key => $value) {
-				
 				echo '<tr>';
 					echo '<th>'. $value['villageName'].'</th>';
 					echo '<th>'. $value['address'].'</th>';
-					echo '<th>'.'<a href="../../control/villageControl?method=update&id='.$value['objectId'].'">修改</a>'.'</th>';
-					echo '<th>'.'<a href="../../control/villageControl?method=delete&id='.$value['objectId'].'">删除</a>'.'</th>';
-					echo '<th>'.'<a href="../../control/estateManagerControl.php?method=register&id='.$value['objectId'].'">注册管理员账号</a>'.'</th>';
+					echo '<th>'.'<a href="'.__PUBLIC__.'/control/villageControl?method=update&id='.$value['objectId'].'">修改</a>'.'</th>';
+					echo '<th>'.'<a href="'.__PUBLIC__.'/control/villageControl?method=delete&id='.$value['objectId'].'">删除</a>'.'</th>';
+					echo '<th>'.'<a href="'.__PUBLIC__.'/control/estateManagerControl.php?method=register&id='.$value['objectId'].'">注册管理员账号</a>'.'</th>';
 				echo '</tr>';
 			}
 		}
 		?>
 	</table>
-	<a href="../../control/villageControl.php?method=add">添加小区</a></br>
-	<a href="index.php">返回</a>
+	<a href=<?php echo __PUBLIC__.'/control/villageControl.php?method=add'?>>添加小区</a></br>
+	<a href=<?php echo __PUBLIC__.'/view/admin/index.php'?>>返回</a>
 </body>
 </html>

@@ -1,3 +1,6 @@
+<?php
+require_once('../../config/config.php');
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,7 +8,7 @@
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
 </head>
 <body>
-	<form method="POST" action="../../control/estateManagerControl.php?method=login">
+	<form method="POST" action=<?php echo __PUBLIC__.'/control/estateManagerControl.php?method=login'?>>
 		账号:<input type="text" name="username"></br>
 		密码:<input type="password" name="password"></br>
 		<input type="submit" value="提交">

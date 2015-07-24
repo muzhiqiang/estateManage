@@ -1,8 +1,5 @@
 <?php
-	session_start();
-	if(!isset($_SESSION["admin"])){
-		header("Location:login.php");
-	}else{
+	require_once('head.php');
 ?>
 	<!DOCTYPE html>
 	<html>
@@ -11,11 +8,16 @@
 		<meta http-equiv="Content-Type:" content="text/html;charset=utf-8">
 	</head>
 	<body>
-		<a href="../../control/villageControl.php?method=getAll">小区管理</a>
-		<a href="../../control/estateManagerControl.php?method=getAll">小区管理员账号管理</a>
+		<a href=
+		<?php 
+		echo __PUBLIC__.'/control/villageControl.php?method=getAll';
+		?>>
+		小区管理</a>
+		<a href=
+		<?php
+		echo __PUBLIC__.'/control/estateManagerControl.php?method=getAll';
+		?>>
+		小区管理员账号管理
+		</a>
 	</body>
 	</html>
-<?php		
-	}
-
-?>

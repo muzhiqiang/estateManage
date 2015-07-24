@@ -1,3 +1,6 @@
+<?php
+require_once('head.php');
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,14 +22,14 @@
 				echo '<tr>';
 					echo '<th>'. $value['estateName'].'</th>';
 					echo '<th>'. $value['estatePassword'].'</th>';
-					echo '<th>'.'<a href="../../control/estateManagerControl.php?method=update&id='.$value['objectId'].'">修改</a>'.'</th>';
-					echo '<th>'.'<a href="../../control/estateManagerControl.php?method=delete&id='.$value['objectId'].'">删除</a>'.'</th>';
-					echo '<th>'.'<a href="../../control/estateManagerControl.php?method=look&id='.$value['villageId'].'">查看小区</a>'.'</th>';
+					echo '<th>'.'<a href="'.__PUBLIC__.'/control/estateManagerControl.php?method=update&id='.$value['objectId'].'">修改</a>'.'</th>';
+					echo '<th>'.'<a href="'.__PUBLIC__.'/control/estateManagerControl.php?method=delete&id='.$value['objectId'].'">删除</a>'.'</th>';
+					echo '<th>'.'<a href="'.__PUBLIC__.'/control/estateManagerControl.php?method=look&id='.$value['villageId'].'">查看小区</a>'.'</th>';
 				echo '</tr>';
 			}
 		}
 		?>
 	</table>
-	<a href="index.php">返回</a>
+	<a href=<?php echo __PUBLIC__.'/view/admin/index.php'?>>返回</a>
 </body>
 </html>

@@ -1,3 +1,6 @@
+<?php
+require_once('head.php');
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,6 +22,6 @@
 			}
 		?>
 	</table>
-	<a href="estateManagerIndex.php">返回</a>
+	<a href=<?php echo __PUBLIC__.'/view/admin/estateManagerIndex.php'?>>返回</a>
 </body>
 </html>

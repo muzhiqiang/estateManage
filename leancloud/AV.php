@@ -8,7 +8,6 @@ require_once( 'AVPush.php' );
 require_once( 'AVGeoPoint.php' );
 require_once( 'AVACL.php' );
 require_once( 'AVCloud.php' );
-
 class AVRestClient{
 
 	private $_appid = '';
@@ -47,7 +46,7 @@ class AVRestClient{
 	 */
 	public function request($args){
 		$isFile = false;
-		$cacert = 'C:\xampp\htdocs\estateManage\leancloud'.'/cacert.pem'; // download cacert.pem from http://curl.haxx.se/docs/caextract.html and paste it in this folder
+		$cacert = $_SERVER['DOCUMENT_ROOT'].'/estateManagement/leancloud/cacert.pem'; // download cacert.pem from http://curl.haxx.se/docs/caextract.html and paste it in this folder
 		$c = curl_init();
 		curl_setopt($c, CURLOPT_TIMEOUT, 30);
 		curl_setopt($c, CURLOPT_USERAGENT, 'AVOSCloud.com-php-library/2.0');
