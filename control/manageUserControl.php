@@ -1,10 +1,11 @@
 <?php
 require_once '../model/manageUserModel.php';
 require_once('../config/config.php');
+
 function forUserList()
 {
  $userList=showUserList();
- $json=array();
+ /*$json=array();
  foreach ($userList as $key => $value) {
   if(isset($value['ifConfirm']))
    $temp="1";
@@ -12,8 +13,8 @@ function forUserList()
    $temp="2";
   $json[$key]=array('email'=>$value['email'],'mobilePhoneVerified'=>$value['mobilePhoneVerified'],'username' =>$value['username'] ,'createdAt'=>$value['createdAt'],'gender'=>$value['gender'],'age'=>$value['age'],'isMarried'=>$value['isMarried'],'name'=>$value['name'],'occupation'=>$value['occupation'],'type'=>$value['type'],'houseId'=>$value['houseId'],'parkingId'=>$value['parkingId'],'ifConfirm'=>$temp);
   
- }
- echo json_encode($json);
+ }*/
+ echo json_encode($userList);
 
 }
 if(isset($_GET['getMethod']))

@@ -6,12 +6,14 @@ session_start();
 function showUserList()				//获取用户信息列表
 {
 	$tempId="55ae78fe00b096856ad76b35";
+
 	$query=new leancloud\AVQuery('House');
+	#$query->where('villageId',getPointer('villageInfo',$_SESSION['estateManager']['villageId']));
 	$query->where('villageId',getPointer('villageInfo',$tempId));
-	$result=toArray($query->find(),array('villageId'));
+	$usefulResult=toArray($query->find(),array('villageId'));
 	//print_r($result);
 	$HouseId=array();
-	foreach ($result as $key => $value) {
+	foreach ($usefulResult as $key => $value) {
 		$HouseId[$key]=$value['objectId'];
 	}
 	
@@ -23,5 +25,17 @@ function showUserList()				//获取用户信息列表
 		$userList=array_merge($userList,$result);
 		//print_r($result);
 	}
-	return $userList;
+	#$userList=array_merge($userList,$usefulResult);
+	#$returnList
+	foreach ($usefulResult as $key => $value) {
+		foreach ($value as $key_1 => $value_1) {
+			$returnList[$key][$key_1]=$value_1;
+		}
+	}
+	foreach ($userList as $key => $value) {
+		foreach ($value as $key_1 => $value_1) {
+			$returnList[$key][$key_1]=$value_1;
+		}
+	}
+	return $returnList;
 }
