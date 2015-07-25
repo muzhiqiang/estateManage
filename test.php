@@ -10,10 +10,9 @@ require_once('leancloud/AV.php');
 </head>
 <body>
 <?php
-	$query = new leancloud\AVQuery('villageInfo');
-    $query->where('objectId','55ae78fe00b096856ad76b35');
-    $return = $query->find();
-    print_r($return);
+	if(isset($_SESSION['estateManager']))
+	echo $_SESSION['estateManager'];
+
 ?>
 </body>
 </html>
