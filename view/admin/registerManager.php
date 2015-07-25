@@ -5,6 +5,7 @@ require_once('head.php');
 <html>
 <head>
 	<title>注册管理员账号</title>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
 </head>
 <body>
 	<form method="POST" action=<?php if(isset($_GET['id'])){echo __PUBLIC__.'/control/estateManagerControl.php?method=register&id='.$_GET['id'];} ?>>

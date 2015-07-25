@@ -22,6 +22,22 @@ require_once('../utils/function.php');
 			$villageInfo = toArray($villageInfo);
 			return $villageInfo[0];
 		}
+		public function update($villageName,$address,$villageId){
+			$query = new leancloud\AVQuery('villageInfo');
+			$query->where('villageName',$villageName);
+			$villageInfoList = $query->find();
+			$villageInfoList = toArray($villageInfoList);
+			foreach ($villageInfoList as $key => $value) {
+				if($value['address'] == $address){
+					return false;
+				}
+			}
+			$obj = new leancloud\AVObject('villageInfo');
+			$obj->villageName = $villageName;
+			$obj->address = $address;
+			$obj->update($villageId);
+			return true;
+		}
 	}
 
 ?>

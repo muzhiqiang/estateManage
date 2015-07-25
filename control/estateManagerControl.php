@@ -51,6 +51,24 @@ if(isset($_GET['method'])){
 				
 		}
 		header("Location:".__PUBLIC__."/view/estateManager/index.php");
+	}
+
+	else if($method=='update'){				//修改密码
+		if(isset($_POST['password'])){
+			$estatePassword = $_POST['password'];
+			$estateManagerId = $_POST['id'];
+			$estateManagerModel->update($estatePassword,$estateManagerId);
+
+		}
+		header("Location:".__PUBLIC__.'/control/estateManagerControl.php?method=getAll');		
+	}
+
+	else if($method == 'delete'){			//删除管理员账号
+		if(isset($_GET['id'])){
+			$estateManagerId = $_GET['id'];
+			$estateManagerModel->delete($estateManagerId);
+		}
+		header('Location:'.__PUBLIC__.'/control/estateManagerControl.php?method=getAll');
 	}	
 }
 

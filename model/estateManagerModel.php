@@ -51,6 +51,25 @@ Class estateManagerModel{
         }   
         return array();
     }
+
+    /**
+    *管理员密码修改
+    **/
+    public function update($password,$estateManagerId){
+        $obj = new leancloud\AVObject('estateManager');
+        $obj->estatePassword = $password;
+        print_r($obj->update($estateManagerId));
+        return true;
+    }
+
+    /**
+    *删除管理员账号
+    **/
+    public function delete($estateManagerId){
+        $obj = new leancloud\AVObject('estateManager');
+        $obj->delete($estateManagerId);
+        return true;
+    }
 }
 
 ?>
