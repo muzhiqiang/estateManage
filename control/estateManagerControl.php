@@ -40,12 +40,14 @@ if(isset($_GET['method'])){
 		if(isset($_POST['username'])&&isset($_POST['password'])){
 			$estateManager = $estateManagerModel->login($_POST['username'],$_POST['password']);
 			if(!empty($estateManager)){
-				$villageId = $estateManager['villageId'];				
+				$villageId = $estateManager['villageId'];
+
 				$villageInfo = $villageModel->getByVillageId($villageId);
                 $estateManager = array_merge($estateManager,array('villageName'=>$villageInfo['villageName']));
 				session_start();
 				
 				$_SESSION['estateManager'] = $estateManager;
+				
 			}
 			
 				

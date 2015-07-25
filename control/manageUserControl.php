@@ -2,9 +2,10 @@
 require_once '../model/manageUserModel.php';
 require_once('../config/config.php');
 
-function forUserList()
+function forUserList($objectId)
 {
- $userList=showUserList();
+ $userList=showUserList($objectId);
+
  /*$json=array();
  foreach ($userList as $key => $value) {
   if(isset($value['ifConfirm']))
@@ -25,7 +26,7 @@ if(isset($_GET['getMethod']))
 			header("Location:".__PUBLIC__."/view/manageUser/index.php");
 			break;
 		case 'getInformation':
-			forUserList();
+			forUserList($_GET['objectId']);
 			break;
 		default:
 			# code...
