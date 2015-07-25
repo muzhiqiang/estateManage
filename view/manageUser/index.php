@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <?php
-require('../estateManager/head.php');
+require_once('head.php');
 
-}
 ?>
 <html>
 <head>
@@ -23,9 +22,7 @@ require('../estateManager/head.php');
 		<th>查看详细</th>
 	</tr>
 	<?php
-		if(isset($_COOKIE['test']))
-			echo $_COOKIE['test'];
-		
+		//selectMetthod();
 	?>
 	</table>
 <h2>申请名单：</h2>

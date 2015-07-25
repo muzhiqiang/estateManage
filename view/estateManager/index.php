@@ -11,7 +11,7 @@
 <body>
 <?php echo $estateManager['villageName']?></br>
 <a href="">账号管理</a></br>
-<a href="">业主管理</a></br>
+<a href=<?php echo __PUBLIC__.'/control/manageUserControl.php?getMethod=showUserList';?>>用户管理</a></br>
 <a href=<?php echo __PUBLIC__.'/control/noticeControl.php?method=getAll&id='.$estateManager['villageId'];?>>通知管理</a><br>
 <a href="">账单管理</a><br>
 <a href="">维修管理</a><br>

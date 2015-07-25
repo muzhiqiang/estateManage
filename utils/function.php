@@ -24,4 +24,13 @@ function getPointer($className,$objectId){
 	return $pointer;
 
 }
+function test($List)
+{
+	$result=$List;
+	foreach ($result as $key => $value) {
+		foreach ($value as $key_1 => $value_1) {
+			print_r($key_1.":".$value_1);
+		}
+	}
+}
 ?>
