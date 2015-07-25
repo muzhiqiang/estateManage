@@ -1,4 +1,19 @@
 <!DOCTYPE html>
+<?php
+	require_once('head.php');
+	require ('../../utils/getInformation.php');
+	HttpClient::init($HttpClient, array('userAgent' => $_SERVER['HTTP_USER_AGENT'], 'redirect' => true));
+	$HttpClient->get("http://localhost/estateManagement/control/manageUserControl.php?getMethod=getInformation&objectId=".$_SESSION['estateManager']['villageId']);
+	$json=json_decode($HttpClient->buffer,true);
+
+	#$_SESSION['message']=$json;
+	/*foreach ($json as $key => $value) {
+		foreach ($value as $key_1 => $value_1) {
+			echo $key_1.":".$value_1;
+		}
+		echo "================================";
+	}*/
+?>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -18,9 +33,20 @@
 		<th>查看详细</th>
 	</tr>
 	<?php
-		if(isset($_COOKIE['test']))
-			echo $_COOKIE['test'];
-		
+		foreach ($json as $key => $value) {
+			if($value['isConfirm'])
+			{
+				echo "<tr>";
+				echo "<td>".$value['name']."</td>";
+				echo "<td>".$value['gender']."</td>";
+				echo "<td>".$value['mobilePhoneNumber']."</td>";
+				echo "<td>".$value['building']."</td>";
+				echo "<td>".$value['floor']."</td>";
+				echo "<td>".$value['unit']."</td>";
+				echo "<td><a href=\"detail.php?objectId=".$value['objectId']."\">查看详细</a></td>";
+				echo "</tr>";
+			}
+		}
 	?>
 	</table>
 <h2>申请名单：</h2>
@@ -32,7 +58,26 @@
 		<th>座别</th>
 		<th>楼层</th>
 		<th>单元</th>
+		<th>通过</th>
+		<th>拒绝</th>
 	</tr>
+	<?php
+		foreach ($json as $key => $value) {
+			if(!$value['isConfirm'])
+			{
+				echo "<tr>";
+				echo "<td>".$value['name']."</td>";
+				echo "<td>".$value['gender']."</td>";
+				echo "<td>".$value['mobilePhoneNumber']."</td>";
+				echo "<td>".$value['building']."</td>";
+				echo "<td>".$value['floor']."</td>";
+				echo "<td>".$value['unit']."</td>";
+				echo "<td><a href=\"\">通过</a></td>";
+				echo "<td><a href=\"\">拒绝</a></td>";
+				echo "</tr>";
+			}
+		}
+	?>
 	</table>
 </center>
 </body>
