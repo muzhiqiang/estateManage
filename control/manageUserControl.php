@@ -1,16 +1,20 @@
 <?php
 require_once '../model/manageUserModel.php';
-require_once(dir(__FILE__).'../config/config.php');
+require_once('../config/config.php');
 function forUserList()
 {
-	echo "test";
-	$userList=showUserList();
-	foreach ($$userList as $key_1 => $userMessage) {
-		
-		foreach ($userMessage as $key => $value) {
-			#
-		}
-	}
+ $userList=showUserList();
+ $json=array();
+ foreach ($userList as $key => $value) {
+  if(isset($value['ifConfirm']))
+   $temp="1";
+  else
+   $temp="2";
+  $json[$key]=array('email'=>$value['email'],'mobilePhoneVerified'=>$value['mobilePhoneVerified'],'username' =>$value['username'] ,'createdAt'=>$value['createdAt'],'gender'=>$value['gender'],'age'=>$value['age'],'isMarried'=>$value['isMarried'],'name'=>$value['name'],'occupation'=>$value['occupation'],'type'=>$value['type'],'houseId'=>$value['houseId'],'parkingId'=>$value['parkingId'],'ifConfirm'=>$temp);
+  
+ }
+ echo json_encode($json);
+
 }
 if(isset($_GET['getMethod']))
 {
@@ -19,7 +23,9 @@ if(isset($_GET['getMethod']))
 		case 'showUserList':
 			header("Location:".__PUBLIC__."/view/manageUser/index.php");
 			break;
-		
+		case 'getInformation':
+			forUserList();
+			break;
 		default:
 			# code...
 			break;

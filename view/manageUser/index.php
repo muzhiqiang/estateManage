@@ -1,7 +1,15 @@
 <!DOCTYPE html>
 <?php
-require_once('head.php');
-
+	require_once('head.php');
+	require ('../../utils/getInformation.php');
+	HttpClient::init($HttpClient, array('userAgent' => $_SERVER['HTTP_USER_AGENT'], 'redirect' => true));
+	$HttpClient->get("http://localhost/estateManagement/control/manageUserControl.php?getMethod=getInformation");
+	$json=json_decode($HttpClient->buffer,true);
+	foreach ($json as $key => $value) {
+		foreach ($value as $key_1 => $value_1) {
+			echo $key_1.":".$value_1;
+		}
+	}
 ?>
 <html>
 <head>
