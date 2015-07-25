@@ -2,6 +2,7 @@
 require_once('../model/estateManagerModel.php');
 require_once('../model/villageModel.php');
 require_once('../config/config.php');
+session_start();
 if(isset($_GET['method'])){
 	$method = $_GET['method'];
 
@@ -10,18 +11,17 @@ if(isset($_GET['method'])){
 
 	if($method=='getAll'){				//获得所有管理员信息
 		$estateManagerList = $estateManagerModel->getAll();
-		session_start();
 		$_SESSION['estateManagerList']=$estateManagerList;
 		header("Location:".__PUBLIC__."/view/admin/estateManagerIndex.php");
 	}
 
 	else if($method=='register'){     //注册管理员账号
 		$villageId = $_GET['id'];
-		if(!isset($_POST['username'])||!isset($_POST['password'])){
+		if(!isset($_POST['adminName'])||!isset($_POST['adminPassword'])){
 			header("Location:".__PUBLIC__."/view/admin/registerManager.php?id=".$villageId);
 		}else{
-			$estateName = $_POST['username'];
-			$estatePassword = $_POST['password'];
+			$estateName = $_POST['adminName'];
+			$estatePassword = $_POST['adminPassword'];
 			$estateManagerModel->register($estateName,$estatePassword,$villageId);
 			header("Location:".__PUBLIC__.'/control/estateManagerControl.php?method=getAll');
 		}
@@ -31,7 +31,6 @@ if(isset($_GET['method'])){
 	else if($method=='look'){   		//查看管理员所属小区信息
 		$villageId = $_GET['id'];
 		$villageInfo = $villageModel->getByVillageId($villageId);
-		session_start();
 		$_SESSION['villageInfo'] = $villageInfo;
 		header("Location:".__PUBLIC__."/view/admin/lookVillage.php");
 	}
@@ -44,7 +43,6 @@ if(isset($_GET['method'])){
 
 				$villageInfo = $villageModel->getByVillageId($villageId);
                 $estateManager = array_merge($estateManager,array('villageName'=>$villageInfo['villageName']));
-				session_start();
 				
 				$_SESSION['estateManager'] = $estateManager;
 				
@@ -56,9 +54,9 @@ if(isset($_GET['method'])){
 	}
 
 	else if($method=='update'){				//修改密码
-		if(isset($_POST['password'])){
-			$estatePassword = $_POST['password'];
-			$estateManagerId = $_POST['id'];
+		if(isset($_POST['newPassword'])){
+			$estatePassword = $_POST['newPassword'];
+			$estateManagerId = $_GET['id'];
 			$estateManagerModel->update($estatePassword,$estateManagerId);
 
 		}

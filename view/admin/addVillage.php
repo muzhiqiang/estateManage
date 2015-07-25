@@ -1,6 +1,3 @@
-<?php
-require_once('head.php');
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,30 +9,23 @@ require_once('head.php');
     <script src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<ul class="nav nav-pills">
-			<li><a href=<?php echo __PUBLIC__.'/view/admin/index.php'; ?>>首页</a></li>
-			<li class="dropdown active"><a class="dropdown-toggle" data-toggle="dropdown" href="#">小区管理<span class="caret"></span></a>
-      			<ul class="dropdown-menu">
-      				<li><a href=<?php echo __PUBLIC__.'/control/villageControl.php?method=getAll';?>>小区列表</a></li>
-         			<li class="active"><a href=<?php echo __PUBLIC__.'/control/villageControl.php?method=add'?>>添加小区</a></li>
-      			</ul>
-   			</li>
-			<li><a href=<?php echo __PUBLIC__.'/control/estateManagerControl.php?method=getAll';?>>小区管理员账号管理</a></li>
-			<li><a href=<?php echo __PUBLIC__.'/control/adminLoginControl.php'; ?>>退出</a></li>
-	</ul>
-	<hr>
+	<?php require_once('navigation.php'); ?>
+	<script type="text/javascript">
+		document.getElementById('village').setAttribute('class','dropdown active');
+		document.getElementById('addVillage').setAttribute('class','active');
+	</script>
 	<div align="center">
 		<form class="form-horizontal" role="form" method="POST" action=<?php echo __PUBLIC__.'/control/villageControl.php?method=add';?>>
 			<div class="row form-group">
 				<label for="villageName" class="col-sm-4">小区名字</label>
 				<div class="col-sm-4">
-					<input type='text' id='villageName' class="form-control">
+					<input type='text' name='villageName' class="form-control">
 				</div>
 			</div>
 			<div class="row form-group">
 				<label class="col-sm-4" for="address">小区地址</label>
 				<div class="col-sm-4">
-					<input class="form-control" type='text' id='address'>
+					<input class="form-control" type='text' name='address'>
 				</div>
 			</div>
 			<div class="form-group">

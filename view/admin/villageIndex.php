@@ -1,6 +1,3 @@
-<?php
-require_once('head.php');
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,18 +9,11 @@ require_once('head.php');
     <script src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<ul class="nav nav-pills">
-			<li><a href=<?php echo __PUBLIC__.'/view/admin/index.php'; ?>>首页</a></li>
-			<li class="dropdown active"><a class="dropdown-toggle" data-toggle="dropdown" href="#">小区管理<span class="caret"></span></a>
-      
-      			<ul class="dropdown-menu">
-      				<li class="active"><a href=<?php echo __PUBLIC__.'/control/villageControl.php?method=getAll';?>>小区列表</a></li>
-         			<li><a href=<?php echo __PUBLIC__.'/control/villageControl.php?method=add'?>>添加小区</a></li>
-      			</ul>
-   			</li>
-			<li><a href=<?php echo __PUBLIC__.'/control/estateManagerControl.php?method=getAll';?>>小区管理员账号管理</a></li>
-			<li><a href=<?php echo __PUBLIC__.'/control/adminLoginControl.php'; ?>>退出</a></li>
-	</ul>
+	<?php require_once('navigation.php');?>
+	<script type="text/javascript">
+		document.getElementById('village').setAttribute('class','dropdown active');
+		document.getElementById('villageList').setAttribute('class','active');
+	</script>
 	<table class="table table-hover table-bordered table-responsive">
 		<thead>
 			<tr>
@@ -51,6 +41,5 @@ require_once('head.php');
 		?>
 		</tbody>
 	</table>
-	</br>
 </body>
 </html>
