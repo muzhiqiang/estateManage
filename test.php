@@ -10,9 +10,8 @@ require_once('leancloud/AV.php');
 </head>
 <body>
 <?php
-	if(isset($_SESSION['estateManager']))
-	echo $_SESSION['estateManager'];
-
+	$file_contents = file_get_content("http://localhost/estateManagement/control/manageUserControl.php?getMethod=getInformation&objectId=55b4b3d500b0bb80c44cf209");
+	echo json_encode($file_contents);
 ?>
 </body>
 </html>
