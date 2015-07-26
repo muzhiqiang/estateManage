@@ -1,23 +1,19 @@
-<?php
-	require_once('head.php');
-?>
-	<!DOCTYPE html>
-	<html>
-	<head>
-		<title>后台管理</title>
-		<meta http-equiv="Content-Type:" content="text/html;charset=utf-8">
-	</head>
-	<body>
-		<a href=
-		<?php 
-		echo __PUBLIC__.'/control/villageControl.php?method=getAll';
-		?>>
-		小区管理</a>
-		<a href=
-		<?php
-		echo __PUBLIC__.'/control/estateManagerControl.php?method=getAll';
-		?>>
-		小区管理员账号管理
-		</a>
-	</body>
-	</html>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>后台管理</title>
+	<meta http-equiv="Content-Type:" content="text/html;charset=utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+   	<link href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+   	<script src="http://apps.bdimg.com/libs/jquery/2.0.0/jquery.min.js"></script>
+   	<script src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<?php require_once('navigation.php');?>
+	<script type="text/javascript">
+		document.getElementById('index').setAttribute('class','active');
+	</script>
+		<h1>后台首页</h1>
+</body>
+</html>

@@ -1,26 +1,34 @@
-<?php
-require_once('head.php');
-?>
 <!DOCTYPE html>
 <html>
 <head>
 	<title>查看小区</title>
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <link href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://apps.bdimg.com/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<table>
-		<tr>
-			<th>小区名字</th>
-			<th>小区地址</th>
-		</tr>
+	<?php require_once('navigation.php');?>
+	<table class="table table-hover table-bordered table-responsive">
+		<thead>
+			<tr>
+				<th>小区名字</th>
+				<th>地址</th>
+			</tr>
+		</thead>
+		<tbody>
 		<?php
 			if(isset($_SESSION['villageInfo'])){
 				$villageInfo = $_SESSION['villageInfo'];
-				echo '<th>'.$villageInfo['villageName'].'</th>';
-				echo '<th>'.$villageInfo['address'].'</th>';
+				echo '<tr>'.
+  						'<td>'.$villageInfo['villageName'].'</td>'.
+    					'<td>'.$villageInfo['address'].'</td>'.
+    				 '</tr>';
+				
 			}
 		?>
+		</tbody>
 	</table>
-	<a href=<?php echo __PUBLIC__.'/view/admin/estateManagerIndex.php'?>>返回</a>
 </body>
 </html>
