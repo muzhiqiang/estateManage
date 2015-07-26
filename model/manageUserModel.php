@@ -6,7 +6,6 @@ class manageModel
 {
 	function showUserList($objectId)				//获取用户信息列表
 	{  	
-		#$tempId="55ae78fe00b096856ad76b35";
 		$tempId=$objectId;
 		$query=new leancloud\AVQuery('House');
 		#$query->where('villageId',getPointer('villageInfo',$_SESSION['estateManager']['villageId']));
