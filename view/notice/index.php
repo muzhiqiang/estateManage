@@ -18,7 +18,7 @@ $noticeList = $_SESSION['noticeList'];
 	document.getElementById('notice').setAttribute('class','dropdown active');
 	document.getElementById('lookNotice').setAttribute('class','active');
 </script>
-<table class="table table-hover table-bordered table-responsive">
+	<table class="table table-hover table-bordered table-responsive">
 		<thead>
 			<tr>
 				<th>标题</th>

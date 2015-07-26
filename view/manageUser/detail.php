@@ -1,11 +1,9 @@
-<!DOCTYPE html>
-<html>
 <?php
-	#require_once('head.php');
-	require ('../../utils/getInformation.php');
+=======
+	require_once('../../utils/getInformation.php');
+	require_once('../estateManager/head.php');
 	if(isset($_GET['objectId']))
 		$_SESSION['objectId']=$_GET['objectId'];
-
 	if(isset($_SESSION['objectId']))
 	{
 		HttpClient::init($HttpClient, array('userAgent' => $_SERVER['HTTP_USER_AGENT'], 'redirect' => true));
@@ -13,12 +11,19 @@
 		$json=json_decode($HttpClient->buffer,true);
 	}
 ?>
+<!DOCTYPE html>
+<html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+=======
 	<title>用户详细</title>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <link href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://apps.bdimg.com/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 </head>
 <body>
-<h1>用户信息</h1>
+	<?php require_once('../estateManager/navigation.php');?>
 <?php
 echo "账号：".$json['userInfo']['username']."</br>";
 echo "姓名：".$json['userInfo']['name']."</br>";
@@ -37,7 +42,6 @@ echo "邮箱地址：".$json['userInfo']['email']."</br>";
 echo "年龄：".$json['userInfo']['age']."</br>";
 echo "职业：".$json['userInfo']['occupation']."</br>";
 echo "婚姻状况：".$json['userInfo']['isMarried']."</br>";
-#echo "注册日期：".$json['userInfo']['updatedAt']."</br>";
 ?>
 <h1>当月账单</h1>
 <a href="#">点击查看详细账单></a>
