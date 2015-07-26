@@ -9,8 +9,8 @@
    			'</li>'.
    			'<li class="dropdown" id="user"><a class="dropdown-toggle" data-toggle="dropdown" href="#">住户管理<span class="caret"></span></a>'.
       			'<ul class="dropdown-menu">'.
-      				'<li id="userPass"><a href="#">本区住户</a></li>'.
-         			'<li id="userApply"><a href="#">申请名单</a></li>'.
+      				'<li id="userPass"><a href='.__PUBLIC__.'/view/manageUser/index.php'.'>本区住户</a></li>'.
+         			'<li id="userApply"><a href='.__PUBLIC__.'./view/manageUser/apply.php'.'>申请名单</a></li>'.
       			'</ul>'.
    			'</li>'.
    			'<li class="dropdown" id="bill"><a class="dropdown-toggle" data-toggle="dropdown" href="#">账单管理<span class="caret"></span></a>'.

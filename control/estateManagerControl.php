@@ -71,8 +71,8 @@ if(isset($_GET['method'])){
 		}
 		header('Location:'.__PUBLIC__.'/control/estateManagerControl.php?method=getAll');
 	}
-	else if($method == 'logout'){
-		$_SESSION['estateManager'] == null;
+	else if($method == 'logout'){			//退出管理员账号
+		$_SESSION['estateManager'] = null;
 		header("Location:".__PUBLIC__.'/view/estateManager/login.php');
 	}	
 }
