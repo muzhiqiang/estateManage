@@ -3,7 +3,7 @@
   require_once('../utils/function.php');
 	Class adminUserModel{
 		public function login($username,$password){
-			    $query = new leancloud\AVQuery('adminManager');
+			    $query = new leancloud\AVQuery('AdminManager');
         	$query->where('username',$username);
         	$user = $query->find();
         	$user = toArray($user);

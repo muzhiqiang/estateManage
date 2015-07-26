@@ -1,3 +1,6 @@
+<?php
+require_once('head.php');
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +17,9 @@
 		<thead>
 			<tr>
 				<th>小区名字</th>
-				<th>地址</th>
+				<th>省份</th>
+				<th>城市</th>
+				<th>详细地址</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -22,7 +27,9 @@
 			if(isset($_SESSION['villageInfo'])){
 				$villageInfo = $_SESSION['villageInfo'];
 				echo '<tr>'.
-  						'<td>'.$villageInfo['villageName'].'</td>'.
+  						'<td>'.$villageInfo['name'].'</td>'.
+  						'<td>'.$villageInfo['province'].'</td>'.
+  						'<td>'.$villageInfo['city'].'</td>'.
     					'<td>'.$villageInfo['address'].'</td>'.
     				 '</tr>';
 				

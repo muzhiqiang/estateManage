@@ -5,16 +5,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>首页</title>
+	<title>物业管理后台</title>
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <link href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://apps.bdimg.com/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    
 </head>
 <body>
-<?php echo $estateManager['villageName']?></br>
-<a href="">账号管理</a></br>
-<a href=<?php echo __PUBLIC__.'/control/manageUserControl.php?getMethod=showUserList';?>>用户管理</a></br>
-<a href=<?php echo __PUBLIC__.'/control/noticeControl.php?method=getAll&id='.$estateManager['villageId'];?>>通知管理</a><br>
-<a href="">账单管理</a><br>
-<a href="">维修管理</a><br>
+
+<?php require_once('navigation.php');?>
+<script type="text/javascript">
+   	document.getElementById('index').setAttribute('class','active');
+</script>
+<p>
+	<h1><?php echo $estateManager['name']?></h1>
+</p>
+<p>
+	<h3><?php echo $estateManager['province'].$estateManager['city'].$estateManager['address'];?></h3>	
+</p>
 
 </body>
 </html>

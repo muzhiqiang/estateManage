@@ -42,8 +42,10 @@ if(isset($_GET['method'])){
 				$villageId = $estateManager['villageId'];
 
 				$villageInfo = $villageModel->getByVillageId($villageId);
-                $estateManager = array_merge($estateManager,array('villageName'=>$villageInfo['villageName']));
-				
+                $estateManager = array_merge($estateManager,array('name'=>$villageInfo['name']));
+				$estateManager = array_merge($estateManager,array('province'=>$villageInfo['province']));
+				$estateManager = array_merge($estateManager,array('city'=>$villageInfo['city']));
+				$estateManager = array_merge($estateManager,array('address'=>$villageInfo['address']));
 				$_SESSION['estateManager'] = $estateManager;
 				
 			}
@@ -52,7 +54,6 @@ if(isset($_GET['method'])){
 		}
 		header("Location:".__PUBLIC__."/view/estateManager/index.php");
 	}
-
 	else if($method=='update'){				//修改密码
 		if(isset($_POST['newPassword'])){
 			$estatePassword = $_POST['newPassword'];
@@ -69,6 +70,10 @@ if(isset($_GET['method'])){
 			$estateManagerModel->delete($estateManagerId);
 		}
 		header('Location:'.__PUBLIC__.'/control/estateManagerControl.php?method=getAll');
+	}
+	else if($method == 'logout'){
+		$_SESSION['estateManager'] == null;
+		header("Location:".__PUBLIC__.'/view/estateManager/login.php');
 	}	
 }
 

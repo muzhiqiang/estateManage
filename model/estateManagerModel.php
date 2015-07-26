@@ -8,15 +8,15 @@ Class estateManagerModel{
     *
     **/
 	public function register($estateName,$estatePassword,$villageId){
-        $query = new leancloud\AVQuery('estateManager');
-        $query->where('estateName',$estateName);
+        $query = new leancloud\AVQuery('EstateManager');
+        $query->where('username',$estateName);
         $estateManager = $query->find();
         $estateManager = toArray($estateManager);
         if(empty($estateManager)){                      //注册成功
-            $obj = new leancloud\AVObject('estateManager');
+            $obj = new leancloud\AVObject('EstateManager');
             $obj->estateName = $estateName;
             $obj->estatePassword = $estatePassword;
-            $obj->villageId = getPointer('villageInfo',$villageId);
+            $obj->villageId = getPointer('Village',$villageId);
             $obj->save();
             return true;
         }else{                          //注册失败
@@ -28,7 +28,7 @@ Class estateManagerModel{
     *获取所有管理员账号信息
     **/
 	public function getAll(){
-		$query = new leancloud\AVQuery('estateManager');
+		$query = new leancloud\AVQuery('EstateManager');
         $estateManagerList = $query->find();
         $estateManager = toArray($estateManagerList,array('villageId'));
 
@@ -39,12 +39,12 @@ Class estateManagerModel{
     *管理员登录处理
     **/
     public function login($username,$password){
-        $query = new leancloud\AVQuery('estateManager');
-        $query->where('estateName',$username);
+        $query = new leancloud\AVQuery('EstateManager');
+        $query->where('username',$username);
         $estateManager = $query->find();
         $estateManager = toArray($estateManager,array('villageId'));
         if(!empty($estateManager)){
-            if($estateManager[0]['estatePassword']==$password){
+            if($estateManager[0]['password']==$password){
                 return $estateManager[0];
             }
         
@@ -56,8 +56,8 @@ Class estateManagerModel{
     *管理员密码修改
     **/
     public function update($password,$estateManagerId){
-        $obj = new leancloud\AVObject('estateManager');
-        $obj->estatePassword = $password;
+        $obj = new leancloud\AVObject('EstateManager');
+        $obj->password = $password;
         print_r($obj->update($estateManagerId));
         return true;
     }
@@ -66,7 +66,7 @@ Class estateManagerModel{
     *删除管理员账号
     **/
     public function delete($estateManagerId){
-        $obj = new leancloud\AVObject('estateManager');
+        $obj = new leancloud\AVObject('EstateManager');
         $obj->delete($estateManagerId);
         return true;
     }

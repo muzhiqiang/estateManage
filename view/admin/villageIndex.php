@@ -1,3 +1,6 @@
+<?php
+require_once('head.php');
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +21,9 @@
 		<thead>
 			<tr>
 				<th>小区名字</th>
-				<th>地址</th>
+				<th>省份</th>
+				<th>城市</th>
+				<th>详细地址</th>
 				<th>修改</th>
 				<th>删除</th>
 				<th>注册管理员账号</th>
@@ -30,7 +35,9 @@
 			$villageList = $_SESSION['villageInfoList'];
 			foreach ($villageList as $key => $value) {
 				echo '<tr>';
-					echo '<th>'. $value['villageName'].'</th>';
+					echo '<th>'. $value['name'].'</th>';
+					echo '<th>'. $value['province'].'</th>';
+					echo '<th>'. $value['city'].'</th>';
 					echo '<th>'. $value['address'].'</th>';
 					echo '<th>'.'<a href="'.__PUBLIC__.'/view/admin/villageUpdate.php?id='.$value['objectId'].'">修改</a>'.'</th>';
 					echo '<th>'.'<a href="'.__PUBLIC__.'/control/villageControl?method=delete&id='.$value['objectId'].'">删除</a>'.'</th>';

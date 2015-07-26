@@ -1,3 +1,6 @@
+<?php
+require_once('head.php');
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,6 +25,12 @@
 			<label for="adminPassword" class="col-sm-4 control-label">密码</label>
 			<div class="col-sm-4">
 				<input type="password" class="form-control" name="adminPassword"></br>
+			</div>
+		</div>
+		<div class="row form-group">
+			<label for="adminPassword2" class="col-sm-4 control-label">确认密码</label>
+			<div class="col-sm-4">
+				<input type="password" class="form-control" name="adminPassword2"></br>
 			</div>
 		</div>
 		<div class="form-group">

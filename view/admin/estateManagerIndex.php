@@ -1,3 +1,6 @@
+<?php 
+require_once('head.php');
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,8 +33,8 @@
 			foreach ($estateManagerList as $key => $value) {
 				
 				echo '<tr>';
-					echo '<th>'. $value['estateName'].'</th>';
-					echo '<th>'. $value['estatePassword'].'</th>';
+					echo '<th>'. $value['username'].'</th>';
+					echo '<th>'. $value['password'].'</th>';
 					echo '<th>'.'<a href="'.__PUBLIC__.'/view/admin/estateManagerUpdate.php?id='.$value['objectId'].'">修改</a>'.'</th>';
 					echo '<th>'.'<a href="'.__PUBLIC__.'/control/estateManagerControl.php?method=delete&id='.$value['objectId'].'">删除</a>'.'</th>';
 					echo '<th>'.'<a href="'.__PUBLIC__.'/control/estateManagerControl.php?method=look&id='.$value['villageId'].'">查看小区</a>'.'</th>';

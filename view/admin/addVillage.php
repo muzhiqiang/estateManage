@@ -1,3 +1,6 @@
+<?php
+require_once('head.php');
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,7 +26,19 @@
 				</div>
 			</div>
 			<div class="row form-group">
-				<label class="col-sm-4" for="address">小区地址</label>
+				<label class="col-sm-4" for="province">省份</label>
+				<div class="col-sm-4">
+					<input class="form-control" type='text' name='province'>
+				</div>
+			</div>
+			<div class="row form-group">
+				<label class="col-sm-4" for="city">城市</label>
+				<div class="col-sm-4">
+					<input class="form-control" type='text' name='city'>
+				</div>
+			</div>
+			<div class="row form-group">
+				<label class="col-sm-4" for="address">详细地址</label>
 				<div class="col-sm-4">
 					<input class="form-control" type='text' name='address'>
 				</div>
