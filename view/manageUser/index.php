@@ -41,7 +41,12 @@
 				{
 					echo "<tr>";
 					echo "<td>".$value['name']."</td>";
-					echo "<td>".$value['gender']."</td>";
+					if($value['gender']==0)
+						echo "<td>未知</td>";
+					else if($value['gender']==0)
+						echo "<td>男</td>";
+					else
+						echo "<td>女</td>";
 					echo "<td>".$value['mobilePhoneNumber']."</td>";
 					echo "<td>".$value['building']."</td>";
 					echo "<td>".$value['floor']."</td>";
