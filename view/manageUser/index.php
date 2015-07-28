@@ -37,7 +37,7 @@
 		<tbody>
 		<?php
 			foreach ($json as $key => $value) {
-				if($value['isConfirm'])
+				if(isset($value['isConfirm'])&&$value['isConfirm'])
 				{
 					echo "<tr>";
 					echo "<td>".$value['name']."</td>";

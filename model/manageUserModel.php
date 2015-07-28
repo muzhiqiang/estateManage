@@ -58,4 +58,19 @@ class manageModel
 		$result=array('userInfo'=>$userInfo[0],'houseInfo'=>$houseInfo[0],'parkingInfo'=>$parkingInfo[0]);
 		return $result;
 	}
+	function passConfirm($objectId)
+	{
+	    $u=new leancloud\AVObject('_User');
+	    $u->isConfirm=true;
+	    $return=$u->update($objectId);
+	    return $return;
+	}
+	function refuseConfirm($objectId)
+	{
+		/*$deleteObject = new leancloud\AVObject('GameScore');
+    $return = $deleteObject->delete($objectId);*/
+    	$d=new leancloud\AVObject('_User');
+    	$return=$d->delete($objectId);
+    	return $return;
+	}
 }

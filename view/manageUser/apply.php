@@ -37,7 +37,7 @@ $json=json_decode($HttpClient->buffer,true);
 		<tbody>
 		<?php
 		foreach ($json as $key => $value) {
-			if(!$value['isConfirm'])
+			if(isset($value['isConfirm'])&&!$value['isConfirm'])
 			{
 				echo "<tr>";
 				echo "<td>".$value['name']."</td>";
@@ -51,8 +51,8 @@ $json=json_decode($HttpClient->buffer,true);
 				echo "<td>".$value['building']."</td>";
 				echo "<td>".$value['floor']."</td>";
 				echo "<td>".$value['unit']."</td>";
-				echo "<td><a href=\"\">通过</a></td>";
-				echo "<td><a href=\"\">拒绝</a></td>";
+				echo "<td><a href=\"../../control/manageUserControl.php?getMethod=getConfirm&isPass=true&objectId=".$value['objectId']."\">通过</a></td>";
+				echo "<td><a href=\"../../control/manageUserControl.php?getMethod=getConfirm&isPass=false&objectId=".$value['objectId']."\">拒绝</a></td>";
 				echo "</tr>";
 			}
 		}

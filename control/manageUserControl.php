@@ -7,15 +7,6 @@ function forUserList($objectId)
 	$message=new manageModel();
 	$userList=$message->showUserList($objectId);
 
-	 /*$json=array();
-	 foreach ($userList as $key => $value) {
-	  if(isset($value['ifConfirm']))
-	   $temp="1";
-	  else
-	   $temp="2";
-	  $json[$key]=array('email'=>$value['email'],'mobilePhoneVerified'=>$value['mobilePhoneVerified'],'username' =>$value['username'] ,'createdAt'=>$value['createdAt'],'gender'=>$value['gender'],'age'=>$value['age'],'isMarried'=>$value['isMarried'],'name'=>$value['name'],'occupation'=>$value['occupation'],'type'=>$value['type'],'houseId'=>$value['houseId'],'parkingId'=>$value['parkingId'],'ifConfirm'=>$temp);
-	  
-	 }*/
 	echo json_encode($userList);
 
 }
@@ -24,6 +15,17 @@ function forUserDetail($objectId)
 	$message=new manageModel();
 	$information=$message->showUserDetail($objectId);
 	echo json_encode($information);
+}
+function passConfirm($objectId)
+{
+	$m=new manageModel();
+	$return=$m->passConfirm($objectId);
+	#echo $return;
+}
+function refuseConfirm($objectId)
+{
+	$m=new manageModel();
+	$return=$m->refuseConfirm($objectId);
 }
 if(isset($_GET['getMethod']))
 {
@@ -41,6 +43,21 @@ if(isset($_GET['getMethod']))
 		case 'getDetailData':
 			forUserDetail($_GET['objectId']);
 			break;
+		case 'getConfirm':
+			if($_GET['isPass']=='true')
+			{
+				passConfirm($_GET['objectId']);
+				header("Location:".__PUBLIC__."/view/manageUser/index.php");
+			
+				//返回格式数据是个object,如何处理?
+			}
+			else
+			{
+				refuseConfirm($_GET['objectId']);
+				header("Location:".__PUBLIC__."/view/manageUser/index.php");
+			}
+			break;
+
 		default:
 			# code...
 			break;
