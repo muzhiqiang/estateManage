@@ -1,8 +1,10 @@
 <?php
 require_once('../estateManager/head.php');
 require ('../../utils/getInformation.php');
+require ('../../utils/function.php');
 HttpClient::init($HttpClient, array('userAgent' => $_SERVER['HTTP_USER_AGENT'], 'redirect' => true));
-$HttpClient->get("http://localhost/estateManagement/control/manageUserControl.php?getMethod=getInformation&objectId=".$_SESSION['estateManager']['villageId']);
+$HttpClient->get("http://localhost/estateManagement/control/manageUserControl.php?getMethod=getInformationApply&objectId=".$_SESSION['estateManager']['villageId']);
+
 $json=json_decode($HttpClient->buffer,true);
 ?>
 <!DOCTYPE html>
@@ -21,6 +23,7 @@ $json=json_decode($HttpClient->buffer,true);
 		document.getElementById('user').setAttribute('class','dropdown active');
 		document.getElementById('userApply').setAttribute('class','active');
 	</script>
+
 	<table class="table table-hover table-bordered table-responsive">
 		<thead>
 			<tr>
@@ -47,10 +50,10 @@ $json=json_decode($HttpClient->buffer,true);
 						echo "<td>男</td>";
 					else
 						echo "<td>女</td>";
-				echo "<td>".$value['mobilePhoneNumber']."</td>";
-				echo "<td>".$value['building']."</td>";
-				echo "<td>".$value['floor']."</td>";
-				echo "<td>".$value['unit']."</td>";
+				echo "<td>".ifExit($value['mobilePhoneNumber'])."</td>";
+				echo "<td>".ifExit($value['building'])."</td>";
+				echo "<td>".ifExit($value['floor'])."</td>";
+				echo "<td>".ifExit($value['unit'])."</td>";
 				echo "<td><a href=\"../../control/manageUserControl.php?getMethod=getConfirm&isPass=true&objectId=".$value['objectId']."\">通过</a></td>";
 				echo "<td><a href=\"../../control/manageUserControl.php?getMethod=getConfirm&isPass=false&objectId=".$value['objectId']."\">拒绝</a></td>";
 				echo "</tr>";

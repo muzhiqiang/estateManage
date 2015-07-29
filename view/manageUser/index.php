@@ -2,6 +2,7 @@
 <?php
 	require_once('../estateManager/head.php');
 	require ('../../utils/getInformation.php');
+	require ('../../utils/function.php');
 	HttpClient::init($HttpClient, array('userAgent' => $_SERVER['HTTP_USER_AGENT'], 'redirect' => true));
 	$HttpClient->get("http://localhost/estateManagement/control/manageUserControl.php?getMethod=getInformation&objectId=".$_SESSION['estateManager']['villageId']);
 	$json=json_decode($HttpClient->buffer,true);
@@ -47,7 +48,7 @@
 						echo "<td>男</td>";
 					else
 						echo "<td>女</td>";
-					echo "<td>".$value['mobilePhoneNumber']."</td>";
+					echo "<td>".ifExit($value['mobilePhoneNumber'])."</td>";
 					echo "<td>".$value['building']."</td>";
 					echo "<td>".$value['floor']."</td>";
 					echo "<td>".$value['unit']."</td>";

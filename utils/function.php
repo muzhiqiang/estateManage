@@ -33,4 +33,11 @@ function test($List)
 		}
 	}
 }
+function ifExit($value)
+{
+	if(isset($value))
+		return $value;
+	else
+		return "尚未填写";
+}
 ?>
