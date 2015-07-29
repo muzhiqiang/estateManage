@@ -1,6 +1,7 @@
 <?php
 require_once('../leancloud/AV.php');
 require_once('../utils/function.php');
+require_once('../config/config.php');
 Class noticeModel{
 	public function getAll($villageId){
 		$query = new leancloud\AVQuery('Notice');
@@ -16,5 +17,6 @@ Class noticeModel{
 		$obj->content = $content;
 		$obj->save();
 	}
+	
 }
 ?>

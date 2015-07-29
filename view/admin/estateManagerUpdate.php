@@ -17,6 +17,12 @@ require_once('head.php');
 <div align="center">
 	<form class="form-horizontal" role="form" method="post" action=<?php echo __PUBLIC__.'/control/estateManagerControl.php?method=update&id='.$_GET['id'];?>>
 		<div class="row form-group">
+			<label for="password" class="col-sm-4 control-label">原密码</label>
+			<div class="col-sm-4">
+				<input type="password" class="form-control" name="password"></br>
+			</div>
+		</div>
+		<div class="row form-group">
 			<label for="newPassword" class="col-sm-4 control-label">新密码</label>
 			<div class="col-sm-4">
 				<input type="password" class="form-control" name="newPassword"></br>
