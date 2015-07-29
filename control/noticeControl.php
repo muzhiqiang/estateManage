@@ -13,7 +13,7 @@ if(isset($_GET['method'])){
 	}else if($method='add'){
 		$villageId = $_SESSION['estateManager']['villageId'];
 		$title = $_POST['title'];
-		$content = $_POST['content'];
+		$content = $_POST['mycontent'];
 		$noticeModel->add($villageId,$title,$content);
 		header('Location:'.__PUBLIC__.'/control/noticeControl.php?method=getAll');
 	}

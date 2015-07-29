@@ -42,6 +42,19 @@ require_once('../utils/function.php');
 			$obj->update($villageId);
 			return true;
 		}
+		public function updateWater($fee,$villageId){
+			$obj = new leancloud\AVObject('Village');
+			$obj->waterPrice = $fee;
+			$obj->update($villageId);
+			return true;
+
+		}
+		public function updatePower($fee,$villageId){
+			$obj = new leancloud\AVObject('Village');
+			$obj->powerPrice = $fee;
+			$obj->update($villageId);
+			return true;
+		}
 	}
 
 ?>

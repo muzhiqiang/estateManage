@@ -16,21 +16,17 @@ $noticeList = $_SESSION['noticeList'];
 </head>
 <body>
 <?php require_once('../estateManager/navigation.php');?>
-	<table class="table table-hover table-bordered table-responsive">
-		<thead>
-			<tr>
-				<th>标题</th>
-				<th>内容</th>
-				<th>时间</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<th><?php echo $noticeList[$key]['title']; ?></th>
-				<th><?php echo $noticeList[$key]['content'];?></th>
-				<th><?php echo substr($noticeList[$key]['createdAt'],0,10); ?></th>
-			</tr>
-		</tbody>
-	</table>
+
+<div class="col-sm-5">
+	<div align="center">
+		<h1><?php echo $noticeList[$key]['title'];?></h1>
+	</div>
+	<div align="right">
+		<h4><?php echo substr($noticeList[$key]['createdAt'],0,10); ?></h4>
+	</div>
+	<div>
+		<?php echo $noticeList[$key]['content'];?>
+	</div>
+</div>
 </body>
 </html>

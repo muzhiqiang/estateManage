@@ -55,13 +55,13 @@ if(isset($_GET['method'])){
 		header("Location:".__PUBLIC__."/view/estateManager/index.php");
 	}
 	else if($method=='update'){				//修改密码
-		if(isset($_POST['newPassword'])){
+		if(isset($_POST['password'])&&$_POST['password']==$_SESSION['estateManager']['password']&&isset($_POST['newPassword'])){
 			$estatePassword = $_POST['newPassword'];
 			$estateManagerId = $_GET['id'];
 			$estateManagerModel->update($estatePassword,$estateManagerId);
 
 		}
-		header("Location:".__PUBLIC__.'/control/estateManagerControl.php?method=getAll');		
+		header("Location:".__PUBLIC__.'/control/estateManagerControl.php?method=logout');		
 	}
 
 	else if($method == 'delete'){			//删除管理员账号
@@ -74,7 +74,20 @@ if(isset($_GET['method'])){
 	else if($method == 'logout'){			//退出管理员账号
 		$_SESSION['estateManager'] = null;
 		header("Location:".__PUBLIC__.'/view/estateManager/login.php');
+	}
+	else if($method == 'waterPrice'){		//修改水费
+		if(isset($_POST['fee'])&&isset($_SESSION['estateManager'])){
+			$villageModel->updateWater((double)$_POST['fee'],$_SESSION['estateManager']['villageId']);
+		}
+		header("Location:".__PUBLIC__.'/view/estateManager/index.php');
+		
 	}	
+	else if($method == 'powerPrice'){		//修改电费
+		if(isset($_POST['fee'])&&isset($_SESSION['estateManager'])){
+			$villageModel->updatePower((double)$_POST['fee'],$_SESSION['estateManager']['villageId']);
+		}
+		header("Location:".__PUBLIC__.'/view/estateManager/index.php');
+	}
 }
 
 

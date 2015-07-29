@@ -10,35 +10,55 @@ require_once('../estateManager/head.php');
     <link href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
     <script src="http://apps.bdimg.com/libs/jquery/2.0.0/jquery.min.js"></script>
     <script src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href='/estateManagement/styles/simditor.css'/>
+
+	<script type="text/javascript" src='/estateManagement/scripts/jquery.min.js'></script>
+	
 </head>
 <body>
-<table>
 <?php require_once('../estateManager/navigation.php');?>
 <script type="text/javascript">
 	document.getElementById('notice').setAttribute('class','dropdown active');
 	document.getElementById('addNotice').setAttribute('class','active');
 </script>
-<div align="center">
 	<form class="form-horizontal" role="form" method="post" action=<?php echo __PUBLIC__.'/control/noticeControl.php?method=add'?>>
-		<div class="row form-group">
-			<label for="title" class="col-sm-4 control-label">标题</label>
-			<div class="col-sm-4">
-				<input type="text" class="form-control" name="title"></br>
+		<div class="row form-group" align="center">
+			<label for="title" class="col-sm-3 control-label">标题</label>
+			<div class="col-sm-6">
+				<input type="text" class="form-control" name="title">
 			</div>
 		</div>
+
 		<div class="row form-group">
-			<label for="content" class="col-sm-4 control-label">内容</label>
-			<div class="col-sm-4">
-				<textarea class="form-control" name="content"></textarea>
+			<div class="col-sm-3"></div>
+			<div class="col-sm-6">
+			<textarea class="form-control" id="mycontent" name="mycontent" placeholder="这里输入内容" autofocus></textarea>
+			<script type="text/javascript" src='/estateManagement/scripts/module.js'></script>
+			<script type="text/javascript" src='/estateManagement/scripts/hotkeys.js'></script>
+			<script type="text/javascript" src='/estateManagement/scripts/uploader.js'></script>
+			<script type="text/javascript" src='/estateManagement/scripts/simditor.js'></script>
+			<script type="text/javascript">
+				var editor = new Simditor({
+					textarea: $('#mycontent'),
+					toolbar: ['title','bold','italic','underline','strikethrough','color','ol','ul','link','image','hr','indent','outdent','alignment'],
+					upload : {
+            				   url : '../../control/uploadControl.php',
+            				   params: null,
+            				   fileKey: 'fileDataFileName',
+            				   connectionCount: 3,
+            				   leaveConfirm: '正在上传文件'
+        					 }
+				});
+				
+			</script>
 			</div>
 		</div>
 		<div class="form-group">
-			<div class="col-sm-offset-3 col-sm-6">
-				<button type="submit" class="btn btn-primary">发布</button>
+			<div class="col-sm-offset-3 col-sm-6" align="center">
+				<button type="submit" class="btn btn-primary" onclick="a()">发布</button>
 			</div>
 		</div>
 	</form>
-</div>
-</table>
 </body>
 </html>
