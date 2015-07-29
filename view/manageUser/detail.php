@@ -8,7 +8,10 @@
 		HttpClient::init($HttpClient, array('userAgent' => $_SERVER['HTTP_USER_AGENT'], 'redirect' => true));
 		$HttpClient->get("http://localhost/estateManagement/control/manageUserControl.php?getMethod=getDetailData&objectId=".$_SESSION['objectId']);
 		$json=json_decode($HttpClient->buffer,true);
+		
 	}
+	
+	
 ?>
 <!DOCTYPE html>
 <html>
@@ -27,16 +30,20 @@
 
 	echo "账号：".$json['userInfo']['username']."</br>";
 	echo "姓名：".$json['userInfo']['name']."</br>";
-	if($json['userInfo']['gender']==0)
-		echo "性别：未知</br>";
-	else if($json['userInfo']['gender']==1)
+	
+	if($json['userInfo']['gender']==1)
 		echo "性别：男</br>";
-	else
+	else if($json['userInfo']['gender']==2)
 		echo "性别：女</br>";
+	else
+		echo "性别：</br>";
+	
 	if($json['userInfo']['type']=="tenant")
 		echo "用户类型：租户</br>";
-	else
+	else if($json['userInfo']['type']=="owner")
 		echo "用户类型：房东</br>";
+	else
+		echo "用户类型：</br>";
 	echo "联系电话：".$json['userInfo']['mobilePhoneNumber']."</br>";
 	echo "邮箱地址：".$json['userInfo']['email']."</br>";
 	echo "年龄：".$json['userInfo']['age']."</br>";
@@ -65,6 +72,7 @@
 </tr>
 <?php
 $sum=0;
+	if(!empty($json['bill']['house']))
 	foreach ($json['bill']['house'] as $key => $value) {
 		echo '<tr>';
 		echo "<td>".$value['type']."</td>";
@@ -74,23 +82,26 @@ $sum=0;
 		echo '</tr>';
 		$sum+=$value['total'];
 	}
-	foreach ($json['bill']['parking'] as $key => $value) {
-		echo '<tr>';
-		echo "<td>".$value['type']."</td>";
-		echo "<td>".$value['usage']."</td>";
-		echo "<td>".$value['price']."</td>";
-		echo "<td>".$value['total']."</td>";
-		echo '</tr>';
-		$sum+=$value['total'];
-	}
+	if(!empty($json['bill']['parking']))
+		foreach ($json['bill']['parking'] as $key => $value) {
+			echo '<tr>';
+			echo "<td>".$value['type']."</td>";
+			echo "<td>".$value['usage']."</td>";
+			echo "<td>".$value['price']."</td>";
+			echo "<td>".$value['total']."</td>";
+			echo '</tr>';
+			$sum+=$value['total'];
+		}
 ?>
 
 </table>
 <?php
 echo "总价：".$sum."</br>";
 ?>
-<a href="#">点击查看详细账单</a></br>
+<a <?php echo "href=\"../../control/billControl.php?method=showUserBill&parkingId=".$json['userInfo']['parkingId']."&houseId=".$json['userInfo']['houseId']."\"";?>>点击查看详细账单</a></br>
 
 <a <?php echo "href=\"../../control/manageUserControl.php?getMethod=modify&objectId=".$json['userInfo']['objectId']."\"";?>>修改该用户资料</a>
+
+
 </body>
 </html>

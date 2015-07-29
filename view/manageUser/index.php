@@ -6,7 +6,7 @@
 	HttpClient::init($HttpClient, array('userAgent' => $_SERVER['HTTP_USER_AGENT'], 'redirect' => true));
 	$HttpClient->get("http://localhost/estateManagement/control/manageUserControl.php?getMethod=getInformation&objectId=".$_SESSION['estateManager']['villageId']);
 	$json=json_decode($HttpClient->buffer,true);
-
+	
 ?>
 <html>
 <head>
@@ -38,23 +38,23 @@
 		<tbody>
 		<?php
 			foreach ($json as $key => $value) {
-				if(isset($value['isConfirm'])&&$value['isConfirm'])
-				{
-					echo "<tr>";
-					echo "<td>".$value['name']."</td>";
-					if($value['gender']==0)
-						echo "<td>未知</td>";
-					else if($value['gender']==0)
-						echo "<td>男</td>";
-					else
-						echo "<td>女</td>";
-					echo "<td>".ifExit($value['mobilePhoneNumber'])."</td>";
-					echo "<td>".$value['building']."</td>";
-					echo "<td>".$value['floor']."</td>";
-					echo "<td>".$value['unit']."</td>";
-					echo "<td><a href=\"detail.php?objectId=".$value['objectId']."\">查看详细</a></td>";
-					echo "</tr>";
-				}
+					if(isset($value['isConfirm'])&&$value['isConfirm'])
+					{
+						echo "<tr>";
+						echo "<td>".$value['name']."</td>";
+						if($value['gender']==0)
+							echo "<td>未知</td>";
+						else if($value['gender']==0)
+							echo "<td>男</td>";
+						else
+							echo "<td>女</td>";
+						echo "<td>".ifExit($value['mobilePhoneNumber'])."</td>";
+						echo "<td>".$value['building']."</td>";
+						echo "<td>".$value['floor']."</td>";
+						echo "<td>".$value['unit']."</td>";
+						echo "<td><a href=\"detail.php?objectId=".$value['objectId']."\">查看详细</a></td>";
+						echo "</tr>";
+					}
 			}
 		?>
 		</tbody>

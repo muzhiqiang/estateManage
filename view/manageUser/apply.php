@@ -4,7 +4,6 @@ require ('../../utils/getInformation.php');
 require ('../../utils/function.php');
 HttpClient::init($HttpClient, array('userAgent' => $_SERVER['HTTP_USER_AGENT'], 'redirect' => true));
 $HttpClient->get("http://localhost/estateManagement/control/manageUserControl.php?getMethod=getInformationApply&objectId=".$_SESSION['estateManager']['villageId']);
-
 $json=json_decode($HttpClient->buffer,true);
 ?>
 <!DOCTYPE html>

@@ -2,6 +2,7 @@
 <?php
 		require_once('../estateManager/head.php');
 		require ('../../utils/getInformation.php');
+		require ('../../utils/function.php');
 		if (isset($_GET['objectId']))
 			$_SESSION['modifyId']=$_GET['objectId'];
 		if(isset($_SESSION['objectId']))
@@ -58,7 +59,7 @@
 
 			联系电话<input type="text" name="mobilePhoneNumber" <?php echo "value=\"".$json['userInfo']['mobilePhoneNumber']."\""; ?>></br>
 			邮箱地址<input type="text" name="email" <?php echo "value=\"".$json['userInfo']['email']."\""; ?>></br>
-			年龄<input type="text" name="age" <?php echo "value=\"".$json['userInfo']['age']."\""; ?>></br>
+			年龄<input type="text" name="age" <?php echo "value=\"".ifExit($json['userInfo']['age'])."\""; ?>></br>
 			职业<input type="text" name="occupation" <?php echo "value=\"".$json['userInfo']['occupation']."\""; ?>></br>
 			房屋地址：</br>
 				座别<input type="text" name="houseBuilding" <?php echo "value=\"".$json['houseInfo']['building']."\""; ?> ></br>

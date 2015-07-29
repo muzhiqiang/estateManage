@@ -6,13 +6,15 @@ function toArray($obj,$point=array()){
 	$return = array();
 	foreach ($obj as $key => $value) {
 		$temp = array();
-		foreach ((array)$value as $key1 => $value1) {	
+		foreach ((array)$value as $key1 => $value1) {		
 			if(in_array($key1, $point)){
-				$value1 = (array)$value1;
-				$temp = array_merge($temp,array($key1=>$value1['objectId']));
+				if(!empty($value1))							//添加判断是否为空，否则出错
+					$value1 = (array)$value1;
+					$temp = array_merge($temp,array($key1=>$value1['objectId']));
 			}else{
 				$temp = array_merge($temp,array($key1=>$value1));
 			}
+			
 		}
 		$return = array_merge($return,array($key=>$temp));
 	}
