@@ -25,7 +25,7 @@ require_once('navigation.php');
 ?>
 <script type="text/javascript">
 	document.getElementById('estateManager').setAttribute('class','navbar-right dropdown active');
-	document.getElementById('upadatePassword').setAttribute('class','active');
+	document.getElementById('updatePassword').setAttribute('class','active');
 </script>
 <div align="center">
 	<form class="form-horizontal" role="form" method="post" action=<?php echo __PUBLIC__.'/control/estateManagerControl.php?method=update&id='.$_SESSION['estateManager']['objectId'];?>>
