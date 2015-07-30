@@ -9,7 +9,7 @@
    			'</li>'.
    			'<li class="dropdown" id="bill"><a class="dropdown-toggle" data-toggle="dropdown" href="#">账单管理<span class="caret"></span></a>'.
       			'<ul class="dropdown-menu">'.
-      				'<li id="lookBill"><a href="#">查看账单</a></li>'.
+      				'<li id="lookBill"><a href='.__PUBLIC__.'/view/bill/index.php'.'>查看账单</a></li>'.
          			'<li id="addBill"><a href="#">添加账单</a></li>'.
       			'</ul>'.
    			'</li>'.

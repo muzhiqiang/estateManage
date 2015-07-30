@@ -73,14 +73,10 @@ require_once('navigation.php');
 
 
 
-<<<<<<< HEAD
 </table>
-<?php
-echo "总价：".$sum."</br>";
-?>
+
 <a <?php echo "href=\"../../control/billControl.php?method=showUserBill&userId=".$json['userInfo']['objectId']."\"";?>>点击查看详细账单</a></br>
-=======
->>>>>>> bd9e1bbde5acc87f93e334f32b0001d46bbc5265
+
 
 
 
