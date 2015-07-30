@@ -19,12 +19,7 @@
          			'<li id="addNotice"><a href='.__PUBLIC__.'/view/notice/noticeEdit.php'.'>新建通知</a></li>'.
       			'</ul>'.
    			'</li>'.
-   			'<li class="dropdown" id="repair"><a class="dropdown-toggle" data-toggle="dropdown" href="#">维修管理<span class="caret"></span></a>'.
-      			'<ul class="dropdown-menu">'.
-      				'<li id="waitRepair"><a href="#">待维修</a></li>'.
-         			'<li id="haveRepair"><a href="#">已维修</a></li>'.
-      			'</ul>'.
-   			'</li>'.
+   			'<li id="repair"><a href='.__PUBLIC__.'/control/repairControl.php?method=waitRepair&id='.$_SESSION['estateManager']['villageId'].'>维修管理</a></li>'.
             '<li class="navbar-right"><a href='.__PUBLIC__.'/control/estateManagerControl.php?method=logout'.'>退出</a></li>'.
             '<li class="dropdown navbar-right" id="estateManager"><a class="dropdown-toggle" data-toggle="dropdown" href="#">'.$_SESSION['estateManager']['name'].'<span class="caret"></span></a>'.
                '<ul class="dropdown-menu">'.
