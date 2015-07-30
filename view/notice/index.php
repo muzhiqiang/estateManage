@@ -11,6 +11,7 @@ $noticeList = $_SESSION['noticeList'];
     <link href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
     <script src="http://apps.bdimg.com/libs/jquery/2.0.0/jquery.min.js"></script>
     <script src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
 </head>
 <body>
 <?php require_once('../estateManager/navigation.php');?>

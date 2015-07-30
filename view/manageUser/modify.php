@@ -15,61 +15,162 @@
 ?>
 <html>
 	<head>
+		<title>修改用户信息</title>
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-		<title>修改用户信息</title>	
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    	<link href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+    	<script src="http://apps.bdimg.com/libs/jquery/2.0.0/jquery.min.js"></script>
+    	<script src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+			
 	</head>
+	<?php
+		require_once('../estateManager/navigation.php');
+		require_once('navigation.php');
+	?>
+	<script type="text/javascript">
+		document.getElementById('user').setAttribute('class','dropdown active');
+		document.getElementById('userPass').setAttribute('class','active');
+		document.getElementById('update').setAttribute('class','active');
+	</script>
 	<body>
-		<h1>基本信息</h1>
-		<form method="POST" action="../../control/manageUserControl.php">
-			<input type="hidden" name="userId" <?php  echo "value=\"".$json['userInfo']['objectId']."\""; ?>>
-			<input type="hidden" name="parkingId" <?php  echo "value=\"".$json['parkingInfo']['objectId']."\""; ?>>
-			<input type="hidden" name="houseId" <?php  echo "value=\"".$json['houseInfo']['objectId']."\""; ?>>
- 			姓名<input type="text" name="name" <?php echo "value=\"".$json['userInfo']['name']."\""; ?>></br>
-
-			性别<input type="radio" name="gender"
-			<?php if($json['userInfo']['gender']==0)
-			echo "checked";
-			?> value="0">未知
-			<input type="radio"
-			<?php if($json['userInfo']['gender']==1)
-			echo "checked";
-			?>  name="gender" value="1">男
-			<input type="radio" <?php if($json['userInfo']['gender']==2)
-			echo "checked";
-			?>  name="gender" value="2">女</br>
-
-			用户类型<input type="radio" <?php if($json['userInfo']['type']=="tenant")
-			echo "checked";
-			?>  name="type" value="tenant">租户
-			<input type="radio" <?php if($json['userInfo']['type']=="owner")
-			echo "checked";
-			?>   name="type" value="owner">业主</br>
-
-			婚姻状况<input type="radio" <?php if($json['userInfo']['isMarried']=="未知")
-			echo "checked";
-			?> name="isMarried" value="未知">未知
-			<input type="radio" 
-			<?php if($json['userInfo']['isMarried']=="已婚")
-			echo "checked";
-			?> name="isMarried" value="已婚">已婚
-			<input type="radio" <?php if($json['userInfo']['isMarried']=="未婚")
-			echo "checked";
-			?> name="isMarried" value="未婚">未婚
-			</br>
-
-			联系电话<input type="text" name="mobilePhoneNumber" <?php echo "value=\"".$json['userInfo']['mobilePhoneNumber']."\""; ?>></br>
-			邮箱地址<input type="text" name="email" <?php echo "value=\"".$json['userInfo']['email']."\""; ?>></br>
-			年龄<input type="text" name="age" <?php echo "value=\"".ifExit($json['userInfo']['age'])."\""; ?>></br>
-			职业<input type="text" name="occupation" <?php echo "value=\"".$json['userInfo']['occupation']."\""; ?>></br>
-			房屋地址：</br>
-				座别<input type="text" name="houseBuilding" <?php echo "value=\"".$json['houseInfo']['building']."\""; ?> ></br>
-				楼层<input type="text" name="houseFloor" <?php echo "value=\"".$json['houseInfo']['floor']."\""; ?> ></br>
-				单元<input type="text" name="houseUnit" <?php echo "value=\"".$json['houseInfo']['unit']."\""; ?> ></br>
-			停车位地址：</br>
-				座别<input type="text" name="parkingBuilding"  <?php echo "value=\"".$json['parkingInfo']['building']."\""; ?> ></br>
-				楼层<input type="text" name="parkingFloor"  <?php echo "value=\"".$json['parkingInfo']['floor']."\""; ?> ></br>
-				单元<input type="text" name="parkingUnit"  <?php echo "value=\"".$json['parkingInfo']['unit']."\""; ?> ></br>
-			<input type="submit" name="submit">
+		
+		<div class="col-sm-8" align="center">
+		<form method="POST" action="../../control/manageUserControl.php" role="form" class="form-horizontal">
+			<div class="row form-group">
+				<input type="hidden" name="userId" <?php  echo "value=\"".$json['userInfo']['objectId']."\""; ?>>
+			</div>
+			<div class="row form-group">
+				<input type="hidden" name="parkingId" <?php  echo "value=\"".$json['parkingInfo']['objectId']."\""; ?>>
+			</div>
+			<div class="row form-group">
+				<input type="hidden" name="houseId" <?php  echo "value=\"".$json['houseInfo']['objectId']."\""; ?>>
+ 			</div>
+ 			<div class="row form-group">
+ 				<label for="name" class="col-sm-4 control-label">姓名</label>
+ 				<div class="col-sm-4">
+ 					<input class="form-control" type="text" name="name" <?php echo "value=\"".$json['userInfo']['name']."\""; ?>>
+ 				</div>
+ 			</div>
+ 			<hr>
+ 			<div class="row form-group">
+ 				<label for="gender" class="col-sm-4 control-label">性别</label>
+ 				<div class="col-sm-4">
+					<input  type="radio" name="gender"
+					<?php if($json['userInfo']['gender']==0)
+					echo "checked";
+					?> value="0">未知
+					<input type="radio"
+					<?php if($json['userInfo']['gender']==1)
+					echo "checked";
+					?>  name="gender" value="1">男
+					<input type="radio" <?php if($json['userInfo']['gender']==2)
+					echo "checked";
+					?>  name="gender" value="2">女
+				</div>
+			</div>
+			<hr>
+			<div class="row form-group">
+				<label for="age" class="col-sm-4 control-label">年龄</label>
+				<div class="col-sm-4">
+					<input class="form-control" type="text" name="age" <?php echo "value=\"".ifExit($json['userInfo']['age'])."\""; ?>>
+				</div>
+			</div>
+			<hr>
+			<div class="row form-group">
+				<label for="mobilePhoneNumber" class="col-sm-4 control-label">联系电话</label>
+				<div class="col-sm-4">
+					<input class="form-control" type="text" name="mobilePhoneNumber" <?php echo "value=\"".$json['userInfo']['mobilePhoneNumber']."\""; ?>>
+				</div>
+			</div>
+			<hr>
+			<div class="row form-group">
+				<label for="type" class="col-sm-4 control-label">用户类型</label>
+				<div class="col-sm-4">
+					<input type="radio" <?php if($json['userInfo']['type']=="tenant")
+													echo "checked";
+										?>  name="type" value="tenant">租户
+					<input type="radio" <?php if($json['userInfo']['type']=="owner")
+											echo "checked";
+										?>   name="type" value="owner">业主
+				</div>
+			</div>
+			<hr>
+			<div class="row form-group">
+				<label for="email" class="col-sm-4 control-label">邮箱地址</label>
+				<div class="col-sm-4">
+					<input class="form-control" type="text" name="email" <?php echo "value=\"".$json['userInfo']['email']."\""; ?>>
+				</div>
+			</div>
+			<hr>
+			<div class="row form-group">
+				<label for="isMarried" class="col-sm-4 control-label">婚姻状况</label>
+				<div class="col-sm-4">
+					<input type="radio" <?php if($json['userInfo']['isMarried']=="未知")
+												echo "checked";
+										?> name="isMarried" value="未知">未知
+					<input type="radio" <?php if($json['userInfo']['isMarried']=="已婚")
+												echo "checked";
+										?> name="isMarried" value="已婚">已婚
+					<input type="radio" <?php if($json['userInfo']['isMarried']=="未婚")
+												echo "checked";
+										?> name="isMarried" value="未婚">未婚
+				</div>
+			</div>
+			<hr>
+			
+		
+			<div class="row form-group">
+				<label for="occupation" class="col-sm-4 control-label">职业</label>
+				<div class="col-sm-4">
+					<input class="form-control" type="text" name="occupation" <?php echo "value=\"".$json['userInfo']['occupation']."\""; ?>>
+				</div>	
+			</div>
+			<hr>
+			<h4>房屋地址</h4>
+			<div class="row form-group">
+				<label for="houseBuilding" class="col-sm-4 control-label">座别</label>
+				<div class="col-sm-4">
+					<input class="form-control" type="text" name="houseBuilding" <?php echo "value=\"".$json['houseInfo']['building']."\""; ?> >
+				</div>
+			</div>
+			<div class="row form-group">
+				<label for="houseFloor" class="col-sm-4 control-label">楼层</label>
+				<div class="col-sm-4">
+					<input class="form-control" type="text" name="houseFloor" <?php echo "value=\"".$json['houseInfo']['floor']."\""; ?> >
+				</div>
+			</div>
+			<div class="row form-group">
+				<label for="houseUnit" class="col-sm-4 control-label">单元</label>
+				<div class="col-sm-4">
+					<input class="form-control" type="text" name="houseUnit" <?php echo "value=\"".$json['houseInfo']['unit']."\""; ?> >
+				</div>
+			</div>
+			<hr>
+			<h4>停车位</h4>
+			<div class="row form-group">
+				<label for="parkingBuilding" class="col-sm-4 control-label">座别</label>
+				<div class="col-sm-4">
+					<input class="form-control" type="text" name="parkingBuilding" <?php echo "value=\"".$json['parkingInfo']['building']."\""; ?> >
+				</div>
+			</div>
+			<div class="row form-group">
+				<label for="parkingFloor" class="col-sm-4 control-label">楼层</label>
+				<div class="col-sm-4">
+					<input class="form-control" type="text" name="parkingFloor" <?php echo "value=\"".$json['parkingInfo']['floor']."\""; ?> >
+				</div>
+			</div>
+			<div class="row form-group">
+				<label for="parkingUnit" class="col-sm-4 control-label">单元</label>
+				<div class="col-sm-4">
+					<input class="form-control" type="text" name="parkingUnit" <?php echo "value=\"".$json['parkingInfo']['unit']."\""; ?> >
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-3 col-sm-6">
+					<button type="submit" class="btn btn-primary">确定</button>
+				</div>
+			</div>
 		</form>
+		</div>
 	</body>
 </html>

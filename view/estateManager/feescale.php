@@ -13,6 +13,7 @@ require_once('../estateManager/head.php');
     <script type="text/javascript">
     	function water(){
     		document.getElementById('name').innerText = '水费';
+    		document.getElementById('unit').innerText = "/吨";
     		document.getElementById('form').setAttribute('action','/estateManagement/control/estateManagerControl.php?method=waterPrice');
     		document.getElementById('waterPrice').setAttribute('class','active');
     		document.getElementById('powerPrice').setAttribute('class','');
@@ -20,6 +21,7 @@ require_once('../estateManager/head.php');
     	}
     	function power(){
     		document.getElementById('name').innerText = "电费";
+    		document.getElementById('unit').innerText = "/度";
     		document.getElementById('form').setAttribute('action','/estateManagement/control/estateManagerControl.php?method=powerPrice');
     		document.getElementById('waterPrice').setAttribute('class','');
     		document.getElementById('powerPrice').setAttribute('class','active');
@@ -42,19 +44,18 @@ require_once('navigation.php');
 	</ul>
 </div>
 <div class="col-sm-6">
-	<div align="center" id="type">
-		
-	</div>
-	<div align="center">
+	<div align="center" class="col-sm-8">
 	<form class="form-horizontal" role="form" method="post" id="form">
 		<div class="row form-group">
-			<label for="username" class="col-sm-4 control-label" id="name"></label>
-			<div class="col-sm-4">
-				<input type="text" class="form-control" name="fee" id="fee"></br>
+			<label for="fee" class="col-sm-6 control-label" id="name"></label>
+			<div class="col-sm-6 input-group">
+				<input type="text" class="form-control" name="fee" id="fee">
+				<span class="input-group-addon" id="unit"></span>
 			</div>
+			
 		</div>
 		<div class="form-group">
-			<div class="col-sm-offset-3 col-sm-6">
+			<div class="col-sm-offset-6 col-sm-6">
 				<button type="submit" class="btn btn-primary">确定</button>
 			</div>
 		</div>
