@@ -98,7 +98,7 @@ $sum=0;
 <?php
 echo "总价：".$sum."</br>";
 ?>
-<a <?php echo "href=\"../../control/billControl.php?method=showUserBill&parkingId=".$json['userInfo']['parkingId']."&houseId=".$json['userInfo']['houseId']."\"";?>>点击查看详细账单</a></br>
+<a <?php echo "href=\"../../control/billControl.php?method=showUserBill&userId=".$json['userInfo']['objectId']."\"";?>>点击查看详细账单</a></br>
 
 <a <?php echo "href=\"../../control/manageUserControl.php?getMethod=modify&objectId=".$json['userInfo']['objectId']."\"";?>>修改该用户资料</a>
 

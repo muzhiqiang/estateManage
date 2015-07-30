@@ -1,6 +1,16 @@
 <?php
 	require_once('../../utils/getInformation.php');
 	require_once('../estateManager/head.php');
+	if(!empty($_GET['userId']))
+		$_SESSION['userBillId']=$_GET['userId'];
+	if(isset($_SESSION['userBillId']))
+	{
+		HttpClient::init($HttpClient, array('userAgent' => $_SERVER['HTTP_USER_AGENT'], 'redirect' => true));
+		$HttpClient->get("http://localhost/estateManagement/control/billControl.php?method=getUserBill&userId=".$_SESSION['userBillId']);
+		print_r("http://localhost/estateManagement/control/billControl.php?method=getUserBill&userId=".$_SESSION['userBillId']);
+		$json=json_decode($HttpClient->buffer,true);
+		print_r($json);
+	}
 ?>
 <!DOCTYPE html>
 <html>
@@ -12,9 +22,7 @@
 	
 	<body>
 		<?php
-			echo $_GET['parkingId'];
-			echo $_GET['houseId'];
-			
+			echo $_GET['userId'];
 		?>
 	
 	</body>
