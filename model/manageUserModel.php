@@ -176,4 +176,12 @@ class manageModel
 
 		return $return;
 	}
+	function deleteUserInfo($objectId)
+	{
+		$update=new leancloud\AVObject('_User');
+		$update->houseId=null;
+		$update->parkingId=null;
+		$return=$update->update($objectId);
+		return $return;
+	}
 }

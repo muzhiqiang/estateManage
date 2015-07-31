@@ -49,6 +49,12 @@ function getTomMnthBill($houseId,$parkingId)
 	$return=$m->showTomonthBill($houseId,$parkingId);
 	echo json_encode($return);
 }
+function deleteUser($objectId)
+{
+	$m=new manageModel();
+	$return=$m->deleteUserInfo($objectId);
+	return $return;
+}
 if(isset($_GET['getMethod']))
 {
 	$choice=$_GET['getMethod'];
@@ -86,6 +92,10 @@ if(isset($_GET['getMethod']))
 		case 'modify':
 			header("Location:".__PUBLIC__."/view/manageUser/modify.php?objectId=".$_GET['objectId']);
 			//echo "Location:".__PUBLIC__."/view/manageUser/modify.php?objectId=".$_GET['objectId'];
+			break;
+		case 'deleteUser':
+			deleteUser($_GET['userId']);
+			header("Location:".__PUBLIC__."/view/manageUser/index.php");
 			break;
 		default:
 			# code...

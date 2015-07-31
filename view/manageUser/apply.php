@@ -39,7 +39,7 @@ $json=json_decode($HttpClient->buffer,true);
 		<tbody>
 		<?php
 		foreach ($json as $key => $value) {
-			if(isset($value['isConfirm'])&&!$value['isConfirm'])
+			if(($value['isConfirm'])&&!$value['isConfirm'])
 			{
 				echo "<tr>";
 				echo "<td>".$value['name']."</td>";

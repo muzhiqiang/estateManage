@@ -35,39 +35,74 @@ require_once('navigation.php');
 </script>
 
 <div class="col-sm-7">
-	<div class="well" align="center">账号:<?php echo $json['userInfo']['username'];?></div>
-	<div class="well" align="center">姓名:<?php echo $json['userInfo']['name'];?></div>
+	<div class="well" align="center">账号:<?php 
+	if(empty($json['userInfo']['username']))
+		echo "尚未填写";
+	else
+		echo $json['userInfo']['username'];?></div>
+	<div class="well" align="center">姓名:<?php 
+	if(empty($json['userInfo']['name']))
+		echo "尚未填写";
+	else
+		echo $json['userInfo']['name'];?></div>
 	<div class="well" align="center">性别:
-				<?php 
-  				if($json['userInfo']['gender']==1)
+				<?php
+				if(!isset($json['userInfo']['gender']))
+				{
+					echo "尚未填写";
+				} 
+  				else if($json['userInfo']['gender']==1)
 					echo "男";
 				else if($json['userInfo']['gender']==2)
 					echo "女";
-				else
-					echo "";
 				?>
 	</div>
 	<div class="well" align="center">用户类型:
 				<?php 
-				if($json['userInfo']['type']=="tenant")
+				if(empty($json['userInfo']['type']))
+					echo "尚未填写";
+				else if($json['userInfo']['type']=="tenant")
 					echo "租户";
 				else if($json['userInfo']['type']=="owner")
 					echo "房东";
-				else
-					echo "";
 				?>
 	</div>
-	<div class="well" align="center">联系电话:<?php echo $json['userInfo']['mobilePhoneNumber'];?></div>
-	<div class="well" align="center">邮箱地址:<?php echo $json['userInfo']['email'];?></div>
-	<div class="well" align="center">年龄:<?php echo $json['userInfo']['age'];?></div>
-	<div class="well" align="center">职业:<?php echo $json['userInfo']['occupation'];?></div>
-	<div class="well" align="center">婚姻状况:<?php echo $json['userInfo']['isMarried'];?></div>
-	<div class="well" align="center">住址:<?php echo $json['houseInfo']['building']."栋".$json['houseInfo']['floor']."层".$json['houseInfo']['unit']."号";?></div>
-	<div class="well" align="center">停车位:<?php
-														if(!empty($json['parkingInfo']))
-															echo $json['parkingInfo']['building']."栋".$json['parkingInfo']['floor']."层".$json['parkingInfo']['unit']."</br>";
-														else
-															echo "无";?>
+	<div class="well" align="center">联系电话:<?php 
+	if(empty($json['userInfo']['mobilePhoneNumber']))
+		echo "尚未填写";
+	else
+	echo $json['userInfo']['mobilePhoneNumber'];?></div>
+	<div class="well" align="center">邮箱地址:<?php 
+	if(empty($json['userInfo']['email']))
+		echo "尚未填写";
+	else
+	echo $json['userInfo']['email'];?></div>
+	<div class="well" align="center">年龄:<?php 
+	if(empty($json['userInfo']['age']))
+		echo "尚未填写";
+	else
+	echo $json['userInfo']['age'];?></div>
+	<div class="well" align="center">职业:<?php 
+	if(empty($json['userInfo']['occupation']))
+		echo "尚未填写";
+	else
+	echo $json['userInfo']['occupation'];?></div>
+	<div class="well" align="center">婚姻状况:<?php 
+	if(empty($json['userInfo']['isMarried']))
+		echo "尚未填写";
+	else
+		echo $json['userInfo']['isMarried'];?></div>
+	<div class="well" align="center">住址:<?php 
+	if(empty($json['houseInfo']['building']))
+		echo "尚未填写";
+	else
+	echo $json['houseInfo']['building']."栋".$json['houseInfo']['floor']."层".$json['houseInfo']['unit']."号";?></div>
+	<div class="well" align="center">停车位:
+		<?php
+			if(!empty($json['parkingInfo']))
+				echo $json['parkingInfo']['building']."栋".$json['parkingInfo']['floor']."层".$json['parkingInfo']['unit']."</br>";
+			else
+				echo "无";?>
 	</div>
 </div>
 
@@ -76,7 +111,7 @@ require_once('navigation.php');
 </table>
 
 <a <?php echo "href=\"../../control/billControl.php?method=showUserBill&userId=".$json['userInfo']['objectId']."\"";?>>点击查看详细账单</a></br>
-
+<a <?php echo "href=\"../../control/manageUserControl.php?getMethod=deleteUser&userId=".$json['userInfo']['objectId']."\"";?>>删除该用户</a></br>
 
 
 
