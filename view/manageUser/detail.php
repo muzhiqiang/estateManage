@@ -110,9 +110,7 @@ require_once('navigation.php');
 
 </table>
 
-<a <?php echo "href=\"../../control/billControl.php?method=showUserBill&userId=".$json['userInfo']['objectId']."\"";?>>点击查看详细账单</a></br>
 <a <?php echo "href=\"../../control/manageUserControl.php?getMethod=deleteUser&userId=".$json['userInfo']['objectId']."\"";?>>删除该用户</a></br>
-
 
 
 </body>

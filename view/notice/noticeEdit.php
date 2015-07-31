@@ -14,7 +14,15 @@ require_once('../estateManager/head.php');
     <link rel="stylesheet" type="text/css" href='/estateManagement/styles/simditor.css'/>
 
 	<script type="text/javascript" src='/estateManagement/scripts/jquery.min.js'></script>
-	
+	<script type="text/javascript">
+		function filter() {
+			var img = document.getElementsByTagName("img");
+			for(i=0;i<img.length;i++){
+				$(img[i]).removeAttr("width");
+				$(img[i]).removeAttr("height");
+			}
+		};
+	</script>
 </head>
 <body>
 <?php require_once('../estateManager/navigation.php');?>
@@ -56,7 +64,7 @@ require_once('../estateManager/head.php');
 		</div>
 		<div class="form-group">
 			<div class="col-sm-offset-3 col-sm-6" align="center">
-				<button type="submit" class="btn btn-primary" onclick="a()">发布</button>
+				<button type="submit" class="btn btn-primary" onclick="filter()">发布</button>
 			</div>
 		</div>
 	</form>

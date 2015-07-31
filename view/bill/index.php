@@ -19,22 +19,35 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		
-		
-		<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
 		<title>用户账单</title>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    	<link href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+    	<script src="http://apps.bdimg.com/libs/jquery/2.0.0/jquery.min.js"></script>
+    	<script src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 	</head>
 	
 	<body>
-	<form>
-		搜索用户：<input type="text" name="username">
-		<input type="submit" name="findUser">
+	<?php 
+		require_once('../estateManager/navigation.php');
+		require_once('navigation.php');
+	?>
+	<div align="center" class="col-sm-5">
+	<form role="form">
+        <div class="input-group">
+            <input type="text" class="form-control" name="username">
+            <span class="input-group-btn">
+          	    <button class="btn btn-default" type="submit" name="findUser">
+                    搜索用户
+                </button>
+            </span>
+        </div>
 	</form>
 	
 	<?php 
 		if(isset($json))
 		{	
-			echo "用户:".$json['userInfo'][0]['name']."   联系电话：".$json['userInfo'][0]['mobilePhoneNumber'];
+			
 			$len=sizeof($json['house'])+sizeof($json['parking']);
 		
 			while($len!=0)
@@ -42,7 +55,8 @@
 				
 				$sum=0;
 				echo "<h1>".$year."  ".$month."</h1>";
-				echo "<table>
+				echo "<table class='table table-hover table-bordered table-responsive'>
+						<thead>
 						<tr>
 							<th>类型</th>
 							<th>用量</th>
@@ -50,7 +64,8 @@
 							<th>总额</th>";
 							if($isToMonth)
 								echo "<th>删除</th>";
-				echo	"</tr>";
+				echo	"</tr></thead>";
+				echo "<tbody>";
 				if(!empty($json['house']))
 					foreach($json['house'] as $key=>$value)
 					{
@@ -71,6 +86,7 @@
 							$sum+=$value['total'];
 						}
 					}
+			
 				if(!empty($json['parking']))
 					foreach($json['parking'] as $key=>$value)
 					{
@@ -90,7 +106,8 @@
 							$len--;
 							$sum+=$value['total'];
 						}
-					}
+					}	
+				echo "</tbody>";
 				echo "</table>";
 				if($isToMonth)
 				{	
@@ -112,8 +129,15 @@
 			}
 		}
 	?>
-		
-		
+	</div>
+	<div class="container col-sm-4">
+		<div class="jumbotron">
+			<h3>用户</h3>
+				<?php echo $json['userInfo'][0]['name'];?>
+			<h3>联系电话</h3>
+				<?php echo $json['userInfo'][0]['mobilePhoneNumber'];?>
+		</div>
+	</div>
 		
 	
 	</body>
