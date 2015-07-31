@@ -80,7 +80,7 @@ $sum=0;
 </tbody>
 </table>
 <div class="alert alert-info" align="center">
-<a <?php echo "href=\"../../control/billControl.php?method=showUserBill&userId=".$json['userInfo']['objectId']."\"";?>>点击查看详细账单</a>
+<a role="button" <?php echo "href=\"../../control/billControl.php?method=showUserBill&userId=".$json['userInfo']['objectId']."\"";?>>点击查看详细账单</a>
 </div>
 </div>
 </body>

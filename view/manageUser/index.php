@@ -41,17 +41,36 @@
 					if(isset($value['isConfirm'])&&$value['isConfirm'])
 					{
 						echo "<tr>";
-						echo "<td>".$value['name']."</td>";
-						if($value['gender']==0)
+						if(empty($value['name']))
 							echo "<td>未知</td>";
-						else if($value['gender']==0)
+						else
+							echo "<td>".$value['name']."</td>";
+						
+						if(empty($value['gender']))
+							echo "<td>未知</td>";
+						else if($value['gender']==1)
 							echo "<td>男</td>";
 						else
 							echo "<td>女</td>";
-						echo "<td>".ifExit($value['mobilePhoneNumber'])."</td>";
-						echo "<td>".$value['building']."</td>";
-						echo "<td>".$value['floor']."</td>";
-						echo "<td>".$value['unit']."</td>";
+						
+						if(empty($value['mobilePhoneNumber']))
+							echo "<td>未知</td>";
+						else
+							echo "<td>".$value['mobilePhoneNumber']."</td>";
+						
+						if(empty($value['building']))
+							echo "<td>未知</td>";
+						else
+							echo "<td>".$value['building']."</td>";
+						if(empty($value['floor']))
+							echo "<td>未知</td>";
+						else
+							echo "<td>".$value['floor']."</td>";
+						if(empty($value['unit']))
+							echo "<td>未知</td>";
+						else
+							echo "<td>".$value['unit']."</td>";
+						
 						echo "<td><a href=\"detail.php?objectId=".$value['objectId']."\">查看详细</a></td>";
 						echo "</tr>";
 					}

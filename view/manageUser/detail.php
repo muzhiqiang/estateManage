@@ -75,8 +75,6 @@ require_once('navigation.php');
 
 </table>
 
-<a <?php echo "href=\"../../control/billControl.php?method=showUserBill&userId=".$json['userInfo']['objectId']."\"";?>>点击查看详细账单</a></br>
-
 
 
 
