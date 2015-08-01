@@ -55,6 +55,36 @@ require_once('../utils/function.php');
 			$obj->update($villageId);
 			return true;
 		}
+		public function addHouse($building,$floorArr,$unitArr,$villageId){
+			$obj = new leancloud\AVObject('House');
+			foreach ($floorArr as $floor) {
+				foreach ($unitArr as $unit) {
+					$obj->building = $building;
+					$obj->floor = $floor;
+					$obj->unit = $unit;
+					$obj->villageId = getPointer("Village",$villageId);
+					$obj->save();
+				}
+			}
+		}
+		public function getBuilding($building,$floor,$unit,$villageId){
+			$query = new leancloud\AVQuery("House");
+			if($building!=""){
+				$query->where('building',$building);
+			}
+			if($floor!=""){
+				$query->where('floor',$floor);
+			}
+			if ($unit!="") {
+				$query->where('unit',$unit);
+			}
+			$query->where('villageId',getPointer("Village",$villageId));
+			return toArray($query->find(),array("villageId"));
+		}
+		public function deleteHouse($id){
+			$obj = new leancloud\AVObject("House");
+			$obj->delete($id);
+		}
 	}
 
 ?>
