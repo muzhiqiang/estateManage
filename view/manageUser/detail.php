@@ -2,13 +2,16 @@
 	require_once('../../utils/getInformation.php');
 	require_once('../estateManager/head.php');
 	if(isset($_GET['objectId']))
-		$_SESSION['objectId']=$_GET['objectId'];
+		$_SESSION['objectId']=$_GET['objectId'];				//houseId
 	if(isset($_SESSION['objectId']))
 	{
 		HttpClient::init($HttpClient, array('userAgent' => $_SERVER['HTTP_USER_AGENT'], 'redirect' => true));
 		$HttpClient->get("http://localhost/estateManagement/control/manageUserControl.php?getMethod=getDetailData&objectId=".$_SESSION['objectId']);
 		$json=json_decode($HttpClient->buffer,true);
-		
+		if(!empty($json['userInfo']))
+			$_SESSION['userId']=$json['userInfo']['objectId'];
+		if(empty($json))
+			$json=array('userInfo'=>'','houseInfo'=>'','parkingInfo'=>'');
 	}
 	
 	
@@ -92,25 +95,45 @@ require_once('navigation.php');
 		echo "尚未填写";
 	else
 		echo $json['userInfo']['isMarried'];?></div>
-	<div class="well" align="center">住址:<?php 
-	if(empty($json['houseInfo']['building']))
-		echo "尚未填写";
-	else
-	echo $json['houseInfo']['building']."栋".$json['houseInfo']['floor']."层".$json['houseInfo']['unit']."号";?></div>
-	<div class="well" align="center">停车位:
-		<?php
-			if(!empty($json['parkingInfo']))
-				echo $json['parkingInfo']['building']."栋".$json['parkingInfo']['floor']."层".$json['parkingInfo']['unit']."</br>";
+	<?php 
+	if(!empty($json['houseInfo']))
+	{
+		foreach($json['houseInfo'] as $key =>$value)
+		{
+			if($value['objectId']==$_SESSION['objectId'])
+				$owner="住址";
 			else
-				echo "无";?>
-	</div>
+				$owner="其他住址";
+			echo "<div class=\"well\" align=\"center\">".$owner.": ".$value['building']."栋".$value['floor']."层".$value['unit']."号"."</div>";
+		}
+	}
+	else
+	{
+		echo "<div class=\"well\" align=\"center\">住址:尚未拥有</div>";
+	}		
+		
+	?>
+	<?php
+		if(!empty($json['parkingInfo']))
+		{
+			foreach($json['parkingInfo'] as $k =>$v)
+			{
+				$number=$k+1;
+				echo "<div class=\"well\" align=\"center\">停车位: ".$v['building']."栋".$v['floor']."层".$v['unit']."号"."</div>";
+			}
+		}
+		else
+		{
+			echo "<div class=\"well\" align=\"center\">停车位:尚未拥有</div>";
+		}
+	?> 
 </div>
 
 
 
 </table>
 
-<a <?php echo "href=\"../../control/manageUserControl.php?getMethod=deleteUser&userId=".$json['userInfo']['objectId']."\"";?>>删除该用户</a></br>
+<a <?php echo "href=\"../../control/manageUserControl.php?getMethod=deleteUser&userId=".$_SESSION['objectId']."\"";?>>删除该用户</a></br>
 
 
 </body>

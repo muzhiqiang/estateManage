@@ -4,13 +4,12 @@
 		require ('../../utils/getInformation.php');
 		require ('../../utils/function.php');
 		if (isset($_GET['objectId']))
-			$_SESSION['modifyId']=$_GET['objectId'];
+			$_SESSION['modifyId']=$_GET['objectId'];				//userId
 		if(isset($_SESSION['objectId']))
 		{
 		HttpClient::init($HttpClient, array('userAgent' => $_SERVER['HTTP_USER_AGENT'], 'redirect' => true));
-		$HttpClient->get("http://localhost/estateManagement/control/manageUserControl.php?getMethod=getDetailData&objectId=".$_SESSION['modifyId']);
+		$HttpClient->get("http://localhost/estateManagement/control/manageUserControl.php?getMethod=modifyDetailData&objectId=".$_SESSION['modifyId']);
 		$json=json_decode($HttpClient->buffer,true);
-		
 		}
 ?>
 <html>
@@ -40,11 +39,9 @@
 				<input type="hidden" name="userId" <?php  echo "value=\"".$json['userInfo']['objectId']."\""; ?>>
 			</div>
 			<div class="row form-group">
-				<input type="hidden" name="parkingId" <?php  echo "value=\"".$json['parkingInfo']['objectId']."\""; ?>>
-			</div>
-			<div class="row form-group">
 				<input type="hidden" name="houseId" <?php  echo "value=\"".$json['houseInfo']['objectId']."\""; ?>>
- 			</div>
+			</div>
+			
  			<div class="row form-group">
  				<label for="name" class="col-sm-4 control-label">姓名</label>
  				<div class="col-sm-4">
@@ -147,24 +144,38 @@
 			</div>
 			<hr>
 			<h4>停车位</h4>
-			<div class="row form-group">
-				<label for="parkingBuilding" class="col-sm-4 control-label">座别</label>
-				<div class="col-sm-4">
-					<input class="form-control" type="text" name="parkingBuilding" <?php echo "value=\"".$json['parkingInfo']['building']."\""; ?> >
+			<?php
+				if(!empty($json['parkingInfo']))
+				{
+					
+					foreach($json['parkingInfo'] as $k => $v)
+					{
+						echo "<div class=\"row form-group\">";
+						echo "<input type=\"hidden\" name=\"parkingId".$k."\" value=\"".$v['objectId']."\" >";
+						echo "</div>";
+						echo "<div class=\"row form-group\">
+				<label for=\"parkingBuilding\" class=\"col-sm-4 control-label\">座别</label>
+				<div class=\"col-sm-4\">";
+						echo "<input class=\"form-control\" type=\"text\" name=\"parkingBuilding".$k."\"value=\"".$v['building']."\" >
 				</div>
-			</div>
-			<div class="row form-group">
-				<label for="parkingFloor" class="col-sm-4 control-label">楼层</label>
-				<div class="col-sm-4">
-					<input class="form-control" type="text" name="parkingFloor" <?php echo "value=\"".$json['parkingInfo']['floor']."\""; ?> >
-				</div>
-			</div>
-			<div class="row form-group">
-				<label for="parkingUnit" class="col-sm-4 control-label">单元</label>
-				<div class="col-sm-4">
-					<input class="form-control" type="text" name="parkingUnit" <?php echo "value=\"".$json['parkingInfo']['unit']."\""; ?> >
-				</div>
-			</div>
+			</div>";
+						echo "<div class=\"row form-group\">
+							<label for=\"parkingFloor\" class=\"col-sm-4 control-label\">楼层</label>
+							<div class=\"col-sm-4\">";
+									echo "<input class=\"form-control\" type=\"text\" name=\"parkingFloor".$k."\"value=\"".$v['floor']."\" >
+							</div>
+						</div>";
+						echo "<div class=\"row form-group\">
+							<label for=\"parkingUnit\" class=\"col-sm-4 control-label\">单元</label>
+							<div class=\"col-sm-4\">";
+									echo "<input class=\"form-control\" type=\"text\" name=\"parkingUnit".$k."\"value=\"".$v['unit']."\" >
+							</div>
+						</div>";
+					}
+					
+				}
+				
+			?>
 			<div class="form-group">
 				<div class="col-sm-offset-3 col-sm-6">
 					<button type="submit" class="btn btn-primary">确定</button>

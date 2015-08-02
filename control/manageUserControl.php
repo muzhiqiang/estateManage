@@ -6,11 +6,8 @@ function forUserList($objectId)
 {
 	$message=new manageModel();
 	$userList=$message->showUserList($objectId);
-	foreach ($userList as $key => $value) {
-		if(isset($value['isConfirm'])&&$value['isConfirm']==true)
-			$return[$key]=$value;
-	}
-	echo json_encode($return);
+	
+	echo json_encode($userList);
 
 }
 function forApplyList($objectId)
@@ -55,6 +52,12 @@ function deleteUser($objectId)
 	$return=$m->deleteUserInfo($objectId);
 	return $return;
 }
+function getModifyData($userId)
+{
+	$m=new manageModel();
+	$return=$m->modifyUser($userId);
+	return $return;
+}
 if(isset($_GET['getMethod']))
 {
 	$choice=$_GET['getMethod'];
@@ -65,8 +68,8 @@ if(isset($_GET['getMethod']))
 		case 'getInformation':
 			forUserList($_GET['objectId']);
 			break;
-		case 'getInformationApply':
-			forApplyList($_GET['objectId']);
+		case 'modifyDetailData':
+			echo json_encode(getModifyData($_GET['objectId']));
 			break;
 		case 'toDetail':
 			header("Location:".__PUBLIC__."/view/manageUser/index.php?objectId=".$_GET['objectId']);
@@ -102,7 +105,7 @@ if(isset($_GET['getMethod']))
 			break;
 	}
 }
-if(isset($_POST['submit']))
+if(isset($_POST['userId']))
 {
 	if(!isset($_POST['name']))
 	{
@@ -116,8 +119,15 @@ if(isset($_POST['submit']))
 	{
 		$_POST['isMarried']='';
 	}
-	$message=array('name'=>$_POST['name'],'gender'=>$_POST['gender'],'type'=>$_POST['type'],'isMarried'=>$_POST['isMarried'],'mobilePhoneNumber'=>$_POST['mobilePhoneNumber'],'email'=>$_POST['email'],'age'=>$_POST['age'],'occupation'=>$_POST['occupation'],'userId'=>$_POST['userId'],'house'=>array('building' =>$_POST['houseBuilding'],'floor'=>$_POST['houseFloor'],'unit'=>$_POST['houseUnit'],'houseId'=>$_POST['houseId']),'parking'=>array('building' =>$_POST['parkingBuilding'],'floor'=>$_POST['parkingFloor'],'unit'=>$_POST['parkingUnit'],'parkingId'=>$_POST['parkingId']));
-	//print_r($message);
+	$name="parkingId";
+	$number='0';
+	while(isset($_POST[$name.$number]))
+	{
+		$parkingInfo[$number]=array('building' =>$_POST['parkingBuilding'.$number],'floor'=>$_POST['parkingFloor'.$number],'unit'=>$_POST['parkingUnit'.$number],'parkingId'=>$_POST['parkingId'.$number]);
+		$number++;
+	}
+	$message=array('name'=>$_POST['name'],'gender'=>$_POST['gender'],'type'=>$_POST['type'],'isMarried'=>$_POST['isMarried'],'mobilePhoneNumber'=>$_POST['mobilePhoneNumber'],'email'=>$_POST['email'],'age'=>$_POST['age'],'occupation'=>$_POST['occupation'],'userId'=>$_POST['userId'],'house'=>array('building' =>$_POST['houseBuilding'],'floor'=>$_POST['houseFloor'],'unit'=>$_POST['houseUnit'],'houseId'=>$_POST['houseId']),'parking'=>$parkingInfo);
+	
 	
 	$m=new manageModel();
 	$return=$m->updateUser($message);

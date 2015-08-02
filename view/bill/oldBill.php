@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 	require_once('../../utils/getInformation.php');
 	require_once('../estateManager/head.php');
 	if(!empty($_GET['houseId']))
@@ -6,8 +6,9 @@
 	if(isset($_SESSION['billHouseId']))
 	{
 		HttpClient::init($HttpClient, array('userAgent' => $_SERVER['HTTP_USER_AGENT'], 'redirect' => true));
-		$HttpClient->get("http://localhost/estateManagement/control/billControl.php?method=getUserBill&houseId=".$_SESSION['billHouseId']);
+		$HttpClient->get("http://localhost/estateManagement/control/billControl.php?method=getOldBill&houseId=".$_SESSION['billHouseId']);
 		$json=json_decode($HttpClient->buffer,true);
+		
 	}
 ?>
 <!DOCTYPE html>
@@ -45,56 +46,77 @@
 			$month=date('m');
 			if($month[0]=='0')
 				$month=$month[1];
+			$month--;
+			$len=sizeof($json['house'])+sizeof($json['parking']);
+			while($len!='0')
+			{
 				
-			$sum=0;
-			echo "<h1>".$year."年  ".$month."月</h1>";
-			echo "<table class='table table-hover table-bordered table-responsive'>
-					<thead>
-					<tr>
-						<th>类型</th>
-						<th>用量</th>
-						<th>单价</th>
-						<th>总额</th>
-						<th>删除</th>";
-			echo	"</tr></thead>";
-			echo "<tbody>";
-			if(!empty($json['house']))
-				foreach($json['house'] as $key=>$value)
+				$sum=0;
+				echo "<h1>".$year."年  ".$month."月</h1>";
+				echo "<table class='table table-hover table-bordered table-responsive'>
+						<thead>
+						<tr>
+							<th>类型</th>
+							<th>用量</th>
+							<th>单价</th>
+							<th>总额</th>
+							";
+				echo	"</tr></thead>";
+				echo "<tbody>";
+				if(!empty($json['house']))
+					foreach($json['house'] as $key=>$value)
+					{
+						if($value['month']==$month&&$value['year']==$year)
+						{
+							echo "<tr>";
+							echo "<td>".$value['type']."</td>";
+							echo "<td>".$value['usage']."</td>";
+							echo "<td>".$value['price']."</td>";
+							echo "<td>".$value['total']."</td>";
+								$houseId=$value['houseId'];
+							echo "</tr>";
+							$sum+=$value['total'];
+							$len--;
+						}
+						
+					}
+			
+				if(!empty($json['parking']))
+					foreach($json['parking'] as $key=>$value)
+					{
+						if($value['month']==$month&&$value['year']==$year)
+						{
+							echo "<tr>";
+							echo "<td>".$value['type']."</td>";
+							echo "<td>".$value['usage']."</td>";
+							echo "<td>".$value['price']."</td>";
+							echo "<td>".$value['total']."</td>";
+						
+								$parkingId=$value['parkingId'];
+							echo "</tr>";
+							$sum+=$value['total'];
+							$len--;
+						}
+							
+						
+					}	
+				echo "</tbody>";
+				echo "</table>";
+				
+				echo "<h3>总价:".$sum."</h3>";
+				
+				if($month=='1')
 				{
-					echo "<tr>";
-					echo "<td>".$value['type']."</td>";
-					echo "<td>".$value['usage']."</td>";
-					echo "<td>".$value['price']."</td>";
-					echo "<td>".$value['total']."</td>";
-					echo "<td><a href=\"../../control/billControl.php?method=deleteBill&billId=".$value['objectId']."\">删除</a></td>";
-						$houseId=$value['houseId'];
-					echo "</tr>";
-					$sum+=$value['total'];
-				}
-		
-			if(!empty($json['parking']))
-				foreach($json['parking'] as $key=>$value)
-				{
-						echo "<tr>";
-						echo "<td>".$value['type']."</td>";
-						echo "<td>".$value['usage']."</td>";
-						echo "<td>".$value['price']."</td>";
-						echo "<td>".$value['total']."</td>";
-						echo "<td><a href=\"../../control/billControl.php?method=deleteBill&billId=".$value['objectId']."\">删除</a></td>";
-							$parkingId=$value['parkingId'];
-						echo "</tr>";
-						$sum+=$value['total'];
-					
+					$month='12';
+					$year--;
 				}	
-			echo "</tbody>";
-			echo "</table>";
-			/*	if(empty($parkingId))
-					$parkingId='unset';
-				if(empty($houseId))
-					$houseId='unset';
-				echo "<a href=\"../../control/billControl.php?method=newBill&houseId=".$houseId."&parkingId=".$parkingId."\">增加新账单</a>";
-			*/
-			echo "<h3>总价:".$sum."</h3>";
+				else
+					$month--;
+				
+				
+			}
+			
+			
 		}
 	?>
 	</div>

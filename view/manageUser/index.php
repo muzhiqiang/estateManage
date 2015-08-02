@@ -34,7 +34,7 @@
 		<tbody>
 		<?php
 			foreach ($json as $key => $value) {
-					//if(isset($value['isConfirm'])&&$value['isConfirm'])
+				if(!empty($value['user']))
 					{
 						echo "<tr>";
 						if(empty($value['building']))
@@ -49,8 +49,29 @@
 							echo "<td>未知</td>";
 						else
 							echo "<td>".$value['unit']."</td>";
-						
-						echo "<td><a href=\"detail.php?objectId=".$value['objectId']."\">查看详细</a></td>";
+
+						echo "<td><a href=\"detail.php?getMethod=toDetail&objectId=".$value['objectId']."\">查看详细</a></td>";
+						echo "</tr>";
+					}
+			}
+			foreach ($json as $key => $value) {
+				if(empty($value['user']))
+					{
+						echo "<tr>";
+						if(empty($value['building']))
+							echo "<td>未知</td>";
+						else
+							echo "<td>".$value['building']."</td>";
+						if(empty($value['floor']))
+							echo "<td>未知</td>";
+						else
+							echo "<td>".$value['floor']."</td>";
+						if(empty($value['unit']))
+							echo "<td>未知</td>";
+						else
+							echo "<td>".$value['unit']."</td>";
+
+						echo "<td>尚未绑定用户</td>";
 						echo "</tr>";
 					}
 			}
