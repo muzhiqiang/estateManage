@@ -53,7 +53,7 @@ require_once('../estateManager/head.php');
 					upload : {
             				   url : '../../control/uploadControl.php',
             				   params: null,
-            				   fileKey: 'fileDataFileName',
+            				   fileKey: 'upload_file',
             				   connectionCount: 3,
             				   leaveConfirm: '正在上传文件'
         					 }
