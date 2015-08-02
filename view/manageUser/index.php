@@ -6,7 +6,6 @@
 	HttpClient::init($HttpClient, array('userAgent' => $_SERVER['HTTP_USER_AGENT'], 'redirect' => true));
 	$HttpClient->get("http://localhost/estateManagement/control/manageUserControl.php?getMethod=getInformation&objectId=".$_SESSION['estateManager']['villageId']);
 	$json=json_decode($HttpClient->buffer,true);
-	
 ?>
 <html>
 <head>
@@ -26,9 +25,6 @@
 	<table class="table table-hover table-bordered table-responsive">
 		<thead>
 			<tr>
-				<th>用户姓名</th>
-				<th>性别</th>
-				<th>联系电话</th>
 				<th>座别</th>
 				<th>楼层</th>
 				<th>单元</th>
@@ -38,26 +34,9 @@
 		<tbody>
 		<?php
 			foreach ($json as $key => $value) {
-					if(isset($value['isConfirm'])&&$value['isConfirm'])
+					//if(isset($value['isConfirm'])&&$value['isConfirm'])
 					{
 						echo "<tr>";
-						if(empty($value['name']))
-							echo "<td>未知</td>";
-						else
-							echo "<td>".$value['name']."</td>";
-						
-						if(empty($value['gender']))
-							echo "<td>未知</td>";
-						else if($value['gender']==1)
-							echo "<td>男</td>";
-						else
-							echo "<td>女</td>";
-						
-						if(empty($value['mobilePhoneNumber']))
-							echo "<td>未知</td>";
-						else
-							echo "<td>".$value['mobilePhoneNumber']."</td>";
-						
 						if(empty($value['building']))
 							echo "<td>未知</td>";
 						else

@@ -19,6 +19,7 @@ require_once('navigation.php');
 ?>
 <script type="text/javascript">
 	document.getElementById('repair').setAttribute('class','active');
+	document.getElementById('have').setAttribute('class','active');
 </script>
 <div class="col-sm-6" align="center">
 	<table class="table table-hover table-bordered table-responsive">

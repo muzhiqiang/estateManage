@@ -14,6 +14,7 @@ if(isset($_GET['method'])){
 		$villageId = $_SESSION['estateManager']['villageId'];
 		$title = $_POST['title'];
 		$content = $_POST['mycontent'];
+		
 		$noticeModel->add($villageId,$title,$content);
 		header('Location:'.__PUBLIC__.'/control/noticeControl.php?method=getAll');
 	}
