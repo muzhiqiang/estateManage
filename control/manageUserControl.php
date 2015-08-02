@@ -60,7 +60,7 @@ if(isset($_GET['getMethod']))
 	$choice=$_GET['getMethod'];
 	switch ($choice) {
 		case 'showUserList':
-			header("Location:".__PUBLIC__."/view/manageUser/index.php");
+			header("Location:".__PUBLIC__."/view/user/index.php");
 			break;
 		case 'getInformation':
 			forUserList($_GET['objectId']);

@@ -1,42 +1,34 @@
 <?php
 require_once('../leancloud/AV.php');
 require_once('../utils/function.php');
-
-	$h="55b4a3da00b0bb80c44c4516";
-	$p="55b4b47000b0bb80c44cf833";
-	$d=date("m");
-	if($d[0]=='0')
-		$month=$d[1];
-	else
-		$month=$d;
-	$year=date("Y");
-	$query_h=new leancloud\AVQuery('Bill');
-	$query_h->where('houseId',getPointer('House',$h));
-	$billOfhouse=toArray($query_h->find(),array('houseId','parkingId'));
-			//如果不存在停车位，则不需要进行停车费用的搜索
+//查询
 	
-		$query_p=new leancloud\AVQuery('Bill');
-		$query_p->where('parkingId',getPointer('Parking',$p));
-		$billOfParking=toArray($query_p->find(),array('parkingId','houseId'));
+	$query = new leancloud\AVQuery('_User');
+    $query->where('houses',getPointer('House','55bc4c7c00b042e65a5f5582'));
 	
-	$return=array();
-	if(!empty($billOfhouse))
-		foreach ($billOfhouse as $key => $value) {
-			if($value['month']==$month&&$value['year']==$year)
-				$return['house'][$key]=$value;
-		}
-	if(!empty($billOfParking))
-	foreach ($billOfParking as $key => $value) {
-		if($value['month']==$month&&$value['year']==$year)
-			$return['parking'][$key]=$value;
-	}
-	/*print_r($billOfhouse);
-	print_r("=================");
-	print_r($billOfParking);
-	print_r("=================");*/
-	
+    $return = $query->find();
+    print_r(json_encode($return));
+//删除 将所有已加的houseId去除，但不会改变表House中的数据
+/*	$u=new leancloud\AVObject('_User');
+	$objectId="55bb693e00b0efdcbe46a502";
+	$u->houses=null;
+	$return=$u->update("55b8426340ac7c6193061d74");
 	print_r($return);
+	*/
 	
-	echo $month;
-	echo $year;
+/*	$query= new leancloud\AVQuery('_User');
 	
+	$query->where("objectId","55b8426340ac7c6193061d74");
+	$return = $query->find();
+	print_r(json_encode($return));*/
+//更新 此方法仅能将原有的全部删除，然后加上我们给与的数据，所以，需要先取出内部所存的数据
+/*	$u=new leancloud\AVObject('_User');
+	$objectId="55bb693e00b0efdcbe46a502";
+	$u->houses=array(getPointer('House',$objectId),getPointer('House',"55bb844300b0efdcbe485231"));
+	$return=$u->update("55b8426340ac7c6193061d74");
+	print_r($return);*/
+/*
+//快捷查询方式
+$query = new leancloud\AVQuery('_User');
+$return = $query->find();
+print_r(json_encode($return));*/
