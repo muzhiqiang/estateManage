@@ -25,33 +25,74 @@
 		require_once('../estateManager/navigation.php');
 		require_once('navigation.php');
 	?>
-		<form action="../../control/billControl.php" method="POST">
-		请选择产生费用来源</br>
-			<input type="hidden" name="houseId" <?php  echo "value=\"".$json['houseInfo']['objectId']."\""; ?>>
+	<script type="text/javascript">
+		document.getElementById("bill").setAttribute("class","active");
+		document.getElementById("addBill").setAttribute("class","active");
+	</script>
+	<div align="center" class="col-sm-5">
+	<form class="form-horizontal" role="form" method="post" action=<?php echo __PUBLIC__.'/control/billControl.php'?>>
+		<input type="hidden" name="houseId" <?php  echo "value=\"".$json['houseInfo']['objectId']."\""; ?>>
+		<div class="row form-group">
+			<label for="source" class="col-sm-4 control-label">房屋</label>
+			<div class="col-sm-4">
+				<?php echo $json['houseInfo']['building']."栋".$json['houseInfo']['floor']."层".$json['houseInfo']['unit']."号" ;?><input checked="true" type="radio" class="form-control" name="source" value=<?php echo "\"houseId\"";?>></br>
+			</div>
 			
-			房屋:<?php echo $json['houseInfo']['building']."栋".$json['houseInfo']['floor']."层".$json['houseInfo']['unit']."号" ;?><input type="radio" name="source" value=<?php echo "\"houseId\"";?>></br>
+				
+		</div>
+		<div class="row form-group">
 			<?php 
 				foreach($json['parkingInfo'] as $key=>$value)
 				{
-					echo "停车位:".$value['building']."栋".$value['floor']."层".$value['unit']."号" ;
-					echo "<input type=\"radio\" name=\"source\" value=\"parkingId".$key."\"></br>";
+					echo '<label for="source" class="col-sm-4 control-label">停车位'."</label>";
+					echo '<div class="col-sm-4">' ;
+					echo $value['building']."栋".$value['floor']."层".$value['unit']."号<input class='form-control' type=\"radio\" name=\"source\" value=\"parkingId".$key."\"></div></br>";
 					echo "<input type=\"hidden\" name=\"parkingId".$key."\" value=\"".$value['objectId']."\">";
 				}
 			?>
-			
-			类型
-			<select name="type">
-				<option name="water" value="水费">水费</option>
-				<option name="elc" value="电费" >电费</option>
-				<option name="parking" value="停车费">停车费</option>
-			</select></br>
-			用量<input type="text" name="usage"></br>
-			单价<input type="text" name="price"></br>
-			总量<input type="text" name="total"></br>
-			单位<input type="text" name="unit"></br>
-			<input type="submit" name="submit" value="提交">
-		</form>
-		<div class="container col-sm-4">
+		</div>
+		<div class="row form-group">
+			<label for="type" class="col-sm-4 control-label">类型</label>
+			<div class="col-sm-4">
+				<select name="type" class="form-control">
+					<option name="water" value="水费" checked=true>水费</option>
+					<option name="elc" value="电费" >电费</option>
+					<option name="parking" value="停车费">停车费</option>
+				</select></br>
+			</div>
+		</div>
+		<div class="row form-group">
+			<label for="usage" class="col-sm-4 control-label">用量</label>
+			<div class="col-sm-4">
+				<input type="text" class="form-control" name="usage"></br>
+			</div>
+		</div>
+		<div class="row form-group">
+			<label for="price" class="col-sm-4 control-label">单价</label>
+			<div class="col-sm-4">
+				<input type="text" name="price" class="form-control"></br>
+			</div>
+		</div>
+		<div class="row form-group">
+			<label for="total" class="col-sm-4 control-label">总量</label>
+			<div class="col-sm-4">
+				<input class="form-control" type="text" name="total"></br>
+			</div>
+		</div>
+		<div class="row form-group">
+			<label for="unit" class="col-sm-4 control-label">单位</label>
+			<div class="col-sm-4">
+				<input class="form-control" type="text" name="unit"></br>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-offset-3 col-sm-6">
+				<button type="submit" class="btn btn-primary">提交</button>
+			</div>
+		</div>
+	</form>
+	</div>
+	<div class="container col-sm-4">
 		<div class="jumbotron">
 			<h3>用户</h3>
 				<?php echo $json['userInfo']['name'];?>

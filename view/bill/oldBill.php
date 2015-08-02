@@ -27,17 +27,11 @@
 		require_once('../estateManager/navigation.php');
 		require_once('navigation.php');
 	?>
+	<script type="text/javascript">
+		document.getElementById("bill").setAttribute("class","active");
+		document.getElementById("oldBill").setAttribute("class","active");
+	</script>
 	<div align="center" class="col-sm-5">
-	<form role="form">
-        <div class="input-group">
-            <input type="text" class="form-control" name="username">
-            <span class="input-group-btn">
-          	    <button class="btn btn-default" type="submit" name="findUser">
-                    搜索用户
-                </button>
-            </span>
-        </div>
-	</form>
 	
 	<?php 
 		if(isset($json))

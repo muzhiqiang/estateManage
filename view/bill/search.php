@@ -48,10 +48,6 @@ if(isset($_POST['searchBui'])||isset($_POST['searchFlo'])||isset($_POST['searchU
           </div>
 	</form>
 	</div>
-	<script type="text/javascript">
-		document.getElementById('user').setAttribute('class','dropdown active');
-		document.getElementById('userPass').setAttribute('class','active');
-	</script>
 	<table class="table table-hover table-bordered table-responsive">
 		<thead>
 			<tr>

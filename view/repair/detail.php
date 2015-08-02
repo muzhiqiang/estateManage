@@ -18,18 +18,22 @@ $type = $_GET['type'];
 require_once('../estateManager/navigation.php');
 require_once('navigation.php');
 ?>
-<div class="col-sm-5" align="center">
+<script type="text/javascript">
+	document.getElementById('repair').setAttribute('class','active');
+</script>
+<div class="col-sm-5">
 	<dl>
-		<dd>内容</dd>
-		<dt><?php echo $_SESSION[$type][$key]['content']?></dt>
-		<dd>图片</dd>
-		<dt>
-			<?php
+		<dd><h3>内容</h3></dd><hr>
+		<dt><?php echo $_SESSION[$type][$key]['content'];?></dt><hr>
+		<?php if(!empty($_SESSION[$type][$key]['urls'])){
+			echo "<dd><h3>图片</h3></dd><hr><dt>";
 				foreach ($_SESSION[$type][$key]['urls'] as $value) {
 					echo '<img src=http://'.$value.' class="img-rounded" width=250 hight=250>';
 				}
-			?>
-		</dt>
+			
+			echo "</dt>";
+		}		
+		?>
 	</dl>
 </div>
 </body>
