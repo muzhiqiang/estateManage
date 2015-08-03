@@ -24,6 +24,7 @@
 	<body>
 	<?php 
 		require_once('../estateManager/navigation.php');
+		echo "<div class='container'>";
 		require_once('navigation.php');
 	?>
 	<script type="text/javascript">
@@ -101,6 +102,6 @@
 		</div>
 	</div>
 		
-	
+	</div>
 	</body>
 </html>

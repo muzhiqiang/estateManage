@@ -76,7 +76,9 @@ require_once('../estateManager/head.php');
    			<input type='text' class='form-control' id='unit'>
    			<span class='input-group-addon'>单元</span>
    		</div>
+      <hr>
    		<button onclick="getBuilding()" class="btn btn-primary">确定</button>
+      <hr>
    		<table class="table table-hover table-bordered table-responsive" id="content">
 			
 		</table>

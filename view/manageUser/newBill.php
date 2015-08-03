@@ -26,11 +26,12 @@
 <body>
 <?php 
 require_once('../estateManager/navigation.php');
+echo "<div class='container'>";
 require_once('navigation.php');
 ?>
 <script type="text/javascript">
-	document.getElementById('user').setAttribute('class','dropdown active');
-	document.getElementById('userPass').setAttribute('class','active');
+	document.getElementById('village').setAttribute('class','dropdown active');
+	document.getElementById('lookHouse').setAttribute('class','active');
 	document.getElementById('newBill').setAttribute('class','active');
 </script>
 
@@ -81,6 +82,7 @@ $sum=0;
 </table>
 <div class="alert alert-info" align="center">
 <a role="button" <?php echo "href=\"../../control/billControl.php?method=showUserBill&houseId=".$_SESSION['objectId']."\"";?>>点击查看详细账单</a>
+</div>
 </div>
 </div>
 </body>

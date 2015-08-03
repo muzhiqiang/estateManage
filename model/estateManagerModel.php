@@ -58,7 +58,7 @@ Class estateManagerModel{
     public function update($password,$estateManagerId){
         $obj = new leancloud\AVObject('EstateManager');
         $obj->password = $password;
-        print_r($obj->update($estateManagerId));
+        $obj->update($estateManagerId);
         return true;
     }
 

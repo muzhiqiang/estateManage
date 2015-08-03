@@ -16,10 +16,17 @@ $type = $_GET['type'];
 <body>
 <?php 
 require_once('../estateManager/navigation.php');
+echo "<div class='container'>";
 require_once('navigation.php');
 ?>
 <script type="text/javascript">
 	document.getElementById('repair').setAttribute('class','active');
+	<?php 
+	if($type =='waitRepair')
+		echo "document.getElementById('wait').setAttribute('class','active')";
+	else
+		echo "document.getElementById('have').setAttribute('class','active')";
+	?>
 </script>
 <div class="col-sm-5">
 	<dl>
@@ -28,13 +35,22 @@ require_once('navigation.php');
 		<?php if(!empty($_SESSION[$type][$key]['urls'])){
 			echo "<dd><h3>图片</h3></dd><hr><dt>";
 				foreach ($_SESSION[$type][$key]['urls'] as $value) {
-					echo '<img src=http://'.$value.' class="img-rounded" width=250 hight=250>';
+					echo '<div class="well"><img src=http://'.$value.' class="img-rounded" width=300 hight=250></div>';
 				}
 			
 			echo "</dt>";
 		}		
 		?>
 	</dl>
+	<?php
+		if($type == 'waitRepair'){
+	?>
+	<hr>
+	<div align="center">
+	<a class="btn btn-primary" href=<?php echo __PUBLIC__.'/control/repairControl.php?method=pass&id='.$_SESSION[$type][$key]['objectId'];?>>通过</a>
+	</div>
+	<?php }?>
+</div>
 </div>
 </body>
 </html>

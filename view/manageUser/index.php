@@ -19,16 +19,17 @@
 <body>
 	<?php require_once('../estateManager/navigation.php');?>
 	<script type="text/javascript">
-		document.getElementById('user').setAttribute('class','dropdown active');
-		document.getElementById('userPass').setAttribute('class','active');
+		document.getElementById('village').setAttribute('class','dropdown active');
+		document.getElementById('lookHouse').setAttribute('class','active');
 	</script>
+	<div class="container">
 	<table class="table table-hover table-bordered table-responsive">
 		<thead>
 			<tr>
 				<th>座别</th>
 				<th>楼层</th>
 				<th>单元</th>
-				<th>查看详细</th>
+				<th>住户信息</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -50,7 +51,7 @@
 						else
 							echo "<td>".$value['unit']."</td>";
 
-						echo "<td><a href=\"detail.php?getMethod=toDetail&objectId=".$value['objectId']."\">查看详细</a></td>";
+						echo "<td><a href=\"detail.php?getMethod=toDetail&objectId=".$value['objectId']."\">查看住户</a></td>";
 						echo "</tr>";
 					}
 			}
@@ -78,5 +79,6 @@
 		?>
 		</tbody>
 	</table>
+	</div>
 </body>
 </html>

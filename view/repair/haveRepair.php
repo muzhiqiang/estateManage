@@ -15,6 +15,7 @@ $haveRepair = $_SESSION['haveRepair'];
 <body>
 <?php 
 require_once('../estateManager/navigation.php');
+echo "<div class='container'>";
 require_once('navigation.php');
 ?>
 <script type="text/javascript">
@@ -44,6 +45,7 @@ require_once('navigation.php');
 		?>
 		</tbody>
 	</table>
+</div>
 </div>
 </body>
 </html>

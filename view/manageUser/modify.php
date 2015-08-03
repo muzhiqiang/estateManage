@@ -24,11 +24,12 @@
 	</head>
 	<?php
 		require_once('../estateManager/navigation.php');
+		echo "<div class='container'>";
 		require_once('navigation.php');
 	?>
 	<script type="text/javascript">
-		document.getElementById('user').setAttribute('class','dropdown active');
-		document.getElementById('userPass').setAttribute('class','active');
+		document.getElementById('village').setAttribute('class','dropdown active');
+		document.getElementById('lookHouse').setAttribute('class','active');
 		document.getElementById('update').setAttribute('class','active');
 	</script>
 	<body>
@@ -182,6 +183,7 @@
 				</div>
 			</div>
 		</form>
+		</div>
 		</div>
 	</body>
 </html>

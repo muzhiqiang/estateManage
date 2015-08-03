@@ -25,6 +25,7 @@
 	<body>
 	<?php 
 		require_once('../estateManager/navigation.php');
+		echo "<div class='container'>";
 		require_once('navigation.php');
 	?>
 	<script type="text/javascript">
@@ -122,7 +123,7 @@
 				<?php echo $json['userInfo']['mobilePhoneNumber'];?>
 		</div>
 	</div>
-		
+	</div>
 	
 	</body>
 </html>

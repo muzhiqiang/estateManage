@@ -14,7 +14,7 @@
     
 </head>
 <body>
-
+<div class="container">
 <?php require_once('navigation.php');?>
 <script type="text/javascript">
    	document.getElementById('index').setAttribute('class','active');
@@ -25,6 +25,6 @@
 <p>
 	<h3><?php echo $estateManager['province'].$estateManager['city'].$estateManager['address'];?></h3>	
 </p>
-
+</div>
 </body>
 </html>

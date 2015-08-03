@@ -19,6 +19,7 @@ $noticeList = $_SESSION['noticeList'];
 	document.getElementById('notice').setAttribute('class','dropdown active');
 	document.getElementById('lookNotice').setAttribute('class','active');
 </script>
+<div class="container">
 	<table class="table table-hover table-bordered table-responsive">
 		<thead>
 			<tr>
@@ -40,5 +41,6 @@ $noticeList = $_SESSION['noticeList'];
 		?>
 		</tbody>
 	</table>
+</div>
 </body>
 </html>
