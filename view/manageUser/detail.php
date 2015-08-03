@@ -126,14 +126,15 @@ require_once('navigation.php');
 		{
 			echo "<div class=\"well\" align=\"center\">停车位:尚未拥有</div>";
 		}
-	?> 
+	?>
+
+</div>
+<div class="well col-sm-2">
+	<a <?php echo "href=\"../../control/manageUserControl.php?getMethod=deleteUser&userId=".$_SESSION['objectId']."\"";?>>删除该用户</a></br> 
 </div>
 
 
 
-</table>
-
-<a <?php echo "href=\"../../control/manageUserControl.php?getMethod=deleteUser&userId=".$_SESSION['objectId']."\"";?>>删除该用户</a></br>
 
 
 </body>
