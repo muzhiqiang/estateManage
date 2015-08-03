@@ -17,5 +17,10 @@ if(isset($_GET['method'])){
 		$_SESSION['haveRepair'] = $haveRepair;
 		header("Location:".__PUBLIC__."/view/repair/haveRepair.php");
 	}
+	else if($method=='pass'){
+		$objectId = $_GET['id'];
+		$repairModel->pass($objectId);
+		header('Location:'.__PUBLIC__.'/control/repairControl.php?method=waitRepair&id='.$_SESSION['estateManager']['villageId']);
+	}
 }
 ?>

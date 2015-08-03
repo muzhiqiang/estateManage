@@ -18,5 +18,11 @@ Class repairModel{
 		$haveRepair = toArray($haveRepair,array('villageId','userId'));
 		return $haveRepair;
 	}
+	public function pass($objectId){
+		$update = new leancloud\AVObject("Repair");
+		$update->ifConfirm = true;
+		$update->update($objectId);
+		return true;
+	}
 }
 ?>

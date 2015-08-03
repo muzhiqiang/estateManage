@@ -37,6 +37,7 @@ require_once('navigation.php');
 	document.getElementById('estateManager').setAttribute('class','navbar-right dropdown active');
 	document.getElementById('feescale').setAttribute('class','active');
 </script>
+<div class="container">
 <div class="col-sm-3">
 	<ul class="nav nav-pills nav-stacked">
 		<li id="waterPrice"><a onclick="water()">水费设置</a></li>
@@ -63,6 +64,7 @@ require_once('navigation.php');
 </div>
 <div>
 	
+</div>
 </div>
 </body>
 </html>

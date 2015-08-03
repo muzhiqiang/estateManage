@@ -48,6 +48,7 @@ if(isset($_POST['searchBui'])||isset($_POST['searchFlo'])||isset($_POST['searchU
           </div>
 	</form>
 	</div>
+	<div class="container">
 	<table class="table table-hover table-bordered table-responsive">
 		<thead>
 			<tr>
@@ -88,5 +89,6 @@ if(isset($_POST['searchBui'])||isset($_POST['searchFlo'])||isset($_POST['searchU
 		?>
 		</tbody>
 	</table>
+	</div>
 </body>
 </html>

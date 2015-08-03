@@ -16,8 +16,11 @@ $noticeList = $_SESSION['noticeList'];
 </head>
 <body>
 <?php require_once('../estateManager/navigation.php');?>
-
-<div class="col-sm-5">
+<script type="text/javascript">
+	document.getElementById('notice').setAttribute('class','dropdown active');
+	document.getElementById('lookNotice').setAttribute('class','active');
+</script>
+<div class="container">
 	<div align="center">
 		<h1><?php echo $noticeList[$key]['title'];?></h1>
 	</div>
