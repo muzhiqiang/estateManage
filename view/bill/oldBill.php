@@ -35,7 +35,7 @@
 	<div align="center" class="col-sm-5">
 	
 	<?php 
-		if(isset($json))
+		if(!empty($json['house']))
 		{	
 			$year=date('Y');
 			$month=date('m');

@@ -145,12 +145,10 @@ class billModel
 		$queryHouse=new leancloud\AVQuery('House');
 		$queryHouse->where('objectId',$houseId);
 		$houseInfo=toArray($queryHouse->find(),array('villageId','user'));
-		
-		$queryParking=new leancloud\AVQuery('Parking');
-		$queryParking->where('user',getPointer('_User',$userInfo[0]['objectId']));
-		$parkingInfo=toArray($queryParking->find(),array('villageId','user'));
-		
-		$returnList=array('userInfo'=>$userInfo[0],'houseInfo'=>$houseInfo[0],'parkingInfo'=>$parkingInfo);
+		if(empty($userInfo))
+			$returnList=array('userInfo'=>'','houseInfo'=>$houseInfo[0]);
+		else
+			$returnList=array('userInfo'=>$userInfo[0],'houseInfo'=>$houseInfo[0]);
 		return $returnList;
 	}
 	function getParkingMessage($parkingId)
@@ -162,8 +160,10 @@ class billModel
 		$queryParking=new leancloud\AVQuery('Parking');
 		$queryParking->where('objectId',$parkingId);
 		$parkingInfo=toArray($queryParking->find(),array('villageId','user'));
-		
-		$returnList=array('userInfo'=>$userInfo[0],'parkingInfo'=>$parkingInfo[0]);
+		if(empty($userInfo))
+			$returnList=array('userInfo'=>'','parkingInfo'=>$parkingInfo[0]);
+		else
+			$returnList=array('userInfo'=>$userInfo[0],'parkingInfo'=>$parkingInfo[0]);
 		return $returnList;
 	}
 	function getOld($houseId)
@@ -177,16 +177,18 @@ class billModel
 		$queryUser->where('houses',getPointer('House',$houseId));
 		$userInfo=toArray($queryUser->find(),array(''));
 		
-		if(empty($userInfo))
-			return array('code'=>'700');
+		
+		
 		
 		
 		$queryHouse=new leancloud\AVQuery('Bill');
 		$queryHouse->where('houseId',getPointer('House',$houseId));
 		$queryHouse->whereNotEqualTo('month',(int)$month);
 		$houseBill=toArray($queryHouse->find(),array('parkingId','houseId'));
-		
-		$returnList=array('house'=>$houseBill,'userInfo'=>$userInfo[0]);
+		if(empty($userInfo))
+			$returnList=array('house'=>$houseBill,'userInfo'=>'');
+		else
+			$returnList=array('house'=>$houseBill,'userInfo'=>$userInfo[0]);
 		return $returnList;
 		
 	}
@@ -201,8 +203,7 @@ class billModel
 		$queryUser->where('parkings',getPointer('Parking',$parkingId));
 		$userInfo=toArray($queryUser->find(),array(''));
 		
-		if(empty($userInfo))
-			return array('code'=>'700');
+		
 		
 		
 		$queryParking=new leancloud\AVQuery('Bill');
@@ -210,7 +211,10 @@ class billModel
 		$queryParking->whereNotEqualTo('month',(int)$month);
 		$parkingBill=toArray($queryParking->find(),array('parkingId','houseId'));
 		
-		$returnList=array('parking'=>$parkingBill,'userInfo'=>$userInfo[0]);
+		if(empty($userInfo))
+			$returnList=array('parking'=>$parkingBill,'userInfo'=>'');
+		else
+			$returnList=array('parking'=>$parkingBill,'userInfo'=>$userInfo[0]);
 		return $returnList;
 	}
 }

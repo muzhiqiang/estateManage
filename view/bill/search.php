@@ -1,6 +1,7 @@
 <?php
 require_once('../estateManager/head.php');
 require_once('../../utils/getInformation.php');
+header('Cache-control: private, must-revalidate'); 
 if(isset($_POST['searchBui'])||isset($_POST['searchFlo'])||isset($_POST['searchUni']))
 {
 	if(!empty($_POST['searchBui'])) $building=$_POST['searchBui'];

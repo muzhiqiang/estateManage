@@ -6,7 +6,6 @@
 		HttpClient::init($HttpClient, array('userAgent' => $_SERVER['HTTP_USER_AGENT'], 'redirect' => true));
 		$HttpClient->get("http://localhost/estateManagement/control/billControl.php?method=getId&houseId=".$_SESSION['billHouseId']);
 		$json=json_decode($HttpClient->buffer,true);
-		
 	}
 ?>
 <!DOCTYPE html>
@@ -36,7 +35,7 @@
 		<div class="row form-group">
 			<label for="source" class="col-sm-4 control-label">房屋</label>
 			<div class="col-sm-4">
-				<?php echo $json['houseInfo']['building']."栋".$json['houseInfo']['floor']."层".$json['houseInfo']['unit']."号" ;?><input checked="true" type="radio" class="form-control" name="source" value=<?php echo "\"houseId\"";?>></br>
+				<?php echo $json['houseInfo']['building']."栋".$json['houseInfo']['floor']."层".$json['houseInfo']['unit']."号" ;?></br>
 			</div>
 			
 				

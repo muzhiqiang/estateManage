@@ -35,7 +35,7 @@
 		<div class="row form-group">
 			<label for="source" class="col-sm-4 control-label">停车位</label>
 			<div class="col-sm-4">
-				<?php echo $json['parkingInfo']['building']."栋".$json['parkingInfo']['floor']."层".$json['parkingInfo']['unit']."号" ;?><input checked="true" type="radio" class="form-control" name="source" value=<?php echo "\"parkingId\"";?>></br>
+				<?php echo $json['parkingInfo']['building']."栋".$json['parkingInfo']['floor']."层".$json['parkingInfo']['unit']."号" ;?></br>
 			</div>
 			
 				
