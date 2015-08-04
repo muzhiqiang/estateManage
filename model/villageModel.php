@@ -85,6 +85,52 @@ require_once('../utils/function.php');
 			$obj = new leancloud\AVObject("House");
 			$obj->delete($id);
 		}
+		public function updateHouse($id,$building,$floor,$unit){
+			$update = new leancloud\AVObject("House");
+			$update->building = $building;
+			$update->floor = $floor;
+			$update->unit = $unit;
+			$update->update($id);
+
+		}
+		public function addParking($building,$floorArr,$unitArr,$villageId){
+			$obj = new leancloud\AVObject('Parking');
+			foreach ($floorArr as $floor) {
+				foreach ($unitArr as $unit) {
+					$obj->building = $building;
+					$obj->floor = $floor;
+					$obj->unit = $unit;
+					$obj->villageId = getPointer("Village",$villageId);
+					$obj->save();
+				}
+			}
+		}
+		public function getParking($building,$floor,$unit,$villageId){
+			$query = new leancloud\AVQuery("Parking");
+			if($building!=""){
+				$query->where('building',$building);
+			}
+			if($floor!=""){
+				$query->where('floor',$floor);
+			}
+			if ($unit!="") {
+				$query->where('unit',$unit);
+			}
+			$query->where('villageId',getPointer("Village",$villageId));
+			return toArray($query->find(),array("villageId"));
+		}
+		public function deleteParking($id){
+			$obj = new leancloud\AVObject("Parking");
+			$obj->delete($id);
+		}
+		public function updateParking($id,$building,$floor,$unit){
+			$update = new leancloud\AVObject("Parking");
+			$update->building = $building;
+			$update->floor = $floor;
+			$update->unit = $unit;
+			$update->update($id);
+
+		}
 	}
 
 ?>

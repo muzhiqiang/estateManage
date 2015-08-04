@@ -1,6 +1,7 @@
 <?php
 require_once('../model/uploadModel.php');
     $uploadModel = new uploadModel();
+    
     print_r($_FILES);
     // print_r($_FILES);
     // $name = $_FILES['fileDataFileName']['name'];
