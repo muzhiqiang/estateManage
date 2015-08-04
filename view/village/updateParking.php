@@ -4,7 +4,7 @@ require_once('../estateManager/head.php');
 <!DOCTYPE html>
 <html>
 <head>
-	<title>房屋修改</title>
+	<title>停车位修改</title>
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
  	<link href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
@@ -16,7 +16,7 @@ require_once('../estateManager/head.php');
   			var building = $("#building").val();
   			var floor = $("#floor").val();
   			var unit = $("#unit").val();
-  			var url = "http://localhost/estateManagement/control/villageControl.php?method=getBuilding";
+  			var url = "http://localhost/estateManagement/control/villageControl.php?method=getParking";
   			if(building!=""){
   				url+=("&building="+building);
   			}
@@ -47,7 +47,7 @@ require_once('../estateManager/head.php');
   			return false;
   		};
   		function deleteHouse(objectId){
-  			var url = "http://localhost/estateManagement/control/villageControl.php?method=deleteHouse&id="+objectId;
+  			var url = "http://localhost/estateManagement/control/villageControl.php?method=deleteParking&id="+objectId;
   			$.ajax({
   				type:"GET",
   				url:url,
@@ -76,7 +76,7 @@ require_once('../estateManager/head.php');
         }
         $.ajax({
           type:"GET",
-          url:"http://localhost/estateManagement/control/villageControl.php?method=updateHouse&id="+objectId+"&building="+building+"&floor="+floor+"&unit="+unit,
+          url:"http://localhost/estateManagement/control/villageControl.php?method=updateParking&id="+objectId+"&building="+building+"&floor="+floor+"&unit="+unit,
           dataType:"json",
           success:function(data){
             $(document.getElementById(objectId)).empty();
@@ -91,7 +91,7 @@ require_once('../estateManager/head.php');
 <?php require_once('../estateManager/navigation.php');?>
 <script type="text/javascript">
 	document.getElementById('village').setAttribute('class','dropdown active');
-	document.getElementById('updateHouse').setAttribute('class','active');
+	document.getElementById('updateParking').setAttribute('class','active');
 </script>
 <div class="container">
    	<div class="jumbotron" align="center">

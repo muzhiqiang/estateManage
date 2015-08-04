@@ -100,6 +100,70 @@
 			$villageModel->deleteHouse($id);
 			echo json_encode(array("code"=>200));
 		}
+		else if($method == 'updateHouse'){
+			$id = $_GET['id'];
+			$building = $_GET['building'];
+			$floor = $_GET['floor'];
+			$unit = $_GET['unit'];
+			$villageModel->updateHouse($id,$building,$floor,$unit);
+			echo json_encode(array("code"=>200));
+		}
+		else if($method == 'inputParking'){
+			$floorArr = array();
+			$unitArr = array();
+			$floorsNum = $_POST['floorsNum'];
+			$unitsNum = $_POST['unitsNum'];
+			$floorNum = $_POST['floorNum'];
+			$unitNum = $_POST['unitNum'];
+			$building = $_POST['building'];
+			for($i=0;$i<$floorNum;$i++){
+				array_push($floorArr, $_POST['floor'.($i+1)]);
+			}
+			for($i=0;$i<$floorsNum;$i+=2){
+				for($j=$_POST['floors'.($i+1)];$j<=$_POST['floors'.($i+2)];$j++){
+					array_push($floorArr, $j."");
+				}
+			}
+			for($i=0;$i<$unitNum;$i++){
+				array_push($unitArr, $_POST['unit'.($i+1)]."");
+			}
+			for($i=0;$i<$unitsNum;$i+=2){
+				for($j=$_POST['units'.($i+1)];$j<=$_POST['units'.($i+2)];$j++){
+					array_push($unitArr, $j."");
+				}
+			}
+			$villageModel->addParking($building,$floorArr,$unitArr,$_GET['id']);
+			header("Location:".__PUBLIC__.'/view/estateManager/index.php');
+		}
+		else if($method == 'getParking'){
+			$building = "";
+			if(isset($_GET['building'])){
+				$building = $_GET['building'];
+			}
+			$floor = "";
+			if(isset($_GET['floor'])){
+				$floor = $_GET['floor'];
+			}
+			$unit = "";
+			if (isset($_GET['unit'])) {
+				$unit = $_GET['unit'];
+			}
+			$villageId = $_SESSION['estateManager']['villageId'];
+			echo json_encode($villageModel->getParking($building,$floor,$unit,$villageId));
+		}
+		else if($method == 'deleteParking'){
+			$id = $_GET['id'];
+			$villageModel->deleteParking($id);
+			echo json_encode(array("code"=>200));
+		}
+		else if($method == 'updateParking'){
+			$id = $_GET['id'];
+			$building = $_GET['building'];
+			$floor = $_GET['floor'];
+			$unit = $_GET['unit'];
+			$villageModel->updateParking($id,$building,$floor,$unit);
+			echo json_encode(array("code"=>200));
+		}
 	}
 	
 
