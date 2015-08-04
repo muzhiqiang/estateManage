@@ -1,19 +1,19 @@
 <?php
-require_once '../model/manageUserModel.php';
+require_once '../model/manageParkingModel.php';
 require_once('../config/config.php');
 
-function forUserList($objectId)
+function forParkingList($objectId)
 {
 	$message=new manageModel();
-	$userList=$message->showUserList($objectId);
-	echo json_encode($userList);
+	$parkingList=$message->showParkingList($objectId);
+	echo json_encode($parkingList);
 
 }
 
-function forUserDetail($objectId)
+function forParkingDetail($objectId)
 {
 	$message=new manageModel();
-	$information=$message->showUserDetail($objectId);
+	$information=$message->showParkingDetail($objectId);
 	echo json_encode($information);
 }
 function getTomMnthBill($houseId,$parkingId)
@@ -30,10 +30,10 @@ function deleteUser($objectId)
 	$return=$m->deleteUserInfo($objectId);
 	return $return;
 }
-function getModifyData($userId)
+function getModifyData($parkingId)
 {
 	$m=new manageModel();
-	$return=$m->modifyUser($userId);
+	$return=$m->modifyParking($parkingId);
 	return $return;
 }
 if(isset($_GET['getMethod']))
@@ -44,23 +44,24 @@ if(isset($_GET['getMethod']))
 			header("Location:".__PUBLIC__."/view/user/index.php");
 			break;
 		case 'getInformation':
-			forUserList($_GET['objectId']);
+			forParkingList($_GET['objectId']);
 			break;
-		case 'modifyDetailData':
+		case 'modifyDetailData':			//for modify.php
 			echo json_encode(getModifyData($_GET['objectId']));
 			break;
 		case 'toDetail':
 			header("Location:".__PUBLIC__."/view/manageUser/index.php?objectId=".$_GET['objectId']);
 			break;
-		case 'getDetailData':
-			forUserDetail($_GET['objectId']);
+		case 'getDetailData':				//for detail.php
+			forParkingDetail($_GET['objectId']);
 			break;
 		case 'modify':
-			header("Location:".__PUBLIC__."/view/manageUser/modify.php?objectId=".$_GET['objectId']);
+			header("Location:".__PUBLIC__."/view/manageParking/modify.php?objectId=".$_GET['objectId']);
 			break;
 		case 'deleteUser':
-			deleteUser($_GET['userId']);
-			header("Location:".__PUBLIC__."/view/manageUser/index.php");
+			echo $_GET['parkingId'];
+			deleteUser($_GET['parkingId']);
+			header("Location:".__PUBLIC__."/view/manageParking/index.php");
 			break;
 		default:
 			# code...
@@ -81,8 +82,9 @@ if(isset($_POST['userId']))
 	{
 		$_POST['isMarried']='';
 	}
-	$message=array('name'=>$_POST['name'],'gender'=>$_POST['gender'],'type'=>$_POST['type'],'isMarried'=>$_POST['isMarried'],'mobilePhoneNumber'=>$_POST['mobilePhoneNumber'],'email'=>$_POST['email'],'age'=>$_POST['age'],'occupation'=>$_POST['occupation'],'userId'=>$_POST['userId'],'house'=>array('building' =>$_POST['houseBuilding'],'floor'=>$_POST['houseFloor'],'unit'=>$_POST['houseUnit'],'houseId'=>$_POST['houseId']));
+	$message=array('name'=>$_POST['name'],'gender'=>$_POST['gender'],'type'=>$_POST['type'],'isMarried'=>$_POST['isMarried'],'mobilePhoneNumber'=>$_POST['mobilePhoneNumber'],'email'=>$_POST['email'],'age'=>$_POST['age'],'occupation'=>$_POST['occupation'],'userId'=>$_POST['userId'],'parking'=>array('building' =>$_POST['parkingBuilding'],'floor'=>$_POST['parkingFloor'],'unit'=>$_POST['houseUnit'],'parkingId'=>$_POST['parkingId']));
+	print_r($message);
 	$m=new manageModel();
 	$return=$m->updateUser($message);
-	header("Location:".__PUBLIC__."/view/manageUser/detail.php");
+	header("Location:".__PUBLIC__."/view/manageParking/detail.php");
 }

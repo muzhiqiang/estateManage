@@ -10,8 +10,9 @@ if(isset($_POST['searchBui'])||isset($_POST['searchFlo'])||isset($_POST['searchU
 	if(!empty($_POST['searchUni'])) $unit=$_POST['searchUni'];
 	else $unit="unset";
 	HttpClient::init($HttpClient, array('userAgent' => $_SERVER['HTTP_USER_AGENT'], 'redirect' => true));
-	$HttpClient->get("http://localhost/estateManagement/control/billControl.php?method=search&building=".$building."&floor=".$floor."&unit=".$unit);
+	$HttpClient->get("http://localhost/estateManagement/control/billControl.php?method=search&building=".$building."&floor=".$floor."&unit=".$unit."&villageId=".$_SESSION['estateManager']['villageId']);
 	$json=json_decode($HttpClient->buffer,true);
+	
 }
 ?>
 <!DOCTYPE html>
@@ -55,15 +56,17 @@ if(isset($_POST['searchBui'])||isset($_POST['searchFlo'])||isset($_POST['searchU
 				<th>座别</th>
 				<th>楼层</th>
 				<th>单元</th>
+				<th>类型</th>
 				<th>查看账单</th>
+				
 			</tr>
 		</thead>
 		<tbody>
 			<?php
 			if(!empty($json))
 			{
-				foreach ($json as $key => $value) {
-					if(!empty($value['user']))
+				foreach ($json['house'] as $key => $value) {
+					//if(!empty($value['user']))
 					{
 						echo "<tr>";
 						if(empty($value['building']))
@@ -79,11 +82,35 @@ if(isset($_POST['searchBui'])||isset($_POST['searchFlo'])||isset($_POST['searchU
 						else
 							echo "<td>".$value['unit']."</td>";
 
-						
+						echo "<td>房屋</td>";
 						echo "<td><a href=\"../../control/billControl.php?method=showUserBill&houseId=".$value['objectId']."\">查看账单</a></td>";
 						echo "</tr>";
 					}
-			}
+					
+				}
+				foreach ($json['parking'] as $key => $value) {
+					//if(!empty($value['user']))
+					{
+						echo "<tr>";
+						if(empty($value['building']))
+							echo "<td>未知</td>";
+						else
+							echo "<td>".$value['building']."</td>";
+						if(empty($value['floor']))
+							echo "<td>未知</td>";
+						else
+							echo "<td>".$value['floor']."</td>";
+						if(empty($value['unit']))
+							echo "<td>未知</td>";
+						else
+							echo "<td>".$value['unit']."</td>";
+						echo "<td>停车位</td>";
+						
+						echo "<td><a href=\"../../control/billControl.php?method=showParkingBill&parkingId=".$value['objectId']."\">查看账单</a></td>";
+						echo "</tr>";
+					}
+					
+				}
 			}
 			
 		?>

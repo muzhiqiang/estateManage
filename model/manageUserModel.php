@@ -4,14 +4,14 @@ require_once('../utils/function.php');
 
 class manageModel
 {
-	function showUserList($objectId)				//获取用户信息列表
+	function showUserList($objectId)				//获取房屋用户信息列表
 	{  	
 		$villageId=$objectId;
 		$query=new leancloud\AVQuery('House');
 		$result=toArray($query->find(),array('villageId','user'));
 		return $result;
 	}
-	function showUserDetail($objectId)				//返回用户详细信息
+	function showUserDetail($objectId)				//返回房屋用户详细信息
 	{
 		$houseId=$objectId;
 		
@@ -23,18 +23,15 @@ class manageModel
 			return array('code'=>'700');
 		
 		$queryHouse=new leancloud\AVQuery('House');
-		$queryHouse->where('user',getPointer('_User',$userInfo[0]['objectId']));
+		//$queryHouse->where('user',getPointer('_User',$userInfo[0]['objectId']));
+		$queryHouse->where('objectId',$houseId);
 		$houseInfo=toArray($queryHouse->find(),array('villageId','user'));
 		
-		$queryParking=new leancloud\AVQuery('Parking');
-		$queryParking->where('user',getPointer('_User',$userInfo[0]['objectId']));
-		$parkingInfo=toArray($queryParking->find(),array('villageId','user'));
-		
-		$returnList=array('userInfo'=>$userInfo[0],'houseInfo'=>$houseInfo,'parkingInfo'=>$parkingInfo);
+		$returnList=array('userInfo'=>$userInfo[0],'houseInfo'=>$houseInfo[0]);
 		
 		return $returnList;
 	}
-	function modifyUser($houseId)
+	function modifyUser($houseId)	//传回修改用户信息所需要的信息
 	{
 		$queryUser=new leancloud\AVQuery('_User');
 		$queryUser->where('houses',getPointer('House',$houseId));
@@ -44,27 +41,11 @@ class manageModel
 		$queryHouse->where('objectId',$houseId);
 		$houseInfo=toArray($queryHouse->find(),array('villageId','user'));
 		
-		$queryParking=new leancloud\AVQuery('Parking');
-		$queryParking->where('user',getPointer('_User',$userInfo[0]['objectId']));
-		$parkingInfo=toArray($queryParking->find(),array('villageId','user'));
-		
-		$returnList=array('userInfo'=>$userInfo[0],'houseInfo'=>$houseInfo[0],'parkingInfo'=>$parkingInfo);
+		$returnList=array('userInfo'=>$userInfo[0],'houseInfo'=>$houseInfo[0]);
 		
 		return $returnList;
 	}
-	function passConfirm($objectId)					//通过验证
-	{
-	    $u=new leancloud\AVObject('_User');
-	    $u->isConfirm=true;
-	    $return=$u->update($objectId);
-	    return $return;
-	}
-	function refuseConfirm($objectId)				//拒绝验证
-	{
-    	$d=new leancloud\AVObject('_User');
-    	$return=$d->delete($objectId);
-    	return $return;
-	}
+
 	function updateUser($message)
 	{
 		$u=new leancloud\AVObject('_User');
@@ -103,34 +84,7 @@ class manageModel
 			$updateHouse->unit=$message['house']['unit'];
 			$updateHouse->update($message['house']['houseId']);
 		}
-		if(!empty($message[parking]))
-		{
-			foreach($message['parking'] as $key => $value)
-			{
-				if(isset($value['building'])&&isset($value['floor'])&&isset($value['unit']))
-				{
-					$parking=new leancloud\AVQuery('Parking');
-					$parking->where('building',$value['building']);
-					$parking->where('floor',$value['floor']);
-					$parking->where('unit',$value['unit']);
-					$isCover=toArray($parking->find(),array('villageId','user'));
-					if(!empty($isCover))
-					{
-						if($isCover[0]['objectId']!=$message['parking']['parkingId'])
-							return array('code'=>'302');
-					}
-						
-					if(!empty($value['parkingId']))
-					{
-						$P=new leancloud\AVObject('Parking');
-						$P->building=$value['building'];
-						$P->floor=$value['floor'];
-						$P->unit=$value['unit'];
-						$return=$P->update($value['parkingId']);
-					}
-				}
-			}
-		}
+		
 		return $return;
 	}
 	function deleteUserInfo($objectId)
@@ -142,5 +96,3 @@ class manageModel
 		return $return;
 	}
 }
-//$m=new manageModel();
-//print_r($m->showUserDetail("55bb693e00b0efdcbe46a502"));

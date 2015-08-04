@@ -1,12 +1,12 @@
 <?php
 	require_once('../../utils/getInformation.php');
 	require_once('../estateManager/head.php');
-	if(!empty($_GET['houseId']))
-		$_SESSION['billHouseId']=$_GET['houseId'];
-	if(isset($_SESSION['billHouseId']))
+	if(!empty($_GET['parkingId']))
+		$_SESSION['parkingId']=$_GET['parkingId'];
+	if(isset($_SESSION['parkingId']))
 	{
 		HttpClient::init($HttpClient, array('userAgent' => $_SERVER['HTTP_USER_AGENT'], 'redirect' => true));
-		$HttpClient->get("http://localhost/estateManagement/control/billControl.php?method=getUserBill&houseId=".$_SESSION['billHouseId']);
+		$HttpClient->get("http://localhost/estateManagement/control/billControl.php?method=getParkingBill&objectId=".$_SESSION['parkingId']);
 		$json=json_decode($HttpClient->buffer,true);
 	}
 ?>
@@ -53,16 +53,15 @@
 						<th>删除</th>";
 			echo	"</tr></thead>";
 			echo "<tbody>";
-			if(!empty($json['house']))
-				foreach($json['house'] as $key=>$value)
+			if(!empty($json['parking']))
+				foreach($json['parking'] as $key=>$value)
 				{
 					echo "<tr>";
 					echo "<td>".$value['type']."</td>";
 					echo "<td>".$value['usage']."</td>";
 					echo "<td>".$value['price']."</td>";
 					echo "<td>".$value['total']."</td>";
-					echo "<td><a href=\"../../control/billControl.php?method=deleteBill&billId=".$value['objectId']."\">删除</a></td>";
-						$houseId=$value['houseId'];
+					echo "<td><a href=\"../../control/billControl.php?method=deleteParkingBill&billId=".$value['objectId']."\">删除</a></td>";
 					echo "</tr>";
 					$sum+=$value['total'];
 				}

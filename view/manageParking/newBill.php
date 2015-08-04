@@ -6,9 +6,8 @@
 	if(isset($_SESSION['objectId']))
 	{
 		HttpClient::init($HttpClient, array('userAgent' => $_SERVER['HTTP_USER_AGENT'], 'redirect' => true));
-		$HttpClient->get("http://localhost/estateManagement/control/billControl.php?method=getTomonth&objectId=".$_SESSION['objectId']);
+		$HttpClient->get("http://localhost/estateManagement/control/billControl.php?method=getToParking&objectId=".$_SESSION['objectId']);
 		$json=json_decode($HttpClient->buffer,true);
-		
 	}
 	
 	
@@ -16,7 +15,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>当月账单</title>
+	<title>当月停车位账单</title>
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <link href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
@@ -53,8 +52,8 @@ require_once('navigation.php');
 <tbody>
 <?php
 $sum=0;
-	if(!empty($json['house']))
-	foreach ($json['house'] as $key => $value) {
+	if(!empty($json['parking']))
+	foreach ($json['parking'] as $key => $value) {
 		echo '<tr>';
 		echo "<td>".$value['type']."</td>";
 		echo "<td>".$value['usage']."</td>";
@@ -71,7 +70,7 @@ $sum=0;
 </tbody>
 </table>
 <div class="alert alert-info" align="center">
-<a role="button" <?php echo "href=\"../../control/billControl.php?method=showUserBill&houseId=".$_SESSION['objectId']."\"";?>>点击查看详细账单</a>
+<a role="button" <?php echo "href=\"../../control/billControl.php?method=showParkingBill&parkingId=".$_SESSION['objectId']."\"";?>>点击查看详细账单</a>
 </div>
 </div>
 </div>

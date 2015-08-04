@@ -6,12 +6,13 @@
 	if(isset($_SESSION['objectId']))
 	{
 		HttpClient::init($HttpClient, array('userAgent' => $_SERVER['HTTP_USER_AGENT'], 'redirect' => true));
-		$HttpClient->get("http://localhost/estateManagement/control/manageUserControl.php?getMethod=getDetailData&objectId=".$_SESSION['objectId']);
+		$HttpClient->get("http://localhost/estateManagement/control/manageParkingControl.php?getMethod=getDetailData&objectId=".$_SESSION['objectId']);
 		$json=json_decode($HttpClient->buffer,true);
 		if(!empty($json['userInfo']))
 			$_SESSION['userId']=$json['userInfo']['objectId'];
 		if(empty($json))
-			$json=array('userInfo'=>'','houseInfo'=>'');
+			$json=array('userInfo'=>'','parkingInfo'=>'');
+		
 	}
 	
 	
@@ -19,7 +20,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>用户详细</title>
+	<title>停车位用户详细</title>
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <link href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
@@ -97,9 +98,9 @@ require_once('navigation.php');
 	else
 		echo $json['userInfo']['isMarried'];?></div>
 	<?php 
-	if(!empty($json['houseInfo']))
+	if(!empty($json['parkingInfo']))
 	{
-		echo "<div class=\"well\" align=\"center\">住址: ".$json['houseInfo']['building']."栋".$json['houseInfo']['floor']."层".$json['houseInfo']['unit']."号"."</div>";
+		echo "<div class=\"well\" align=\"center\">停车位: ".$json['parkingInfo']['building']."栋".$json['parkingInfo']['floor']."层".$json['parkingInfo']['unit']."号"."</div>";
 	}
 	else
 	{
@@ -111,7 +112,7 @@ require_once('navigation.php');
 
 </div>
 <div class="well col-sm-2">
-	<a <?php echo "href=\"../../control/manageUserControl.php?getMethod=deleteUser&userId=".$_SESSION['objectId']."\"";?>>删除该用户</a></br> 
+	<a <?php echo "href=\"../../control/manageParkingControl.php?getMethod=deleteUser&parkingId=".$_SESSION['objectId']."\"";?>>删除该用户</a></br> 
 </div>
 
 

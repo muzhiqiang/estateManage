@@ -17,7 +17,7 @@
       			'</ul>'.
    			'</li>'.
    			'<li id="repair"><a href='.__PUBLIC__.'/control/repairControl.php?method=waitRepair&id='.$_SESSION['estateManager']['villageId'].'>维修管理</a></li>'.
-            '<li id="repair"><a href="#">车位管理</a></li>'.
+            '<li id="repair"><a href='.__PUBLIC__.'/view/manageParking/index.php'.'>车位管理</a></li>'.
             
             '<li class="dropdown navbar-right" id="estateManager"><a class="dropdown-toggle" data-toggle="dropdown" href="#">'.$_SESSION['estateManager']['name'].'<span class="caret"></span></a>'.
                '<ul class="dropdown-menu">'.

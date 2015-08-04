@@ -8,13 +8,13 @@
 		if(isset($_SESSION['objectId']))
 		{
 		HttpClient::init($HttpClient, array('userAgent' => $_SERVER['HTTP_USER_AGENT'], 'redirect' => true));
-		$HttpClient->get("http://localhost/estateManagement/control/manageUserControl.php?getMethod=modifyDetailData&objectId=".$_SESSION['modifyId']);
+		$HttpClient->get("http://localhost/estateManagement/control/manageParkingControl.php?getMethod=modifyDetailData&objectId=".$_SESSION['modifyId']);
 		$json=json_decode($HttpClient->buffer,true);
 		}
 ?>
 <html>
 	<head>
-		<title>修改用户信息</title>
+		<title>修改停车位用户信息</title>
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
     	<link href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
@@ -35,12 +35,12 @@
 	<body>
 		
 		<div class="col-sm-8" align="center">
-		<form method="POST" action="../../control/manageUserControl.php" role="form" class="form-horizontal">
+		<form method="POST" action="../../control/manageParkingControl.php" role="form" class="form-horizontal">
 			<div class="row form-group">
 				<input type="hidden" name="userId" <?php  echo "value=\"".$json['userInfo']['objectId']."\""; ?>>
 			</div>
 			<div class="row form-group">
-				<input type="hidden" name="houseId" <?php  echo "value=\"".$json['houseInfo']['objectId']."\""; ?>>
+				<input type="hidden" name="parkingId" <?php  echo "value=\"".$json['parkingInfo']['objectId']."\""; ?>>
 			</div>
 			
  			<div class="row form-group">
@@ -124,23 +124,23 @@
 				</div>	
 			</div>
 			<hr>
-			<h4>房屋地址</h4>
+			<h4>停车位地址</h4>
 			<div class="row form-group">
 				<label for="houseBuilding" class="col-sm-4 control-label">座别</label>
 				<div class="col-sm-4">
-					<input class="form-control" type="text" name="houseBuilding" <?php echo "value=\"".$json['houseInfo']['building']."\""; ?> >
+					<input class="form-control" type="text" name="parkingBuilding" <?php echo "value=\"".$json['parkingInfo']['building']."\""; ?> >
 				</div>
 			</div>
 			<div class="row form-group">
 				<label for="houseFloor" class="col-sm-4 control-label">楼层</label>
 				<div class="col-sm-4">
-					<input class="form-control" type="text" name="houseFloor" <?php echo "value=\"".$json['houseInfo']['floor']."\""; ?> >
+					<input class="form-control" type="text" name="parkingFloor" <?php echo "value=\"".$json['parkingInfo']['floor']."\""; ?> >
 				</div>
 			</div>
 			<div class="row form-group">
 				<label for="houseUnit" class="col-sm-4 control-label">单元</label>
 				<div class="col-sm-4">
-					<input class="form-control" type="text" name="houseUnit" <?php echo "value=\"".$json['houseInfo']['unit']."\""; ?> >
+					<input class="form-control" type="text" name="houseUnit" <?php echo "value=\"".$json['parkingInfo']['unit']."\""; ?> >
 				</div>
 			</div>
 			<div class="form-group">

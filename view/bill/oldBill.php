@@ -42,7 +42,7 @@
 			if($month[0]=='0')
 				$month=$month[1];
 			$month--;
-			$len=sizeof($json['house'])+sizeof($json['parking']);
+			$len=sizeof($json['house']);
 			while($len!='0')
 			{
 				
@@ -75,26 +75,7 @@
 						}
 						
 					}
-			
-				if(!empty($json['parking']))
-					foreach($json['parking'] as $key=>$value)
-					{
-						if($value['month']==$month&&$value['year']==$year)
-						{
-							echo "<tr>";
-							echo "<td>".$value['type']."</td>";
-							echo "<td>".$value['usage']."</td>";
-							echo "<td>".$value['price']."</td>";
-							echo "<td>".$value['total']."</td>";
-						
-								$parkingId=$value['parkingId'];
-							echo "</tr>";
-							$sum+=$value['total'];
-							$len--;
-						}
-							
-						
-					}	
+				
 				echo "</tbody>";
 				echo "</table>";
 				
@@ -118,9 +99,15 @@
 	<div class="container col-sm-4">
 		<div class="jumbotron">
 			<h3>用户</h3>
-				<?php echo $json['userInfo']['name'];?>
+				<?php 
+				if(empty($json['userInfo']['name']))
+					echo "尚未绑定用户";
+				else
+					echo $json['userInfo']['name'];?>
 			<h3>联系电话</h3>
-				<?php echo $json['userInfo']['mobilePhoneNumber'];?>
+				<?php 
+				if(!empty($json['userInfo']['name']))
+					echo $json['userInfo']['mobilePhoneNumber'];?>
 		</div>
 	</div>
 	</div>

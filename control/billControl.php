@@ -1,7 +1,7 @@
 <?php
 require_once '../model/billModel.php';
 require_once('../config/config.php');
-function getUserBill($houseId)
+function getUserBill($houseId)					//返回bill主页所需信息
 {
 	$bill=new billModel();
 	$json=$bill->getUserBill($houseId);
@@ -25,6 +25,12 @@ function getOld($houseId)
 	$result=$bill->getOld($houseId);
 	return $result;
 }
+function getOldParking($parkingId)
+{
+	$bill=new billModel();
+	$result=$bill->getOldParking($parkingId);
+	return $result;
+}
 function insertHouseBill($houseId,$type,$usage,$price,$total,$unit)
 {
 	$bill=new billModel();
@@ -43,10 +49,22 @@ function getId($houseId)
 	$result=$bill->getId($houseId);
 	return $result;
 }
-function search($building,$floor,$unit)
+function search($building,$floor,$unit,$villageId)
 {
 	$bill=new billModel();
-	$result=$bill->search($building,$floor,$unit);
+	$result=$bill->search($building,$floor,$unit,$villageId);
+	return $result;
+}
+function getParkingTo($parkingId)
+{
+	$bill=new billModel();
+	$result=$bill->getToParking($parkingId);
+	return $result;
+}
+function addParking($parkingId)
+{
+	$bill=new billModel();
+	$result=$bill->getParkingMessage($parkingId);
 	return $result;
 }
 if(isset($_GET['method']))
@@ -66,6 +84,10 @@ if(isset($_GET['method']))
 			deleteBill($_GET['billId']);
 			header("Location:".__PUBLIC__."/view/bill/index.php");
 			break;
+		case 'deleteParkingBill':
+			deleteBill($_GET['billId']);
+			header("Location:".__PUBLIC__."/view/parkingBill/index.php");
+			break;
 		case 'newBill':
 			header("Location:".__PUBLIC__."/view/bill/add.php?houseId=".$_GET['houseId']."&parkingId=".$_GET['parkingId']);
 			break;
@@ -79,22 +101,37 @@ if(isset($_GET['method']))
 			echo json_encode(getId($_GET['houseId']));
 			break;
 		case 'search':
-			echo json_encode(search($_GET['building'],$_GET['floor'],$_GET['unit']));
+			echo json_encode(search($_GET['building'],$_GET['floor'],$_GET['unit'],$_GET['villageId']));
+			break;
+		case 'getToParking':
+			echo json_encode(getParkingTo($_GET['objectId']));
+			break;
+		case 'showParkingBill':
+			header("Location:".__PUBLIC__."/view/parkingBill/index.php?parkingId=".$_GET['parkingId']);
+			break;
+		case 'getParkingBill':
+			echo json_encode(getParkingTo($_GET['objectId']));
+			break;
+		case 'getOldParking':
+			echo json_encode(getOldParking($_GET['parkingId']));
+			break;
+		case 'addParking':
+			echo json_encode(addParking($_GET['parkingId']));
 			break;
 		default:
 			break;
 	}
 }
 
-if(isset($_POST['submit']))
+if(isset($_POST['houseId']))
 {
-	//echo $_POST[$_POST['source']];
-	if($_POST['source']=="houseId")
-		$return=insertHouseBill($_POST['houseId'],$_POST['type'],$_POST['usage'],$_POST['price'],$_POST['total'],$_POST['unit']);
-	else 
-	{
-		$return=insertParkingBill($_POST[$_POST['source']],$_POST['type'],$_POST['usage'],$_POST['price'],$_POST['total'],$_POST['unit']);
-	}
-		
+	$return=insertHouseBill($_POST['houseId'],$_POST['type'],$_POST['usage'],$_POST['price'],$_POST['total'],$_POST['unit']);
+	
 	header("Location:".__PUBLIC__."/view/bill/index.php");
+}
+if(isset($_POST['parkingId']))
+{
+	$return=insertParkingBill($_POST['parkingId'],$_POST['type'],$_POST['usage'],$_POST['price'],$_POST['total'],$_POST['unit']);
+	//print_r($return);die;
+	header("Location:".__PUBLIC__."/view/parkingBill/index.php");
 }
