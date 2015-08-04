@@ -1,13 +1,22 @@
 <?php
 	echo '<div class="container"><ul class="nav nav-pills">'.
 			'<li id="index"><a href='.__PUBLIC__.'/view/estateManager/index.php'.'>首页</a></li>'.
-   			'<li class="dropdown" id="village"><a class="dropdown-toggle" data-toggle="dropdown" href="#">小区管理<span class="caret"></span></a>'.
+   			'<li class="dropdown" id="village"><a class="dropdown-toggle" data-toggle="dropdown" href="#">房屋管理<span class="caret"></span></a>'.
                '<ul class="dropdown-menu">'.
                   '<li id="lookHouse"><a href='.__PUBLIC__.'/view/manageUser/index.php'.'>查看房屋</a></li>'.
                   '<li id="inputHouse"><a href='.__PUBLIC__.'/view/village/inputHouse.php>房屋录入</a></li>'.
                   '<li id="updateHouse"><a href='.__PUBLIC__.'/view/village/updateHouse.php>房屋修改</a></li>'.
-                  '<li id="inputParking"><a href='.__PUBLIC__.'/view/village/inputParking.php>停车位录入</a></li>'.
-                  '<li id="updateParking"><a href='.__PUBLIC__.'/view/village/updateParking.php>停车位修改</a></li>'.
+         
+                  
+               '</ul>'.
+            '</li>'.
+            '<li class="dropdown" id="parking"><a class="dropdown-toggle" data-toggle="dropdown" href="#">车位管理<span class="caret"></span></a>'.
+               '<ul class="dropdown-menu">'.
+                  '<li id="lookParking"><a href='.__PUBLIC__.'/view/manageParking/index.php'.'>查看车位</a></li>'.
+                  
+                  
+                  '<li id="inputParking"><a href='.__PUBLIC__.'/view/village/inputParking.php>车位录入</a></li>'.
+                  '<li id="updateParking"><a href='.__PUBLIC__.'/view/village/updateParking.php>车位修改</a></li>'.
                '</ul>'.
             '</li>'.
    			'<li id="bill"><a href='.__PUBLIC__.'/view/bill/search.php>账单管理</a></li>'.   			
@@ -18,7 +27,8 @@
       			'</ul>'.
    			'</li>'.
    			'<li id="repair"><a href='.__PUBLIC__.'/control/repairControl.php?method=waitRepair&id='.$_SESSION['estateManager']['villageId'].'>维修管理</a></li>'.
-            '<li id="repair"><a href='.__PUBLIC__.'/view/manageParking/index.php'.'>车位管理</a></li>'.
+            
+   
             
             '<li class="dropdown navbar-right" id="estateManager"><a class="dropdown-toggle" data-toggle="dropdown" href="#">'.$_SESSION['estateManager']['name'].'<span class="caret"></span></a>'.
                '<ul class="dropdown-menu">'.

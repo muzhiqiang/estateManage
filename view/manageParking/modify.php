@@ -28,8 +28,8 @@
 		require_once('navigation.php');
 	?>
 	<script type="text/javascript">
-		document.getElementById('village').setAttribute('class','dropdown active');
-		document.getElementById('lookHouse').setAttribute('class','active');
+		document.getElementById('parking').setAttribute('class','dropdown active');
+		document.getElementById('lookParking').setAttribute('class','active');
 		document.getElementById('update').setAttribute('class','active');
 	</script>
 	<body>

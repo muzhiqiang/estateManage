@@ -100,7 +100,7 @@ require_once('navigation.php');
 	<?php 
 	if(!empty($json['houseInfo']))
 	{
-		echo "<div class=\"well\" align=\"center\">住址: ".$json['houseInfo']['building']."栋".$json['houseInfo']['floor']."层".$json['houseInfo']['unit']."号"."</div>";
+		echo "<p align=\"center\">住址: ".$json['houseInfo']['building']."栋".$json['houseInfo']['floor']."层".$json['houseInfo']['unit']."号"."</p>";
 	}
 	else
 	{
@@ -108,11 +108,14 @@ require_once('navigation.php');
 	}		
 		
 	?>
+	<div align="center">
+		<a class="btn btn-primary alert alert-danger" <?php echo "href=\"../../control/manageUserControl.php?getMethod=deleteUser&userId=".$_SESSION['objectId']."\"";?>>删除该用户</a></br> 
+	</div>
 </div>
 
-<div class="well col-sm-2">
-	<a <?php echo "href=\"../../control/manageUserControl.php?getMethod=deleteUser&userId=".$_SESSION['objectId']."\"";?>>删除该用户</a></br> 
-</div>
+
+	
+
 	
 
 

@@ -30,16 +30,11 @@
 		document.getElementById("addBill").setAttribute("class","active");
 	</script>
 	<div align="center" class="col-sm-5">
+	<p align="center">停车位：<?php echo $json['parkingInfo']['building']."栋".$json['parkingInfo']['floor']."层".$json['parkingInfo']['unit']."号" ;?></p>
 	<form class="form-horizontal" role="form" method="post" action=<?php echo __PUBLIC__.'/control/billControl.php'?>>
 		<input type="hidden" name="parkingId" <?php  echo "value=\"".$_SESSION['parkingId']."\""; ?>>
-		<div class="row form-group">
-			<label for="source" class="col-sm-4 control-label">停车位</label>
-			<div class="col-sm-4">
-				<?php echo $json['parkingInfo']['building']."栋".$json['parkingInfo']['floor']."层".$json['parkingInfo']['unit']."号" ;?></br>
-			</div>
 			
 				
-		</div>
 		<div class="row form-group">
 			<label for="type" class="col-sm-4 control-label">类型</label>
 			<div class="col-sm-4">
