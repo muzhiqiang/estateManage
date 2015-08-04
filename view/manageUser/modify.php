@@ -54,14 +54,14 @@
  				<label for="gender" class="col-sm-4 control-label">性别</label>
  				<div class="col-sm-4">
 					<input  type="radio" name="gender"
-					<?php if($json['userInfo']['gender']==0)
+					<?php if(!isset($json['userInfo']['gender'])||$json['userInfo']['gender']==0)
 					echo "checked";
 					?> value="0">未知
 					<input type="radio"
-					<?php if($json['userInfo']['gender']==1)
+					<?php if(isset($json['userInfo']['gender'])&&$json['userInfo']['gender']==1)
 					echo "checked";
 					?>  name="gender" value="1">男
-					<input type="radio" <?php if($json['userInfo']['gender']==2)
+					<input type="radio" <?php if(isset($json['userInfo']['gender'])&&$json['userInfo']['gender']==2)
 					echo "checked";
 					?>  name="gender" value="2">女
 				</div>
@@ -70,7 +70,7 @@
 			<div class="row form-group">
 				<label for="age" class="col-sm-4 control-label">年龄</label>
 				<div class="col-sm-4">
-					<input class="form-control" type="text" name="age" <?php echo "value=\"".ifExit($json['userInfo']['age'])."\""; ?>>
+					<input class="form-control" type="text" name="age" <?php if(isset($json['userInfo']['age'])) echo "value=\"".ifExit($json['userInfo']['age'])."\""; ?>>
 				</div>
 			</div>
 			<hr>
@@ -96,20 +96,20 @@
 			<div class="row form-group">
 				<label for="email" class="col-sm-4 control-label">邮箱地址</label>
 				<div class="col-sm-4">
-					<input class="form-control" type="text" name="email" <?php echo "value=\"".$json['userInfo']['email']."\""; ?>>
+					<input class="form-control" type="text" name="email" <?php if(isset($json['userInfo']['email'])) echo "value=\"".$json['userInfo']['email']."\""; ?>>
 				</div>
 			</div>
 			<hr>
 			<div class="row form-group">
 				<label for="isMarried" class="col-sm-4 control-label">婚姻状况</label>
 				<div class="col-sm-4">
-					<input type="radio" <?php if($json['userInfo']['isMarried']=="未知")
+					<input type="radio" <?php if(!isset($json['userInfo']['isMarried'])||$json['userInfo']['isMarried']=="未知")
 												echo "checked";
 										?> name="isMarried" value="未知">未知
-					<input type="radio" <?php if($json['userInfo']['isMarried']=="已婚")
+					<input type="radio" <?php if(isset($json['userInfo']['isMarried'])&&$json['userInfo']['isMarried']=="已婚")
 												echo "checked";
 										?> name="isMarried" value="已婚">已婚
-					<input type="radio" <?php if($json['userInfo']['isMarried']=="未婚")
+					<input type="radio" <?php if(isset($json['userInfo']['isMarried'])&&$json['userInfo']['isMarried']=="未婚")
 												echo "checked";
 										?> name="isMarried" value="未婚">未婚
 				</div>
@@ -120,7 +120,7 @@
 			<div class="row form-group">
 				<label for="occupation" class="col-sm-4 control-label">职业</label>
 				<div class="col-sm-4">
-					<input class="form-control" type="text" name="occupation" <?php echo "value=\"".$json['userInfo']['occupation']."\""; ?>>
+					<input class="form-control" type="text" name="occupation" <?php if(isset($json['userInfo']['occupation'])) echo "value=\"".$json['userInfo']['occupation']."\""; ?>>
 				</div>	
 			</div>
 			<hr>
