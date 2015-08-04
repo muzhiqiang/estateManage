@@ -4,8 +4,10 @@ require_once('../config/qiniu.php');
 use Qiniu\Auth;
 use Qiniu\Storage\BucketManager;
 use Qiniu\Storage\UploadManager;
+use Qiniu\Processing\Operation;
 Class uploadModel{
 	 public function postDoupload($name,$filePath,$type){
+        $qiniu = new qiniu();
         $token=$this->getToken();
         $uploadManager=new UploadManager();
         list($ret,$err)=$uploadManager->putFile($token,$name,$filePath,null,$type,false);
@@ -14,7 +16,12 @@ Class uploadModel{
             return $err;//返回错误信息到上传页面
         }else{//成功
             //添加信息到数据库
-            return $ret['key'];//返回结果到上传页面
+            $accessKey=$qiniu::accessKey;
+            $secretKey=$qiniu::secretKey;
+            $auth=new Auth($accessKey, $secretKey);
+            $baseUrl = $qiniu::domain."/".$ret['key'];
+            $authUrl = $auth->privateDownloadUrl($baseUrl);
+            return $authUrl;//返回结果到上传页面
         }
     }
 	private function getToken(){

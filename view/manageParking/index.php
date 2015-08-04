@@ -20,8 +20,8 @@
 <body>
 	<?php require_once('../estateManager/navigation.php');?>
 	<script type="text/javascript">
-		document.getElementById('village').setAttribute('class','dropdown active');
-		document.getElementById('lookHouse').setAttribute('class','active');
+		document.getElementById('parking').setAttribute('class','dropdown active');
+		document.getElementById('lookParking').setAttribute('class','active');
 	</script>
 	<div class="container">
 	<table class="table table-hover table-bordered table-responsive">

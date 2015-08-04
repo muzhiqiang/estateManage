@@ -31,16 +31,14 @@
 		document.getElementById("addBill").setAttribute("class","active");
 	</script>
 	<div align="center" class="col-sm-5">
-	<form class="form-horizontal" role="form" method="post" action=<?php echo __PUBLIC__.'/control/billControl.php'?>>
-		<input type="hidden" name="houseId" <?php  echo "value=\"".$_SESSION['billHouseId']."\""; ?>>
-		<div class="row form-group">
-			<label for="source" class="col-sm-4 control-label">房屋</label>
-			<div class="col-sm-4">
-				<?php echo $json['houseInfo']['building']."栋".$json['houseInfo']['floor']."层".$json['houseInfo']['unit']."号" ;?><input checked="true" type="radio" class="form-control" name="source" value=<?php echo "\"houseId\"";?>></br>
-			</div>
+	
+	<p>房屋：<?php echo $json['houseInfo']['building']."栋".$json['houseInfo']['floor']."层".$json['houseInfo']['unit']."号" ;?></p>
 			
 				
-		</div>
+
+	<form class="form-horizontal" role="form" method="post" action=<?php echo __PUBLIC__.'/control/billControl.php'?>>
+		<input type="hidden" name="houseId" <?php  echo "value=\"".$_SESSION['billHouseId']."\""; ?>>
+		
 		<div class="row form-group">
 			<label for="type" class="col-sm-4 control-label">类型</label>
 			<div class="col-sm-4">

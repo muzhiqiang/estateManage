@@ -29,8 +29,8 @@ echo "<div class='container'>";
 require_once('navigation.php');
 ?>
 <script type="text/javascript">
-	document.getElementById('village').setAttribute('class','dropdown active');
-	document.getElementById('lookHouse').setAttribute('class','active');
+	document.getElementById('parking').setAttribute('class','dropdown active');
+	document.getElementById('lookParking').setAttribute('class','active');
 	document.getElementById('newBill').setAttribute('class','active');
 </script>
 
