@@ -32,10 +32,10 @@ if(isset($_POST['searchBui'])||isset($_POST['searchFlo'])||isset($_POST['searchU
 	<script type="text/javascript">
 		document.getElementById('bill').setAttribute('class','active');
 	</script>
-	<div class="col-sm-3"></div>
-	<div align="center" class="col-sm-6">
+	<div class="container">
+	<div align="center">
 	<form role="form" method="POST" action=<?php echo __PUBLIC__.'/view/bill/search.php';?>>
-		<div class="input-group">
+		<div class="input-group col-sm-6">
          <input type="text" class="form-control" name="searchBui">
          <span class="input-group-addon">栋</span>
          <input type="text" class="form-control" name="searchFlo">
@@ -43,14 +43,15 @@ if(isset($_POST['searchBui'])||isset($_POST['searchFlo'])||isset($_POST['searchU
          <input type="text" class="form-control" name="searchUni">
          <span class="input-group-addon" >单元</span>
             <span class="input-group-btn">
-          	    <button class="btn btn-default" type="submit" name="findUser">
+          	    <button class="btn btn-primary" type="submit" name="findUser">
                     搜索
                 </button>
             </span>
           </div>
 	</form>
 	</div>
-	<div class="container">
+	<hr>
+	
 	<table class="table table-hover table-bordered table-responsive">
 		<thead>
 			<tr>

@@ -55,16 +55,27 @@ require_once('../utils/function.php');
 			$obj->update($villageId);
 			return true;
 		}
-		public function addHouse($building,$floorArr,$unitArr,$villageId){
+		public function addHouse($buildingArr,$floorArr,$unitArr,$villageId){
 			$obj = new leancloud\AVObject('House');
-			foreach ($floorArr as $floor) {
-				foreach ($unitArr as $unit) {
-					$obj->building = $building;
-					$obj->floor = $floor;
-					$obj->unit = $unit;
-					$obj->villageId = getPointer("Village",$villageId);
-					$obj->save();
+			foreach ($buildingArr as $building) {
+				if($building!=""){
+					foreach ($floorArr as $floor) {
+						if($floor!=""){
+							foreach ($unitArr as $unit) {
+								if($unit!=""){
+									$obj->building = $building;
+									$obj->floor = $floor;
+									$obj->unit = $unit;
+									$obj->villageId = getPointer("Village",$villageId);
+									$obj->save();
+								}
+							
+							}
+						}
+					
+					}
 				}
+				
 			}
 		}
 		public function getBuilding($building,$floor,$unit,$villageId){
@@ -93,16 +104,27 @@ require_once('../utils/function.php');
 			$update->update($id);
 
 		}
-		public function addParking($building,$floorArr,$unitArr,$villageId){
+		public function addParking($buildingArr,$floorArr,$unitArr,$villageId){
 			$obj = new leancloud\AVObject('Parking');
-			foreach ($floorArr as $floor) {
-				foreach ($unitArr as $unit) {
-					$obj->building = $building;
-					$obj->floor = $floor;
-					$obj->unit = $unit;
-					$obj->villageId = getPointer("Village",$villageId);
-					$obj->save();
+			foreach ($buildingArr as $building) {
+				if($building!=""){
+					foreach ($floorArr as $floor) {
+						if($floor!=""){
+							foreach ($unitArr as $unit) {
+								if($unit!=""){
+									$obj->building = $building;
+									$obj->floor = $floor;
+									$obj->unit = $unit;
+									$obj->villageId = getPointer("Village",$villageId);
+									$obj->save();
+								}
+							
+							}
+						}
+					
+					}
 				}
+				
 			}
 		}
 		public function getParking($building,$floor,$unit,$villageId){

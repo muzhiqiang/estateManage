@@ -28,20 +28,29 @@ require_once('navigation.php');
 		echo "document.getElementById('have').setAttribute('class','active')";
 	?>
 </script>
-<div class="col-sm-5">
-	<dl>
-		<dd><h3>内容</h3></dd><hr>
-		<dt><?php echo $_SESSION[$type][$key]['content'];?></dt><hr>
-		<?php if(!empty($_SESSION[$type][$key]['urls'])){
-			echo "<dd><h3>图片</h3></dd><hr><dt>";
-				foreach ($_SESSION[$type][$key]['urls'] as $value) {
-					echo '<div class="well"><img src=http://'.$value.' class="img-rounded" width=300 hight=250></div>';
-				}
-			
-			echo "</dt>";
-		}		
-		?>
-	</dl>
+<div class="col-sm-9">
+	<table class='table table-hover table-bordered table-responsive'>
+		<tbody>
+			<tr>
+				<td>内容</td>
+				<td><?php echo $_SESSION[$type][$key]['content'];?></td>
+			</tr>
+			<tr>
+				<td>图片</td>
+				<td>
+				<?php
+					if(!empty($_SESSION[$type][$key]['urls'])){
+						$number = count($_SESSION[$type][$key]['urls']);
+						$scale = 90/$number;
+						foreach ($_SESSION[$type][$key]['urls'] as $value) {
+							echo '<img width='.$scale.'% hspace="5" vspace="5" src=http://'.$value.' class="img-rounded"/>';
+						}
+					}
+				?>
+				</td>
+			</tr>
+		</tbody>
+	</table>
 	<?php
 		if($type == 'waitRepair'){
 	?>

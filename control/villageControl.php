@@ -53,30 +53,13 @@
 			
 		}
 		else if($method == 'inputHouse'){
-			$floorArr = array();
-			$unitArr = array();
-			$floorsNum = $_POST['floorsNum'];
-			$unitsNum = $_POST['unitsNum'];
-			$floorNum = $_POST['floorNum'];
-			$unitNum = $_POST['unitNum'];
-			$building = $_POST['building'];
-			for($i=0;$i<$floorNum;$i++){
-				array_push($floorArr, $_POST['floor'.($i+1)]);
-			}
-			for($i=0;$i<$floorsNum;$i+=2){
-				for($j=$_POST['floors'.($i+1)];$j<=$_POST['floors'.($i+2)];$j++){
-					array_push($floorArr, $j."");
-				}
-			}
-			for($i=0;$i<$unitNum;$i++){
-				array_push($unitArr, $_POST['unit'.($i+1)]."");
-			}
-			for($i=0;$i<$unitsNum;$i+=2){
-				for($j=$_POST['units'.($i+1)];$j<=$_POST['units'.($i+2)];$j++){
-					array_push($unitArr, $j."");
-				}
-			}
-			$villageModel->addHouse($building,$floorArr,$unitArr,$_GET['id']);
+			$floor = $_POST['floors'];
+			$unit = $_POST['units'];
+			$building = $_POST['buildings'];
+			$floorArr = explode(",", $floor);
+			$unitArr = explode(",", $unit);
+			$buildingArr = explode(",", $building);
+			$villageModel->addHouse($buildingArr,$floorArr,$unitArr,$_GET['id']);
 			header("Location:".__PUBLIC__.'/view/estateManager/index.php');
 		}
 		else if($method == 'getBuilding'){
@@ -109,30 +92,13 @@
 			echo json_encode(array("code"=>200));
 		}
 		else if($method == 'inputParking'){
-			$floorArr = array();
-			$unitArr = array();
-			$floorsNum = $_POST['floorsNum'];
-			$unitsNum = $_POST['unitsNum'];
-			$floorNum = $_POST['floorNum'];
-			$unitNum = $_POST['unitNum'];
-			$building = $_POST['building'];
-			for($i=0;$i<$floorNum;$i++){
-				array_push($floorArr, $_POST['floor'.($i+1)]);
-			}
-			for($i=0;$i<$floorsNum;$i+=2){
-				for($j=$_POST['floors'.($i+1)];$j<=$_POST['floors'.($i+2)];$j++){
-					array_push($floorArr, $j."");
-				}
-			}
-			for($i=0;$i<$unitNum;$i++){
-				array_push($unitArr, $_POST['unit'.($i+1)]."");
-			}
-			for($i=0;$i<$unitsNum;$i+=2){
-				for($j=$_POST['units'.($i+1)];$j<=$_POST['units'.($i+2)];$j++){
-					array_push($unitArr, $j."");
-				}
-			}
-			$villageModel->addParking($building,$floorArr,$unitArr,$_GET['id']);
+			$floor = $_POST['floors'];
+			$unit = $_POST['units'];
+			$building = $_POST['buildings'];
+			$floorArr = explode(",", $floor);
+			$unitArr = explode(",", $unit);
+			$buildingArr = explode(",", $building);
+			$villageModel->addParking($buildingArr,$floorArr,$unitArr,$_GET['id']);
 			header("Location:".__PUBLIC__.'/view/estateManager/index.php');
 		}
 		else if($method == 'getParking'){
