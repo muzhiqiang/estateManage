@@ -48,10 +48,7 @@
 			}
 		}
 
-		else if($method == 'delete'){ 					//删除小区
-			$villageId = $_GET['id'];
-			
-		}
+		
 		else if($method == 'inputHouse'){
 			$floor = $_POST['floors'];
 			$unit = $_POST['units'];

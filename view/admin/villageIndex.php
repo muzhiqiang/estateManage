@@ -25,7 +25,6 @@ require_once('head.php');
 				<th>城市</th>
 				<th>详细地址</th>
 				<th>修改</th>
-				<th>删除</th>
 				<th>注册管理员账号</th>
 			</tr>
 		</thead>
@@ -40,7 +39,7 @@ require_once('head.php');
 					echo '<th>'. $value['city'].'</th>';
 					echo '<th>'. $value['address'].'</th>';
 					echo '<th>'.'<a href="'.__PUBLIC__.'/view/admin/villageUpdate.php?id='.$value['objectId'].'">修改</a>'.'</th>';
-					echo '<th>'.'<a href="'.__PUBLIC__.'/control/villageControl?method=delete&id='.$value['objectId'].'">删除</a>'.'</th>';
+					
 					echo '<th>'.'<a href="'.__PUBLIC__.'/control/estateManagerControl.php?method=register&id='.$value['objectId'].'">注册管理员账号</a>'.'</th>';
 				echo '</tr>';
 			}
