@@ -38,7 +38,7 @@ require_once('../estateManager/head.php');
   						alert("查找无结果");
   					}
   					$.each(data,function(i,n){
-  						$("#tableBody").append("<tr id="+n["objectId"]+"><th>"+n["building"]+"</th><th>"+n["floor"]+"</th><th>"+n["unit"]+"</th><th><a data-toggle='modal' data-target='#myModal' onclick='toModal(\""+n["objectId"]+"\",\""+n["building"]+"\",\""+n["floor"]+"\",\""+n["unit"]+"\")'>修改</a></th><th><a onclick='deleteHouse(\""+n["objectId"]+"\")'>删除</a></th></tr>");
+  						$("#tableBody").append("<tr id="+n["objectId"]+"><th>"+n["building"]+"</th><th>"+n["floor"]+"</th><th>"+n["unit"]+"</th><th><a href='#' data-toggle='modal' data-target='#myModal' onclick='toModal(\""+n["objectId"]+"\",\""+n["building"]+"\",\""+n["floor"]+"\",\""+n["unit"]+"\")'>修改</a></th><th><a href='#' onclick='deleteHouse(\""+n["objectId"]+"\")'>删除</a></th></tr>");
   					  
             });
 
@@ -94,8 +94,8 @@ require_once('../estateManager/head.php');
 	document.getElementById('updateParking').setAttribute('class','active');
 </script>
 <div class="container">
-   	<div class="jumbotron" align="center">
-   		<div class='input-group col-sm-4'>
+   	<div align="center">
+   		<div class='input-group col-sm-6'>
    			<input type='text' class='form-control' id='building'>
    			<span class='input-group-addon'>栋</span>
    			<input type='text' class='form-control' id='floor'>
@@ -104,7 +104,7 @@ require_once('../estateManager/head.php');
    			<span class='input-group-addon'>单元</span>
         <button onclick="getBuilding()" class="form-control btn btn-primary">搜索</button>
    		</div>
-   		
+   	</div>
       <hr>
    		<table class="table table-hover table-bordered table-responsive" id="content">
       <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

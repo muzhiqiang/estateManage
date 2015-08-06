@@ -38,7 +38,7 @@ require_once('navigation.php');
 				echo '<tr>'.
 						'<td>'.$value['address'].'</td>'.
 						'<td>'.$value['content'].'</td>'.
-						'<td>'.$value['createdAt'].'</td>'.
+						'<td>'.substr($value['createdAt'],0,10).'</td>'.
 						'<td><a href='.__PUBLIC__.'/view/repair/detail.php?type=haveRepair&key='.$key.'>查看详情</a></td>'.
 					 '</tr>';
 			}
