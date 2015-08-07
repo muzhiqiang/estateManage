@@ -4,7 +4,7 @@
 	if(isset($_SESSION['parkingId']))
 	{
 		HttpClient::init($HttpClient, array('userAgent' => $_SERVER['HTTP_USER_AGENT'], 'redirect' => true));
-		$HttpClient->get("http://localhost/estateManagement/control/billControl.php?method=getOldParking&parkingId=".$_SESSION['parkingId']);
+		$HttpClient->get(__PUBLIC__."/control/billControl.php?method=getOldParking&parkingId=".$_SESSION['parkingId']);
 		$json=json_decode($HttpClient->buffer,true);
 		
 	}

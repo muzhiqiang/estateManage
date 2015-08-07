@@ -6,7 +6,7 @@
 	if(isset($_SESSION['objectId']))
 	{
 		HttpClient::init($HttpClient, array('userAgent' => $_SERVER['HTTP_USER_AGENT'], 'redirect' => true));
-		$HttpClient->get("http://localhost/estateManagement/control/billControl.php?method=getTomonth&objectId=".$_SESSION['objectId']);
+		$HttpClient->get(__PUBLIC__."/control/billControl.php?method=getTomonth&objectId=".$_SESSION['objectId']);
 		$json=json_decode($HttpClient->buffer,true);
 		
 	}

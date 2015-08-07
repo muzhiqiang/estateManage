@@ -11,7 +11,7 @@ if(isset($_POST['searchBui'])||isset($_POST['searchFlo'])||isset($_POST['searchU
 	if(!empty($_POST['searchUni'])) $unit=$_POST['searchUni'];
 	else $unit="unset";
 	HttpClient::init($HttpClient, array('userAgent' => $_SERVER['HTTP_USER_AGENT'], 'redirect' => true));
-	$HttpClient->get("http://localhost/estateManagement/control/billControl.php?method=search&building=".$building."&floor=".$floor."&unit=".$unit."&villageId=".$_SESSION['estateManager']['villageId']);
+	$HttpClient->get(__PUBLIC__."/control/billControl.php?method=search&building=".$building."&floor=".$floor."&unit=".$unit."&villageId=".$_SESSION['estateManager']['villageId']);
 	$json=json_decode($HttpClient->buffer,true);
 	
 }

@@ -8,7 +8,7 @@
 		if(isset($_SESSION['objectId']))
 		{
 		HttpClient::init($HttpClient, array('userAgent' => $_SERVER['HTTP_USER_AGENT'], 'redirect' => true));
-		$HttpClient->get("http://localhost/estateManagement/control/manageUserControl.php?getMethod=modifyDetailData&objectId=".$_SESSION['modifyId']);
+		$HttpClient->get(__PUBLIC__."/control/manageUserControl.php?getMethod=modifyDetailData&objectId=".$_SESSION['modifyId']);
 		$json=json_decode($HttpClient->buffer,true);
 		}
 ?>
