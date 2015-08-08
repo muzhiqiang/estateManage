@@ -14,8 +14,8 @@ Class estateManagerModel{
         $estateManager = toArray($estateManager);
         if(empty($estateManager)){                      //注册成功
             $obj = new leancloud\AVObject('EstateManager');
-            $obj->estateName = $estateName;
-            $obj->estatePassword = $estatePassword;
+            $obj->username = $estateName;
+            $obj->password = $estatePassword;
             $obj->villageId = getPointer('Village',$villageId);
             $obj->save();
             return true;
