@@ -8,6 +8,7 @@
                '</ul>'.
             '</li>'.
          '<li id="estateManager"><a href='.__PUBLIC__.'/control/estateManagerControl.php?method=getAll'.'>小区管理员账号管理</a></li>'.
+         '<li id="assistant"><a href='.__PUBLIC__.'/control/assistantControl.php?method=getAll'.'>专员账号管理</a></li>'.
          '<li><a href='.__PUBLIC__.'/control/adminLoginControl.php'.'>退出</a></li>'.
    '</ul>'.
    '<hr>';

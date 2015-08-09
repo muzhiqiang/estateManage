@@ -16,8 +16,11 @@ class manageModel
 		$houseId=$objectId;
 		
 		$queryUser=new leancloud\AVQuery('_User');
-		$queryUser->where('houses',getPointer('House',$houseId));
-		$userInfo=toArray($queryUser->find(),array(''));
+		$queryHouse = new leancloud\AVQuery("House");
+		$queryHouse->where('objectId',$houseId);
+		$houseInfo=toArray($queryHouse->find(),array('villageId','user'));
+		$queryUser->where('objectId',$houseInfo[0]['user']);
+		$userInfo = toArray($queryUser->find());
 		
 		if(empty($userInfo))
 			return array('code'=>'700');
@@ -34,8 +37,11 @@ class manageModel
 	function modifyUser($houseId)	//传回修改用户信息所需要的信息
 	{
 		$queryUser=new leancloud\AVQuery('_User');
-		$queryUser->where('houses',getPointer('House',$houseId));
-		$userInfo=toArray($queryUser->find(),array(''));
+		$queryHouse = new leancloud\AVQuery("House");
+		$queryHouse->where('objectId',$houseId);
+		$houseInfo=toArray($queryHouse->find(),array('villageId','user'));
+		$queryUser->where('objectId',$houseInfo[0]['user']);
+		$userInfo = toArray($queryUser->find());
 		
 		$queryHouse=new leancloud\AVQuery('House');
 		$queryHouse->where('objectId',$houseId);
@@ -94,5 +100,43 @@ class manageModel
 		$update->user=null;
 		$return=$update->update($objectId);
 		return $return;
+	}
+	function addUser($username,$password,$name,$gender,$age,$mobilePhoneNumber,$type,$email,$isMarry,$occupation,$houseArr,$parkingArr){
+		$obj = new leancloud\AVObject("_User");
+		$obj->username = $username;
+		$obj->password = $password;
+		$obj->name = $name;
+		$obj->gender = $gender;
+		$obj->age = $age;
+		$obj->mobilePhoneNumber = $mobilePhoneNumber;
+		$obj->type = $type;
+		$obj->email = $email;
+		$obj->isMarried = $isMarry;
+		$obj->occupation = $occupation;
+		$obj->isConfirm = true;
+		$result = (array)$obj->save();
+		
+		foreach ($houseArr as $key => $value) {
+			$query = new leancloud\AVQuery("House");
+			$query->where("building",$value['building']);
+			$query->where("floor",$value['floor']);
+			$query->where("unit",$value['unit']);
+			$house = toArray($query->find(),array("villageId","user"));
+			$update = new leancloud\AVObject("House");
+			$update->user = getPointer("_User",$result['objectId']);
+			$update->update($house[0]['objectId']);
+			
+		}
+		
+		foreach ($parkingArr as $key => $value) {
+			$query = new leancloud\AVQuery("Parking");
+			$query->where("building",$value['building']);
+			$query->where("floor",$value['floor']);
+			$query->where("unit",$value['unit']);
+			$parking = toArray($query->find(),array("villageId","user"));
+			$update = new leancloud\AVObject("Parking");
+			$update->user = getPointer("_User",$result['objectId']);
+			$update->update($parking[0]['objectId']);
+		}
 	}
 }

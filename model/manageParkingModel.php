@@ -37,8 +37,11 @@ class manageModel
 	function modifyParking($parkingId)	//传回修改停车位用户信息所需要的信息
 	{
 		$queryUser=new leancloud\AVQuery('_User');
-		$queryUser->where('parkings',getPointer('House',$parkingId));
-		$userInfo=toArray($queryUser->find(),array(''));
+		$queryParking = new leancloud\AVQuery("Parking");
+		$queryParking->where('objectId',$parkingId);
+		$parkingInfo=toArray($queryParking->find(),array('villageId','user'));
+		$queryUser->where('objectId',$parkingInfo[0]['user']);
+		$userInfo = toArray($queryUser->find());
 		
 		$queryParking=new leancloud\AVQuery('Parking');
 		$queryParking->where('objectId',$parkingId);
