@@ -16,7 +16,7 @@ require_once('../estateManager/head.php');
   			var building = $("#building").val();
   			var floor = $("#floor").val();
   			var unit = $("#unit").val();
-  			var url = "http://localhost/estateManagement/control/villageControl.php?method=getBuilding";
+  			var url = '<?php echo __PUBLIC__."/control/villageControl.php?method=getBuilding";?>';
   			if(building!=""){
   				url+=("&building="+building);
   			}
@@ -47,7 +47,7 @@ require_once('../estateManager/head.php');
   			return false;
   		};
   		function deleteHouse(objectId){
-  			var url = "http://localhost/estateManagement/control/villageControl.php?method=deleteHouse&id="+objectId;
+  			var url = '<?php echo __PUBLIC__."/control/villageControl.php?method=deleteHouse&id=";?>'+objectId;
   			$.ajax({
   				type:"GET",
   				url:url,
@@ -76,7 +76,7 @@ require_once('../estateManager/head.php');
         }
         $.ajax({
           type:"GET",
-          url:"http://localhost/estateManagement/control/villageControl.php?method=updateHouse&id="+objectId+"&building="+building+"&floor="+floor+"&unit="+unit,
+          url: '<?php echo __PUBLIC__."/control/villageControl.php?method=updateHouse&id=";?>'+objectId+"&building="+building+"&floor="+floor+"&unit="+unit,
           dataType:"json",
           success:function(data){
             $(document.getElementById(objectId)).empty();
