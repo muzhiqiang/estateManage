@@ -82,8 +82,8 @@ if(isset($_GET['method'])){
 		header("Location:".__PUBLIC__."/view/assistant/index.php");
 	}
 	else if($method == 'getFiles'){
-		$estateManager = $_SESSION['estateManager'];
-		$villageId = $estateManager['villageId'];
+		$assistant = $_SESSION['assistant'];
+		$villageId = $assistant['villageId'];
 		$fileList = $uploadFileModel->getFiles($villageId);
 		$_SESSION['fileList']= $fileList;
 		header("Location:".__PUBLIC__."/view/assistant/fileList.php");
