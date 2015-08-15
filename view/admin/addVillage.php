@@ -45,7 +45,7 @@ require_once('head.php');
 			</div>
 			<div class="form-group">
 				<div class="col-sm-offset-3 col-sm-6">
-					<button type="submit" class="btn btn-primary">登录</button>
+					<button type="submit" class="btn btn-primary">添加</button>
 				</div>
 			</div>
 		</form>

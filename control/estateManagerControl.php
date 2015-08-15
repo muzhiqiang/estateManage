@@ -47,12 +47,18 @@ if(isset($_GET['method'])){
 				$estateManager = array_merge($estateManager,array('city'=>$villageInfo['city']));
 				$estateManager = array_merge($estateManager,array('address'=>$villageInfo['address']));
 				$_SESSION['estateManager'] = $estateManager;
-				
+				$_SESSION['eCookie']='201';
+				header("Location:".__PUBLIC__."/view/estateManager/index.php");
+			}
+			else
+			{
+				$_SESSION['eCookie']='301';
+				header("Location:".__PUBLIC__."/view/estateManager/login.php");
 			}
 			
 				
 		}
-		header("Location:".__PUBLIC__."/view/estateManager/index.php");
+		
 	}
 	else if($method=='update'){				//修改密码
 		if(isset($_POST['password'])&&$_POST['password']==$_SESSION['estateManager']['password']&&isset($_POST['newPassword'])){

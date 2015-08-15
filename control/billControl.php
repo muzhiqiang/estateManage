@@ -1,6 +1,7 @@
 <?php
 require_once '../model/billModel.php';
 require_once('../config/config.php');
+session_start();
 function getUserBill($houseId)					//返回bill主页所需信息
 {
 	$bill=new billModel();
@@ -125,12 +126,22 @@ if(isset($_GET['method']))
 
 if(isset($_POST['houseId']))
 {
-	$return=insertHouseBill($_POST['houseId'],$_POST['type'],$_POST['usage'],$_POST['price'],$_POST['total'],$_POST['unit']);
+	if(empty($_POST['houseId'])||empty($_POST['type'])||empty($_POST['usage'])||empty($_POST['price'])||empty($_POST['total'])||empty($_POST['unit']))
+	{
+		$_SESSION['billCode']='302';
+	}
+	else
+		$return=insertHouseBill($_POST['houseId'],$_POST['type'],$_POST['usage'],$_POST['price'],$_POST['total'],$_POST['unit']);
 	
 	header("Location:".__PUBLIC__."/view/bill/index.php");
 }
 if(isset($_POST['parkingId']))
 {
+	if(empty($_POST['parkingId'])||empty($_POST['type'])||empty($_POST['usage'])||empty($_POST['price'])||empty($_POST['total'])||empty($_POST['unit']))
+	{
+		$_SESSION['billCode']='302';
+	}
+	else
 	$return=insertParkingBill($_POST['parkingId'],$_POST['type'],$_POST['usage'],$_POST['price'],$_POST['total'],$_POST['unit']);
 	//print_r($return);die;
 	header("Location:".__PUBLIC__."/view/parkingBill/index.php");

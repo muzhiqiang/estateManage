@@ -102,6 +102,32 @@ class manageModel
 		return $return;
 	}
 	function addUser($username,$password,$name,$gender,$age,$mobilePhoneNumber,$type,$email,$isMarry,$occupation,$houseArr,$parkingArr){
+
+		foreach ($houseArr as $key => $value) {
+			$query = new leancloud\AVQuery("House");
+			$query->where("building",$value['building']);
+			$query->where("floor",$value['floor']);
+			$query->where("unit",$value['unit']);
+			$house = toArray($query->find(),array("villageId","user"));
+			if(empty($house))
+			{
+				return '308';
+			}			
+		}
+		
+		foreach ($parkingArr as $key => $value) {
+			$query = new leancloud\AVQuery("Parking");
+			$query->where("building",$value['building']);
+			$query->where("floor",$value['floor']);
+			$query->where("unit",$value['unit']);
+			$parking = toArray($query->find(),array("villageId","user"));
+			if(empty($parking))
+			{
+				return '309';
+			}
+		}
+
+
 		$obj = new leancloud\AVObject("_User");
 		$obj->username = $username;
 		$obj->password = $password;
@@ -114,7 +140,26 @@ class manageModel
 		$obj->isMarried = $isMarry;
 		$obj->occupation = $occupation;
 		$obj->isConfirm = true;
-		$result = (array)$obj->save();
+		try
+		{
+			$result = (array)$obj->save();
+		}
+		catch(Exception $e)
+		{
+			if($e=='AVOSCloud.com error: Username has already been taken')
+				return '303';
+			else if($e=='AVOSCloud.com error: 此电子邮箱已经被占用。')
+				return '304';
+			else if($e=='AVOSCloud.com error: Password is missing or empty')
+				return '305';
+			else if($e=='AVOSCloud.com error: The email address was invalid.')
+				return '306';
+			else if($e=="AVOSCloud.com error: The mobile phone number was invalid. It must be a string,numbers and '-' are the only valid characters.")
+				return '307';
+			else
+				return $e;
+		}
+
 		
 		foreach ($houseArr as $key => $value) {
 			$query = new leancloud\AVQuery("House");
@@ -124,7 +169,14 @@ class manageModel
 			$house = toArray($query->find(),array("villageId","user"));
 			$update = new leancloud\AVObject("House");
 			$update->user = getPointer("_User",$result['objectId']);
-			$update->update($house[0]['objectId']);
+			try
+			{
+				$update->update($house[0]['objectId']);
+			}
+			catch(Exception $e)
+			{
+				return '235';
+			}
 			
 		}
 		
@@ -136,7 +188,15 @@ class manageModel
 			$parking = toArray($query->find(),array("villageId","user"));
 			$update = new leancloud\AVObject("Parking");
 			$update->user = getPointer("_User",$result['objectId']);
-			$update->update($parking[0]['objectId']);
+			try
+			{
+				$update->update($parking[0]['objectId']);
+			}
+			catch(Exception $e)
+			{
+				return '236';
+			}
 		}
+		return '201';
 	}
 }

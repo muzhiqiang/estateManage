@@ -6,6 +6,7 @@
 		HttpClient::init($HttpClient, array('userAgent' => $_SERVER['HTTP_USER_AGENT'], 'redirect' => true));
 		$HttpClient->get(__PUBLIC__."/control/billControl.php?method=addParking&parkingId=".$_SESSION['parkingId']);
 		$json=json_decode($HttpClient->buffer,true);
+		
 	}
 ?>
 <!DOCTYPE html>

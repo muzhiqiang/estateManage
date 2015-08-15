@@ -31,7 +31,7 @@ if(isset($_GET['method'])){
 		$assistantModel->delete($id);
 		header("Location:".__PUBLIC__."/control/assistantCOntrol.php?method=getAll");
 	}
-	else if($method=='login'){
+	else if($method=='login'){					//登陆
 		if(isset($_POST['username'])&&isset($_POST['password'])){
 			$username = $_POST['username'];
 			$password = $_POST['password'];
@@ -39,10 +39,15 @@ if(isset($_GET['method'])){
 			if(!empty($assistant)){
 				
 				$_SESSION['assistant'] = $assistant[0];
+				$_SESSION['aCookie']='201';
 				header("Location:".__PUBLIC__."/view/assistant/index.php");
 			}
 			else
+			{
+				$_SESSION['aCookie']='301';
 				header("Location:".__PUBLIC__."/view/assistant/login.php");
+			}
+				
 		}
 	}
 	else if($method=='logout'){
@@ -78,8 +83,9 @@ if(isset($_GET['method'])){
 			$temp = array("building"=>$parkingBuilding,"floor"=>$parkingFloor,"unit"=>$parkingUnit);
 			$parkingArr = array_merge($parkingArr, array($i=>$temp));
 		}
-		$manageUserModel->addUser($username,$password,$name,$gender,$age,$mobilePhoneNumber,$type,$email,$isMarry,$occupation,$houseArr,$parkingArr);
-		header("Location:".__PUBLIC__."/view/assistant/index.php");
+		$code=$manageUserModel->addUser($username,$password,$name,$gender,$age,$mobilePhoneNumber,$type,$email,$isMarry,$occupation,$houseArr,$parkingArr);
+		$_SESSION['assCode']=$code;
+		header("Location:".__PUBLIC__."/view/assistant/addUser.php");
 	}
 	else if($method == 'getFiles'){
 		$assistant = $_SESSION['assistant'];

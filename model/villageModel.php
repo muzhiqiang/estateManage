@@ -153,6 +153,20 @@ require_once('../utils/function.php');
 			$update->update($id);
 
 		}
+		public function getUpdateVillageInfo($villageId)
+		{
+			$query=new leancloud\AVQuery('Village');
+			$query->where('objectId',$villageId);
+			$result=toArray($query->find(),array());
+			if(empty($result))
+			{
+				$return['code']='402';
+			}
+			else
+				$return['code']='201';
+			$return['villageInfo']=$result[0];
+			return $return;
+		}
 	}
 
 ?>

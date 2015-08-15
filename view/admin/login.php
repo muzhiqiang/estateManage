@@ -1,5 +1,6 @@
 <?php
 require_once('../../config/config.php');
+session_start();
 ?>
 <!DOCTYPE html>
 <html>
@@ -25,6 +26,16 @@ require_once('../../config/config.php');
 			<label for="adminPassword" class="col-sm-4 control-label">密码</label>
 			<div class="col-sm-4">
 				<input type="password" class="form-control" name="adminPassword"></br>
+				<p style="color:red;font-size:12px;"><?php 
+				if(isset($_SESSION['adminCookie']))
+				{
+					if($_SESSION['adminCookie']=='301')
+					{
+						echo "用户名不存在或密码错误";
+						$_SESSION['adminCookie']=null;
+					}
+				}
+			?></p>
 			</div>
 		</div>
 		<div class="form-group">

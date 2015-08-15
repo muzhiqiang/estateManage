@@ -1,5 +1,16 @@
 <?php
 require_once('head.php');
+require_once('../../utils/getInformation.php');
+if(isset($_GET['id']))
+{
+	$_SESSION['villageId']=$_GET['id'];
+}
+if(isset($_SESSION['villageId']))				//获取要修改小区的信息，显示与form表单上
+{
+	HttpClient::init($HttpClient, array('userAgent' => $_SERVER['HTTP_USER_AGENT'], 'redirect' => true));
+	$HttpClient->get(__PUBLIC__."/control/villageControl.php?method=getUpdateVillageInfo&villageId=".$_SESSION['villageId']);
+	$json=json_decode($HttpClient->buffer,true);
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -10,9 +21,14 @@ require_once('head.php');
     <link href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
     <script src="http://apps.bdimg.com/libs/jquery/2.0.0/jquery.min.js"></script>
     <script src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-
 </head>
 <body>
+<Script Language="JavaScript">
+<?php 
+	if(isset($_SESSION['code'])&&$_SESSION['code']=='302')
+		echo "alert(\"hello word!\")";
+?>
+</Script>
 <?php
 require_once('navigation.php');
 ?>
@@ -21,25 +37,49 @@ require_once('navigation.php');
 			<div class="row form-group">
 				<label for="villageName" class="col-sm-4">小区名字</label>
 				<div class="col-sm-4">
-					<input type='text' name='villageName' class="form-control">
+					<input type='text' name='villageName' class="form-control" <?php 
+						if(!empty($json))
+						{
+							echo "value=\"".$json['villageInfo']['name']."\"";
+						}
+					?>>
 				</div>
 			</div>
 			<div class="row form-group">
 				<label class="col-sm-4" for="province">省份</label>
 				<div class="col-sm-4">
-					<input class="form-control" type='text' name='province'>
+					<input class="form-control" type='text' name='province'<?php 
+						if(!empty($json))
+						{
+							echo "value=\"".$json['villageInfo']['province']."\"";
+						}
+					?>>
 				</div>
 			</div>
 			<div class="row form-group">
 				<label class="col-sm-4" for="city">城市</label>
 				<div class="col-sm-4">
-					<input class="form-control" type='text' name='city'>
+					<input class="form-control" type='text' name='city'
+					<?php 
+						if(!empty($json))
+						{
+							echo "value=\"".$json['villageInfo']['city']."\"";
+						}
+					?>
+					>
 				</div>
 			</div>
 			<div class="row form-group">
 				<label class="col-sm-4" for="address">详细地址</label>
 				<div class="col-sm-4">
-					<input class="form-control" type='text' name='address'>
+					<input class="form-control" type='text' name='address'
+					<?php 
+						if(!empty($json))
+						{
+							echo "value=\"".$json['villageInfo']['address']."\"";
+						}
+					?>
+					>
 				</div>
 			</div>
 			<div class="form-group">

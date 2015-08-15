@@ -13,7 +13,12 @@
 	
 	if(!empty($adminUser)){
 		$_SESSION['adminUser'] = $adminUser;
-
+		header("Location:".__PUBLIC__."/view/admin/index.php");
 	}
-	header("Location:".__PUBLIC__."/view/admin/index.php");
+	else
+	{
+		$_SESSION['adminCookie']='301';
+		header("Location:".__PUBLIC__."/view/admin/login.php");
+	}
+	
 ?>

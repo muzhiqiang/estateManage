@@ -13,7 +13,7 @@
 		}
 
 		else if($method == 'add'){			//添加小区信息
-			if(!isset($_POST['villageName'])||!isset($_POST['address'])||!isset($_POST['province'])||!isset($_POST['city'])){
+			if(empty($_POST['villageName'])||empty($_POST['address'])||empty($_POST['province'])||empty($_POST['city'])){
 				header('Location:'.__PUBLIC__.'/view/admin/addVillage.php');
 			}else{
 				$villageName = $_POST['villageName'];
@@ -35,7 +35,8 @@
 		}
 
 		else if($method =='update'){					//修改小区信息
-			if(!isset($_POST['villageName'])||!isset($_POST['address'])||!isset($_POST['province'])||!isset($_POST['city'])){
+			if(empty($_POST['villageName'])||empty($_POST['address'])||empty($_POST['province'])||empty($_POST['city'])){
+				$_SESSION['code']='302';
 				header('Location:'.__PUBLIC__.'/view/admin/villageUpdate.php');
 			}else{
 				$villageId = $_GET['id'];
@@ -126,6 +127,11 @@
 			$unit = $_GET['unit'];
 			$villageModel->updateParking($id,$building,$floor,$unit);
 			echo json_encode(array("code"=>200));
+		}
+		else if($method='getUpdateVillageInfo')
+		{
+			$info=$villageModel->getUpdateVillageInfo($_GET['villageId']);
+			echo  json_encode($info);
 		}
 	}
 	

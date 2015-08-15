@@ -4,6 +4,41 @@ require_once('head.php');
 <!DOCTYPE html>
 <html>
 <head>
+	<?php
+    	echo "<script  type=\"text/javascript\">";
+    	if(isset($_SESSION["assCode"]))
+    		switch ($_SESSION["assCode"]) {
+    			case "303":
+    				echo "alert(\"用户名已被占用\");";
+    				break;
+    			case "304":
+    				echo "alert(\"邮箱已被占用\");";
+    				break;
+    			case "305":
+    				echo "alert(\"输入密码格式错误\");";
+    				break;
+    			case "306":
+    				echo "alert(\"邮箱格式不合法\");";
+    				break;
+    			case "307":
+    				echo "alert(\"手机格式不合法\")";
+    				break;
+    			case '308':
+    				echo "alert(\"输入房屋信息错误\")";
+    				break;
+    			case '309':
+    				echo "alert(\"输入停车位信息错误\")";
+    				break;
+    			case '201':
+    				echo "alert(\"录入成功\")";
+    				break;
+    			default:
+    				# code...
+    				break;
+    		}
+    	$_SESSION["assCode"]=null;
+    		echo "</script>";
+    ?>
 	<title>添加用户</title>
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
@@ -11,6 +46,7 @@ require_once('head.php');
     <script src="http://apps.bdimg.com/libs/jquery/2.0.0/jquery.min.js"></script>
     <script src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script type="text/javascript">
+
     	var i = 0;
     	var j = 0;
     	function addHouse(){
@@ -30,6 +66,10 @@ require_once('head.php');
     		$("#content").append('<input type="hidden" name="parkingNum" value='+j+'>');
     	};
     </script>
+    
+   
+    	
+	
 </head>
 <body>
 	<?php require_once('navigation.php');?>
@@ -42,13 +82,13 @@ require_once('head.php');
  			<div class="row form-group">
  				<label for="username" class="col-sm-4 control-label">账号</label>
  				<div class="col-sm-4">
- 					<input class="form-control" type="text" name="username"/>*
+ 					<input class="form-control" type="text" name="username"/>
  				</div>
  			</div>
  			<div class="row form-group">
  				<label for="password" class="col-sm-4 control-label">密码</label>
  				<div class="col-sm-4">
- 					<input class="form-control" type="text" name="password">*
+ 					<input class="form-control" type="text" name="password">
  				</div>
  			</div>
  			<div class="row form-group">
@@ -77,7 +117,7 @@ require_once('head.php');
 			<div class="row form-group">
 				<label for="mobilePhoneNumber" class="col-sm-4 control-label">联系电话</label>
 				<div class="col-sm-4">
-					<input class="form-control" type="text" name="mobilePhoneNumber">*
+					<input class="form-control" type="text" name="mobilePhoneNumber">
 				</div>
 			</div>
 			<hr>
@@ -127,7 +167,7 @@ require_once('head.php');
 			</div>
 			<hr>
 			
-			
+		
 			<div class="form-group">
 				<div class="col-sm-offset-3 col-sm-6">
 					<button type="submit" class="btn btn-primary" onclick="add()">确定</button>
