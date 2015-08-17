@@ -7,7 +7,7 @@
 	{
 		HttpClient::init($HttpClient, array('userAgent' => $_SERVER['HTTP_USER_AGENT'], 'redirect' => true));
 		$HttpClient->get(__PUBLIC__."/control/billControl.php?method=getUserBill&houseId=".$_SESSION['billHouseId']);
-		$json=json_decode($HttpClient->buffer,true);
+		$json=json_decode($HttpClient->buffer,true); 
 		
 	}
 ?>
@@ -51,6 +51,7 @@
 						<th>用量</th>
 						<th>单价</th>
 						<th>总额</th>
+						<th>推送</th>
 						<th>删除</th>";
 			echo	"</tr></thead>";
 			echo "<tbody>";
@@ -62,6 +63,14 @@
 					echo "<td>".$value['usage']."</td>";
 					echo "<td>".$value['price']."</td>";
 					echo "<td>".$value['total']."</td>";
+
+					if($value['visible'])
+					{
+						echo "<td>已推送</td>";
+					}
+					else
+						echo "<td><a href=\"../../control/billControl.php?method=houseVisible&billId=".$value['objectId']."\">推送</a></td>";
+
 					echo "<td><a href=\"../../control/billControl.php?method=deleteBill&billId=".$value['objectId']."\">删除</a></td>";
 						$houseId=$value['houseId'];
 					echo "</tr>";
@@ -69,6 +78,7 @@
 				}
 			echo "</tbody>";
 			echo "</table>";
+			echo "<h4 align='right' style=\"margin-top:4px;margin-left:4px;margin-right:60px;margin-bottom:4px;\"><a href=\"../../control/billControl.php?method=allPassHouse&houseId=".$_SESSION['billHouseId']."\" >一键全部推送</a></h4>";
 			echo "<h3>总价:".$sum."</h3>";
 		}
 	?>
@@ -84,7 +94,15 @@
 			<h3>联系电话</h3>
 				<?php 
 				if(!empty($json['userInfo']['name']))
-					echo $json['userInfo']['mobilePhoneNumber'];?>
+					echo $json['userInfo']['mobilePhoneNumber'];
+				else 
+					echo "未知";
+				?>
+			<h3>房屋地址</h3>
+				<?php 
+				echo $json['houseInfo'][0]['building']."座 ".$json['houseInfo'][0]['floor']."层 ".$json['houseInfo'][0]['unit']."单元";
+
+				?>
 		</div>
 	</div>
 		

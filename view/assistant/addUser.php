@@ -32,6 +32,9 @@ require_once('head.php');
     			case '201':
     				echo "alert(\"录入成功\")";
     				break;
+				case '405':
+					echo "alert(\"必须填写房屋信息\")";
+					break;
     			default:
     				# code...
     				break;
@@ -89,6 +92,7 @@ require_once('head.php');
  				<label for="password" class="col-sm-4 control-label">密码</label>
  				<div class="col-sm-4">
  					<input class="form-control" type="text" name="password">
+ 					<p style="color:red;font-size:8px;">请确认输入密码正确，一旦输入将无法查看及修改</p>
  				</div>
  			</div>
  			<div class="row form-group">
@@ -118,6 +122,7 @@ require_once('head.php');
 				<label for="mobilePhoneNumber" class="col-sm-4 control-label">联系电话</label>
 				<div class="col-sm-4">
 					<input class="form-control" type="text" name="mobilePhoneNumber">
+					<p style="color:red;font-size:8px;">此项必填</p>
 				</div>
 			</div>
 			<hr>
@@ -133,6 +138,7 @@ require_once('head.php');
 				<label for="email" class="col-sm-4 control-label">邮箱地址</label>
 				<div class="col-sm-4">
 					<input class="form-control" type="text" name="email"/>
+					<p style="color:red;font-size:8px;">此项必填</p>
 				</div>
 			</div>
 			<hr>

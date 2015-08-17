@@ -19,7 +19,9 @@
                   '<li id="updateParking"><a href='.__PUBLIC__.'/view/village/updateParking.php>车位修改</a></li>'.
                '</ul>'.
             '</li>'.
-   			'<li id="bill"><a href='.__PUBLIC__.'/view/bill/search.php>账单管理</a></li>'.   			
+            '<li id="bill"><a href='.__PUBLIC__.'/view/bill/search.php>账单管理</a></li>'.
+            
+   			  			
    			'<li class="dropdown" id="notice"><a class="dropdown-toggle" data-toggle="dropdown" href="#">通知管理<span class="caret"></span></a>'.
       			'<ul class="dropdown-menu">'.
       				'<li id="lookNotice"><a href='.__PUBLIC__.'/control/noticeControl.php?method=getAll'.'>查看通知</a></li>'.

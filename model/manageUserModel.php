@@ -102,7 +102,10 @@ class manageModel
 		return $return;
 	}
 	function addUser($username,$password,$name,$gender,$age,$mobilePhoneNumber,$type,$email,$isMarry,$occupation,$houseArr,$parkingArr){
-
+		if(empty($houseArr))
+		{
+			return '405';
+		}
 		foreach ($houseArr as $key => $value) {
 			$query = new leancloud\AVQuery("House");
 			$query->where("building",$value['building']);

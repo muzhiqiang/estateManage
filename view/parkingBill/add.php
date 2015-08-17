@@ -31,7 +31,7 @@
 		document.getElementById("addBill").setAttribute("class","active");
 	</script>
 	<div align="center" class="col-sm-5">
-	<p align="center">停车位：<?php echo $json['parkingInfo']['building']."栋".$json['parkingInfo']['floor']."层".$json['parkingInfo']['unit']."号" ;?></p>
+	<h3 align="center">停车位：<?php echo $json['parkingInfo']['building']."栋".$json['parkingInfo']['floor']."层".$json['parkingInfo']['unit']."号" ;?></h3>
 	<form class="form-horizontal" role="form" method="post" action=<?php echo __PUBLIC__.'/control/billControl.php'?>>
 		<input type="hidden" name="parkingId" <?php  echo "value=\"".$_SESSION['parkingId']."\""; ?>>
 			
@@ -87,6 +87,11 @@
 				<?php 
 				if(!empty($json['userInfo']['name']))
 					echo $json['userInfo']['mobilePhoneNumber'];?>
+			<h3>房屋地址</h3>
+				<?php 
+				echo $json['parkingInfo']['building']."座 ".$json['parkingInfo']['floor']."层 ".$json['parkingInfo']['unit']."单元";
+
+				?>
 		</div>
 	</div>
 	</div>

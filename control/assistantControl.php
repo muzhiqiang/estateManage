@@ -94,5 +94,14 @@ if(isset($_GET['method'])){
 		$_SESSION['fileList']= $fileList;
 		header("Location:".__PUBLIC__."/view/assistant/fileList.php");
 	}
+	else if($method=='showUserInfo')
+	{
+		echo json_encode($assistantModel->showUserList($_GET['villageId']));
+	}
+	else if($method='deleteUser')
+	{
+		$assistantModel->deleteUser($_GET['userId']);
+		header("Location:".__PUBLIC__."/view/assistant/userList.php");
+	}
 }
 ?>

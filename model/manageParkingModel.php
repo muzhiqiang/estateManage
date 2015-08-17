@@ -22,15 +22,19 @@ class manageModel
 		$queryParking->where('objectId',$parkingId);
 		$parkingInfo=toArray($queryParking->find(),array('villageId','user'));
 		
-		$queryUser=new leancloud\AVQuery('_User');
-		$queryUser->where('objectId',$parkingInfo[0]['user']);
-		$userInfo=toArray($queryUser->find(),array(''));
+
+		if(!empty($parkingInfo[0]['user']))
+		{
+			$queryUser=new leancloud\AVQuery('_User');
+			$queryUser->where('objectId',$parkingInfo[0]['user']);
+			$userInfo=toArray($queryUser->find(),array(''));
+		}
+		
 		
 		if(empty($userInfo))
-			return array('code'=>'700');
-		
-		
-		$returnList=array('userInfo'=>$userInfo[0],'parkingInfo'=>$parkingInfo[0]);
+			$returnList=array('userInfo'=>array(),'parkingInfo'=>$parkingInfo[0]);
+		else
+			$returnList=array('userInfo'=>$userInfo[0],'parkingInfo'=>$parkingInfo[0]);
 		
 		return $returnList;
 	}
@@ -40,14 +44,20 @@ class manageModel
 		$queryParking = new leancloud\AVQuery("Parking");
 		$queryParking->where('objectId',$parkingId);
 		$parkingInfo=toArray($queryParking->find(),array('villageId','user'));
-		$queryUser->where('objectId',$parkingInfo[0]['user']);
-		$userInfo = toArray($queryUser->find());
+		
+		
 		
 		$queryParking=new leancloud\AVQuery('Parking');
 		$queryParking->where('objectId',$parkingId);
 		$parkingInfo=toArray($queryParking->find(),array('villageId','user'));
-		
-		$returnList=array('userInfo'=>$userInfo[0],'parkingInfo'=>$parkingInfo[0]);
+		if(!empty($parkingInfo[0]['user']))
+		{
+			$queryUser->where('objectId',$parkingInfo[0]['user']);
+			$userInfo = toArray($queryUser->find());
+			$returnList=array('userInfo'=>$userInfo[0],'parkingInfo'=>$parkingInfo[0]);
+		}
+		else
+			$returnList=array('userInfo'=>array(),'parkingInfo'=>$parkingInfo[0]);
 		
 		return $returnList;
 	}

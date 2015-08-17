@@ -105,6 +105,11 @@
 				<?php 
 				if(!empty($json['userInfo']['name']))
 					echo $json['userInfo']['mobilePhoneNumber'];?>
+			<h3>房屋地址</h3>
+				<?php 
+				echo $json['parkingInfo'][0]['building']."座 ".$json['parkingInfo'][0]['floor']."层 ".$json['parkingInfo'][0]['unit']."单元";
+
+				?>
 		</div>
 	</div>
 	</div>

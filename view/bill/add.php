@@ -34,7 +34,7 @@
 		<input type="hidden" name="houseId" <?php  echo "value=\"".$_SESSION['billHouseId']."\""; ?>>
 		
 	
-	<p>房屋：<?php echo $json['houseInfo']['building']."栋".$json['houseInfo']['floor']."层".$json['houseInfo']['unit']."号" ;?></p>
+	<h3>房屋：<?php echo $json['houseInfo']['building']."栋".$json['houseInfo']['floor']."层".$json['houseInfo']['unit']."号" ;?></h3>
 			
 				
 
@@ -93,6 +93,11 @@
 				<?php 
 				if(!empty($json['userInfo']['name']))
 					echo $json['userInfo']['mobilePhoneNumber'];?>
+			<h3>房屋地址</h3>
+				<?php 
+				echo $json['houseInfo']['building']."座 ".$json['houseInfo']['floor']."层 ".$json['houseInfo']['unit']."单元";
+
+				?>
 		</div>
 	</div>
 	</div>
